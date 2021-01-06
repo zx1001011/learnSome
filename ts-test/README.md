@@ -7,6 +7,13 @@
 ### 官网：[typescript](https://ts.xcatliu.com/introduction/hello-typescript.html)
 
 
+### 学习日记
+| 序号 | 时间 | 阶段 | 视频集数 | 备注 |
+| ---- | ---- | ---- | ------- | ---- |
+| 1 | 2021.1.6 | 初步详细输入阶段 | 01 - 07 | 从初步认识，搭建编译环境，数据类型，函数，类 |
+| 2 | 2021.1.7 | 初步详细输入阶段 | 08 - | |
+
+
 ## 一、简介  
 google研发，为了面向大型复杂的项目，使用javascript可以搭建
 ts 是 javascript 的超集，包含 es6 和 es5
