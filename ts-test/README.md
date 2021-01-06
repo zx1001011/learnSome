@@ -1,6 +1,8 @@
 ## 前提：
 
 ### 视频链接：[主讲老师大地](https://www.bilibili.com/video/BV1yt411e7xV?from=search&seid=13056183740590042272)
+### 文件链接： [itying-typescript教程](https://www.itying.com/goods-905.html)
+
 
 ### 官网：[typescript](https://ts.xcatliu.com/introduction/hello-typescript.html)
 
@@ -111,3 +113,203 @@ ts 需要兼容 es5 和 es6 重载的写法， 与 java 有区别
     console.log(getInfo('张三')) // 我的名字是张三
     console.log(getInfo(20)) // 我的年龄是20
 ```
+- 箭头函数 es6 () => {}
+  this 上下文指向函数运行的上下文， 非私有
+### 3.类(上) —— es5 中的类
+- Es5中的类和静态方法 
+``` javascript
+// 1. 最简单的类 - 通过构造函数
+function Person() { this.name='张三'}
+var p = new Person()
+alert(p.name)
+// 2. 构造函数和原型链增加属性或者方法
+// 区别： 实例不会共享构造函数的属性和方法， 原型链会
+function Person() { 
+    this.name='张三'
+    this.run = function () { return this.name + '在奔跑' } 
+}
+Person.prototype.work = function () { return this.name + '在工作' }
+var p = new Person()
+alert(p.run)
+alert(p.work)
+
+// 3. 类里面的静态方法
+// 实例方法必须 new 一个实例才可以使用，静态相当于默认就有
+Person.getInfo = function () { return '我是静态方法' }
+alert(Person.getInfo())
+```
+
+- Es5 继承（原型链继承、对象冒充继承、原型链+对象冒充组合继承）
+    1. 对象冒充继承
+    ``` javascript
+    function Person() { 
+        this.name='张三'
+        this.run = function () { return this.name + '在奔跑' } 
+    }
+    Person.prototype.work = function () { return this.name + '在工作' }
+    var p = new Person()
+    // Web 类 继承 Person 类
+    // 1. 对象冒充实现继承
+    function Web() {
+        Person.call(this) // 对象冒充实现继承
+    }
+    var w = new Web()
+    console.info(w.run()) // 对象冒充可以继承构造函数的属性和方法
+    // console.info(w.work()) // 但是无法继承原型链上的属性和方法
+
+    ```
+    
+    2. 原型链继承
+    ``` javascript
+    function Person(name) { 
+        this.name = name
+        this.run = function () { return this.name + '' } 
+    }
+    Person.prototype.work = function () { return this.name + '在工作' }
+    var p = new Person()
+    // Web 类 继承 Person 类
+    // 2. 原型链实现继承
+    function Web(name) {
+    }
+    Web.prototype = new Person()
+    var w = new Web()
+    console.info(w.run()) // 可以继承构造函数的属性和方法   undefined在奔跑
+    console.info(w.work()) // 可以继承原型链上的属性和方法 undefined在工作
+    // 问题： 实例化子类的时候，无法给父类传参
+
+    ```
+   
+    3. 原型链+对象冒充组合继承
+    ``` javascript
+    function Person(name) {
+        this.name = name
+        this.run = function () {
+            return this.name + '在奔跑'
+        }
+    }
+    Person.prototype.work = function () {
+        return this.name + '在工作'
+    }
+    // 2. 原型链+对象冒充组合实现继承
+    function Web(name) {
+        Person.call(this, name)
+    }
+    Web.prototype = new Person() // 或者 Web.prototype = Person.prototype
+    var w = new Web('zhangsan')
+    console.info(w.run()) // 可以继承构造函数的属性和方法
+    console.info(w.work()) // 可以继承原型链上的属性和方法
+
+    ```
+### 4.类(下) —— ts 中的类
+- 类的定义   
+```class``` 关键字
+``` typescript
+class Person {
+    name:string;  // 属性，前面省略了 public 关键字【默认】
+    constructor(name:string) { // 构造函数，实例化类的时候触发的方法
+        this.name = name
+    }
+    run():void {
+        console.info(`${this.name}在跑步`)
+    }
+}
+// 调用
+let p = new Person('小张')
+p.run()
+```
+
+- 继承   
+```extends``` 关键字， ```super``` 关键字
+``` typescript
+// 继承 Person
+class worker extends Person {
+    constructor(name:string){
+        super(name)
+    }
+    // 方法先看子类是否有，然后父类
+}
+let w = new Web('李四')
+console.log(w.run())
+
+```
+
+- 类里面的修饰符 - public,protected,private   
+public: 公有 ， 全都可以访问【默认】   
+protected： 保护 ， 类和子类可以访问     
+private: 私有 ， 类可以访问   
+![](./img/2.png)
+
+
+- 静态属性或者静态方法  - static 关键字
+``` typescript
+class Person{
+    public name:string;
+    static a:number = 0;
+    constructor(name:string) {
+        this.name = name
+    }
+    run ():void{
+        console.log(`${this.name}在奔跑`)
+    }
+    static print():void{ 
+        // 静态方法无法直接调用类里的属性 ， static语法类似 C 语言
+        // 当前类里面的全局存在
+        console.info(`静态方法` + this.a++)
+    }
+}
+Person.print()
+
+```
+
+- 抽象类  继承  多态   
+1. 多态：父类定义一个方法不去实现，让继承它的子类去实现 ， 每个子类根据自己的特性去定义不同的表现   
+多态属于继承
+
+``` typescript
+class Animal {
+    name: string
+    constructor(name: string) {
+        this.name = name
+    }
+    eat() {
+        console.log('吃的方法')
+    }
+    work() {
+        console.log('工作的方法')
+    }
+}
+
+class Dog extends Animal {
+    constructor(name: string) {
+        super(name)
+    }
+    eat() {  // this is 多态
+        return '主人已经准备好狗粮，快来吃饭！'
+    }
+}
+```
+2. 抽象方法 - abstract 关键字   
+ts 中的抽象类，是提供其他类继承的基类/父类，不能直接实例化   
+```abstract```关键字来定义抽象类和抽象方法，抽象类中的抽象方法不包含具体实现并且必须在派生类中实现
+作用： 抽象类和抽象方法用于定义标准
+
+``` typescript
+// 定义animal子类必须包含eat方法
+abstract class animal { // 抽象类
+    // 可以包含非抽象方法
+    work() {
+
+    }
+    abstract eat(): any; // 抽象方法， 抽象方法只能在抽象类中定义
+}
+```
+### 5.接口
+- 属性类接口
+
+- 函数类型接口
+
+- 可索引接口
+
+- 类类型接口
+
+- 接口扩展
