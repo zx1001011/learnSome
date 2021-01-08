@@ -15,7 +15,7 @@
 | ---- | ---- | ---- | ------- | ---- | --- |
 | 1 | 2021.1.6 | 初步详细输入阶段 | 01 - 07 | 从初步认识，搭建编译环境，数据类型，函数，类 | 较为详细的接触 |
 | 2 | 2021.1.7 | 初步详细输入阶段 | 08 - 18 | 接口，泛型，泛型类，泛型接口，模块化，命名空间 | 主要意识到了面向对象的思想, 其中 视频17的案例需要补充 |
-| 3 | 2021.1.8 | 初步详细输入阶段 | 19 - | | |
+| 3 | 2021.1.8上午 | 初步详细输入阶段 | 19 - 20 | 装饰器 | 补充视频17的案例，学习装饰器，下午有其他事情 |
 
 
 ## 一、简介  
@@ -627,8 +627,97 @@ ts 模块的概念（官方）：
 
 语法与 es6 相同
 
-具体实例等待更新中....
+    ```typescript
+    // index.ts 使用
+    import {User, UserModel} from './7-ts-modules/model/User'
+    import {Article, ArticleModel} from './7-ts-modules/model/Article'
 
+    /**
+     * 案例 之 7-ts 进行模块化
+     */
+    var u = new User(1, 'lily', '111111')
+    UserModel.add(u)
+    var article = new Article(1, '特大新闻！特大新闻！今天有毛毛雨！', 'lily')
+    ArticleModel.add(article)
+
+
+    // db.ts
+    interface DBI<T>{
+        add(info: T): boolean;
+        update(info: T, id: number): boolean;
+        delete(id: number): boolean;
+        get(id: number): any[];
+    }
+    // 定义一个操作 mysql 数据库的类   tip: 实现泛型接口 类也要是泛型类
+    export class MySqlDb<T> implements DBI<T>{
+        add(info: T): boolean {
+            console.info(info)
+            return true
+        }
+        update(info: T, id: number): boolean {
+            return true
+        }
+        delete(id: number): boolean {
+            return true
+        }
+        get(id: number): any[] {
+            return []
+        }
+    }
+
+    export class MsSqlDb<T> implements DBI<T>{
+        add(info: T): boolean {
+            console.log(info)
+            return true
+        }
+        update(info: T, id: number): boolean {
+            return true
+        }
+        delete(id: number): boolean {
+            return true
+        }
+        get(id: number): any[] {
+            return []
+        }
+    }
+
+    // User.ts
+    import {MySqlDb} from '../db/db'
+
+    class User {
+        id: number | undefined;
+        username: string | undefined;
+        password: string | undefined;
+        constructor(id: number, username: string, password: string) {
+            this.id = id
+            this.username = username
+            this.password = password
+        }
+    }
+
+    let UserModel = new MySqlDb<User>() // 类作为参数来约束数据传入的类型
+
+    export { User, UserModel }
+
+    // 同理 > Article.ts
+    import {MsSqlDb} from '../db/db'
+
+    class Article {
+        id: number | undefined;
+        title: string | undefined;
+        author: string | undefined;
+        constructor(id: number, title: string, author: string) {
+            this.id = id
+            this.title = title
+            this.author = author
+        }
+    }
+
+    let ArticleModel = new MsSqlDb<Article>() // 类作为参数来约束数据传入的类型
+
+    export { Article, ArticleModel }
+
+    ```
 
 *引入其他模块之后，编译之后的文件路径会有所变化*
 
@@ -679,3 +768,206 @@ ts 模块的概念（官方）：
     let dog = new PersonA.Dog('花花')
     dog.eat()
     ```
+### 10. 装饰器
+定义：  
+装饰器是一种特殊类型的声明，它能够被附加到类声明、方法、属性或参数上，可以修改类的行为。   
+通俗理解： 装饰器是一个方法，可以注入到类、方法、属性参数来扩展他们的功能。  
+常见的装饰器有： 类装饰器、属性装饰器、方法装饰器、参数装饰器   
+装饰器的写法： 普通装饰器（无法传参）、装饰器工厂（可传参）   
+装饰器是过去几年中 js 最大的成就之一，已经是 es7 的标准特性之一   
+
+- 类装饰器： 在类声明之前被声明（紧靠着声明）。  
+    类装饰器应用于类构造函数，可以用来监视、修改、替换类定义，传入一个参数   
+    *es6 也有装饰器 decorator{}*   
+    1. 普通方法（无法传参）  
+
+    ``` typescript
+    function logClass(params: any) {
+        console.info(params) // 当前的类
+
+        params.url = 'hahha'
+        params.prototype.Url = 'XXXX'
+        params.prototype.run = function (): void {
+            console.info('running....')
+        }
+    }
+
+    @logClass
+    class HttpClient1 {
+        constructor() {
+            
+        }
+        getData() {
+
+        }
+    }
+
+    var http: any = new HttpClient1()
+    console.log(http.url)  // 无法获取， undefined
+    console.log(http.Url)
+    http.run()
+    ```  
+
+    2. 装饰器工厂（可传参） 
+
+    ``` typescript  
+    // 2. 类装饰器：装饰器工厂（可传参）
+    namespace class2 {
+        function logClass(params: string) {
+            
+            return function (target: any) {
+                console.log(target)  // 当前的类
+                console.info(params) // 装饰器传入参数
+                target.prototype.url = params
+                target.prototype.run = function (): void {
+                    console.info('running....')
+                }
+
+            }
+        }
+    
+        @logClass('http://xxx.com/api')
+        class HttpClient1 {
+            constructor() {
+                
+            }
+            getData() {
+    
+            }
+        }
+    
+        var http: any = new HttpClient1()
+        console.log(http.url) 
+        http.run()
+    }
+    ```    
+
+    3. 类装饰器替换类的构造函数   
+
+    ``` typescript  
+    function logClass(target: any) {
+        
+        return class extends target () {
+            // 相当于重写，因为每个属性都需要 extends
+            constructor() {
+            
+            }
+            getData() {
+
+            }
+        }
+    }
+
+    @logClass
+    class HttpClient1 {
+        constructor() {
+            
+        }
+        getData() {
+
+        }
+    }
+    ``` 
+
+- 属性装饰器
+    *都是语法糖*
+    ```typescript
+    function logClass (params: any){
+        return function (target: any, attr: any) {
+            console.log(target) // 类
+            console.log(attr)  // url
+            target[attr] = params
+        }
+    }
+
+    // @logClass('http://itying.com')
+    // var url: any | undefined;  // 无效
+
+    class ht1 {
+        @logClass('http://itying.com')
+        public url: any | undefined;
+    }
+    var t = new ht1()
+    console.log(t.url)
+    ```
+
+- 方法装饰器
+    方法装饰器在运行时传入下列 3 个参数：
+    1. 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象
+    2. 成员的名字
+    3. 成员的属性描述符
+
+    *跟 es6 的相似*
+
+    ```typescript
+    // 方法装饰器
+    function get(params: any) {
+        return function (target: any, methodName: any, desc: any) {
+            // console.log(target) // 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象
+            // console.log(methodName) // 成员的名字
+            // console.log(desc) // 成员的属性描述符
+            
+            // 修改装饰器的方法， 把装饰器方法里面传入的所有参数改为 string 类型
+            // 1. 保存当前的方法
+
+            let oMethod = desc.value  // 保存当前方法
+            // 修改当前方法
+            desc.value = function (...args: any[]) {
+                args = args.map((val) {
+                    return String(val)
+                }) 
+                console.log('装饰器中转换的形参：' , args)
+                oMethod.apply(this, args)  // 融合类中的 该方法语句
+            }
+        }
+    }
+
+    class Ht {
+        url: string | undefined;
+        constructor() {
+        }
+
+        @get('http://www.itying.com')
+        getData(...args:any[]) {
+            console.log(args)
+            console.log('我是类中的方法')
+        }
+    }
+    let ht = new Ht()
+    ht.getData(12, 11, true)
+    ```
+
+- 参数装饰器
+    *不常用， 其他装饰器也可以实现*
+    ```typescript
+    // 方法参数装饰器
+    function logParams(params: any) {
+        return function (target: any, methodName: any, paramsIndex: any) {
+            console.log(target)
+            console.log(methodName)
+            console.log(paramsIndex)
+            target.url = params
+        }
+    }
+    class Ht {
+        url: string | undefined;
+        constructor() {
+        }
+
+        getCan(@logParams('uuid') uuid: any) {
+            console.log(uuid)
+            console.log('我是类中的参数方法')
+        }
+    }
+    let ht = new Ht()
+    ht.getCan('jjj')
+    console.log(ht.url)
+    ```
+
+#### 装饰器顺序：  
+| 顺序 | 名称 | 多个内部顺序 |
+| ---- | --- | --- |
+| 1 | 属性装饰器 |  |
+| 2 | 方法装饰器 |  |
+| 3 | 方法参数装饰器 | 先执行后面的，从后向前 | 
+| 4 | 类装饰器 | 先执行后面的，从后向前 | 

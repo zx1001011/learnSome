@@ -12,15 +12,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
+Object.defineProperty(exports, "__esModule", { value: true });
 var str = "你好 ts";
 // 2.函数
 var fun1;
@@ -240,6 +232,26 @@ var fun4;
     // }
     // getData<string>('hahha', 'hhah')
 })(fun4 || (fun4 = {}));
+// 8. ts 模块 
+var User_1 = require("../7-ts-modules/model/User");
+var Article_1 = require("../7-ts-modules/model/Article");
+var fun6;
+(function (fun6) {
+    // es6
+    // import { save, getData, dbUrl } from '../modules/db'
+    // getData()   
+    // save()
+    // console.log(dbUrl)
+    // import port from '../modules/db'
+    // console.log(port)
+    /**
+     * 案例 之 7-ts 进行模块化
+     */
+    var u = new User_1.User(1, 'lily', '111111');
+    User_1.UserModel.add(u);
+    var article = new Article_1.Article(1, '特大新闻！特大新闻！今天有毛毛雨！', 'lily');
+    Article_1.ArticleModel.add(article);
+})(fun6 || (fun6 = {}));
 // 9. 命名空间
 var fun7;
 (function (fun7) {
@@ -263,146 +275,3 @@ var fun7;
     var dog = new PersonA.Dog('花花');
     // dog.eat()
 })(fun7 || (fun7 = {}));
-// 10. 装饰器
-var fun8;
-(function (fun8) {
-    // 类装饰器
-    // 1. 普通装饰器（无法传参）
-    var class1;
-    (function (class1) {
-        function logClass(params) {
-            // console.info(params) // 当前的类
-            params.url = 'hahha';
-            params.prototype.Url = 'XXXX';
-            params.prototype.run = function () {
-                console.info('running....');
-            };
-        }
-        var HttpClient1 = /** @class */ (function () {
-            function HttpClient1() {
-            }
-            HttpClient1.prototype.getData = function () {
-            };
-            HttpClient1 = __decorate([
-                logClass
-            ], HttpClient1);
-            return HttpClient1;
-        }());
-        var http = new HttpClient1();
-        // console.log(http.url)  // 无法获取， undefined
-        // console.log(http.Url)
-        // http.run()
-    })(class1 || (class1 = {}));
-    // 2. 类装饰器：装饰器工厂（可传参）
-    var class2;
-    (function (class2) {
-        function logClass(params) {
-            return function (target) {
-                // console.log(target)  // 当前的类
-                // console.info(params) // 装饰器传入参数
-                target.prototype.url = params;
-                target.prototype.run = function () {
-                    console.info('running....');
-                };
-            };
-        }
-        var HttpClient1 = /** @class */ (function () {
-            function HttpClient1() {
-            }
-            HttpClient1.prototype.getData = function () {
-            };
-            HttpClient1 = __decorate([
-                logClass('http://xxx.com/api')
-            ], HttpClient1);
-            return HttpClient1;
-        }());
-        var http = new HttpClient1();
-        // console.log(http.url) 
-        // http.run()
-    })(class2 || (class2 = {}));
-    // 属性装饰器
-    var class3;
-    (function (class3) {
-        function logClass(params) {
-            return function (target, attr) {
-                // console.log(target) // 类
-                // console.log(attr)  // url
-                target[attr] = params;
-            };
-        }
-        // @logClass('http://itying.com')
-        // var url: any | undefined;  // 无效
-        var ht1 = /** @class */ (function () {
-            function ht1() {
-            }
-            __decorate([
-                logClass('http://itying.com')
-            ], ht1.prototype, "url", void 0);
-            return ht1;
-        }());
-        var t = new ht1();
-        // console.log(t.url)
-    })(class3 || (class3 = {}));
-    var class4;
-    (function (class4) {
-        // 方法装饰器
-        function get(params) {
-            return function (target, methodName, desc) {
-                // console.log(target) // 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象
-                // console.log(methodName) // 成员的名字
-                // console.log(desc) // 成员的属性描述符
-                // 修改装饰器的方法， 把装饰器方法里面传入的所有参数改为 string 类型
-                // 1. 保存当前的方法
-                var oMethod = desc.value; // 保存当前方法
-                // 修改当前方法
-                desc.value = function () {
-                    var args = [];
-                    for (var _i = 0; _i < arguments.length; _i++) {
-                        args[_i] = arguments[_i];
-                    }
-                    args = args.map(function (val) {
-                        return String(val);
-                    });
-                    console.log('装饰器中转换的形参：', args);
-                    oMethod.apply(this, args); // 融合类中的 该方法语句
-                };
-            };
-        }
-        // 方法参数装饰器
-        function logParams(params) {
-            return function (target, methodName, paramsIndex) {
-                console.log(target);
-                console.log(methodName);
-                console.log(paramsIndex);
-                target.url = params;
-            };
-        }
-        var Ht = /** @class */ (function () {
-            function Ht() {
-            }
-            Ht.prototype.getData = function () {
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                console.log(args);
-                console.log('我是类中的方法');
-            };
-            Ht.prototype.getCan = function (uuid) {
-                console.log(uuid);
-                console.log('我是类中的参数方法');
-            };
-            __decorate([
-                get('http://www.itying.com')
-            ], Ht.prototype, "getData", null);
-            __decorate([
-                __param(0, logParams('uuid'))
-            ], Ht.prototype, "getCan", null);
-            return Ht;
-        }());
-        var ht = new Ht();
-        // ht.getData(12, 11, true)
-        ht.getCan('jjj');
-        console.log(ht.url);
-    })(class4 || (class4 = {}));
-})(fun8 || (fun8 = {}));

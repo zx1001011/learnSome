@@ -263,49 +263,49 @@ namespace fun5 {
     // // 定义一个操作 mysql 数据库的类   tip: 实现泛型接口 类也要是泛型类
     // class MySqlDb<T> implements DBI<T>{
     //     add(info: T): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     update(info: T, id: number): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     delete(id: number): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     get(id: number): any[] {
-    //         throw new Error("Method not implemented.");
+    //         return []
     //     }
     // }
     
     // class MsSqlDb<T> implements DBI<T>{
     //     add(info: T): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     update(info: T, id: number): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     delete(id: number): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     get(id: number): any[] {
-    //         throw new Error("Method not implemented.");
+    //         return []
     //     }
     // }
     
     // class MongoDb<T> implements DBI<T>{
     //     add(info: T): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     update(info: T, id: number): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     delete(id: number): boolean {
-    //         throw new Error("Method not implemented.");
+    //         return true
     //     }
     //     get(id: number): any[] {
-    //         throw new Error("Method not implemented.");
+    //         return []
     //     }
     // }
-    // // 操作用户表 定义一个 User 类和数据表做映射
+    // 操作用户表 定义一个 User 类和数据表做映射
     // class User {
     //     id: number | undefined;
     //     username: string | undefined;
@@ -324,6 +324,10 @@ namespace fun5 {
     // mMsSql.add(u1) 
 }
 // 8. ts 模块 
+
+// import {User, UserModel} from './7-ts-modules/model/User'
+// import {Article, ArticleModel} from './7-ts-modules/model/Article'
+// namespace 里面无法写 import
 namespace fun6 {
     // es6
     // import { save, getData, dbUrl } from '../modules/db'
@@ -334,6 +338,14 @@ namespace fun6 {
     // import port from '../modules/db'
     // console.log(port)
 
+
+    /**
+     * 案例 之 7-ts 进行模块化
+     */
+    // var u = new User(1, 'lily', '111111')
+    // UserModel.add(u)
+    // var article = new Article(1, '特大新闻！特大新闻！今天有毛毛雨！', 'lily')
+    // ArticleModel.add(article)
 }
 
 // 9. 命名空间
@@ -364,5 +376,142 @@ namespace fun7 {
     } 
 
     let dog = new PersonA.Dog('花花')
-    dog.eat()
+    // dog.eat()
+}
+
+// 10. 装饰器
+namespace fun8 {
+
+    // 类装饰器
+    // 1. 普通装饰器（无法传参）
+    namespace class1 {
+        function logClass(params: any) {
+            // console.info(params) // 当前的类
+    
+            params.url = 'hahha'
+            params.prototype.Url = 'XXXX'
+            params.prototype.run = function (): void {
+                console.info('running....')
+            }
+        }
+    
+        @logClass
+        class HttpClient1 {
+            constructor() {
+                
+            }
+            getData() {
+    
+            }
+        }
+    
+        var http: any = new HttpClient1()
+        // console.log(http.url)  // 无法获取， undefined
+        // console.log(http.Url)
+        // http.run()
+    }
+    // 2. 类装饰器：装饰器工厂（可传参）
+    namespace class2 {
+        function logClass(params: string) {
+            
+            return function (target: any) {
+                // console.log(target)  // 当前的类
+                // console.info(params) // 装饰器传入参数
+                target.prototype.url = params
+                target.prototype.run = function (): void {
+                    console.info('running....')
+                }
+
+            }
+        }
+    
+        @logClass('http://xxx.com/api')
+        class HttpClient1 {
+            constructor() {
+                
+            }
+            getData() {
+    
+            }
+        }
+    
+        var http: any = new HttpClient1()
+        // console.log(http.url) 
+        // http.run()
+    }
+
+    // 属性装饰器
+    namespace class3 {
+        function logClass (params: any){
+            return function (target: any, attr: any) {
+                // console.log(target) // 类
+                // console.log(attr)  // url
+                target[attr] = params
+            }
+        }
+    
+        // @logClass('http://itying.com')
+        // var url: any | undefined;  // 无效
+
+        class ht1 {
+            @logClass('http://itying.com')
+            public url: any | undefined;
+        }
+        var t = new ht1()
+        // console.log(t.url)
+    }
+
+    namespace class4 {
+        // 方法装饰器
+        function get(params: any) {
+            return function (target: any, methodName: any, desc: any) {
+                // console.log(target) // 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象
+                // console.log(methodName) // 成员的名字
+                // console.log(desc) // 成员的属性描述符
+                
+                // 修改装饰器的方法， 把装饰器方法里面传入的所有参数改为 string 类型
+                // 1. 保存当前的方法
+
+                let oMethod = desc.value  // 保存当前方法
+                // 修改当前方法
+                desc.value = function (...args: any[]) {
+                    args = args.map((val) => {
+                        return String(val)
+                    }) 
+                    console.log('装饰器中转换的形参：' , args)
+                    oMethod.apply(this, args)  // 融合类中的 该方法语句
+                }
+            }
+        }
+
+        // 方法参数装饰器
+        function logParams(params: any) {
+            return function (target: any, methodName: any, paramsIndex: any) {
+                console.log(target)
+                console.log(methodName)
+                console.log(paramsIndex)
+                target.url = params
+            }
+        }
+        class Ht {
+            url: string | undefined;
+            constructor() {
+            }
+
+            @get('http://www.itying.com')
+            getData(...args:any[]) {
+                console.log(args)
+                console.log('我是类中的方法')
+            }
+
+            getCan(@logParams('uuid') uuid: any) {
+                console.log(uuid)
+                console.log('我是类中的参数方法')
+            }
+        }
+        let ht = new Ht()
+        // ht.getData(12, 11, true)
+        ht.getCan('jjj')
+        console.log(ht.url)
+    }
 }
