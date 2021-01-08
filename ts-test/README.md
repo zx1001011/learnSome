@@ -1,12 +1,13 @@
 ## 前提：
 
-### 视频链接：
+### 1. 视频链接：
 [主讲老师大地](https://www.bilibili.com/video/BV1yt411e7xV?from=search&seid=13056183740590042272)
-### 文件链接： 
+
+### 2. 文件链接： 
 [itying-typescript教程](https://www.itying.com/goods-905.html)
 
 
-### 官网：
+### 3. 官网：
 [typescript](https://ts.xcatliu.com/introduction/hello-typescript.html)
 [ts](https://www.typescriptlang.org/)
 
@@ -26,6 +27,7 @@ ts 是 javascript 的超集，包含 es6 和 es5
 ts 是由 c# 之父 [Anders Hejlsberg](https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%96%AF%C2%B7%E6%B5%B7%E5%B0%94%E6%96%AF%E4%BC%AF%E6%A0%BC/2152925?fromtitle=Anders%20Hejlsberg&fromid=9081506&fr=aladdin) 发起的
 
 *建议使用 es6 语法*
+
 ## 二、使用
 
 ### 1. 安装  
@@ -38,20 +40,20 @@ ts 是由 c# 之父 [Anders Hejlsberg](https://baike.baidu.com/item/%E5%AE%89%E5
 ### 2. 使用
 - 创建文件 hello.ts   
 写入ts语法
+
 - ts 编译成 es5 语法  
 浏览器本身不支持ts语法   
 命令： ``` tsc hello.ts ```
-
 *注意：每次运行都需要编译*
 
 - 配置自动化编译脚本  
-1. 创建 tsconfig.json 文件   
-``` tsc --init ``` 生成配置文件
-2. 快捷键 Ctrl+shift+B  选择监视模式 进行编译  
+    1. 创建 tsconfig.json 文件   
+    ``` tsc --init ``` 生成配置文件
+    2. 快捷键 Ctrl+shift+B  选择监视模式 进行编译  
 每次有更新就会编译
 
-*tsc watch 是自动监听，下次保存文件就自动编译*  
-*tsc build 是编译一次*
+    *tsc watch 是自动监听，下次保存文件就自动编译*  
+    *tsc build 是编译一次*
 
 ## 三.语法
 *以下 typescript 简写为 ts*
@@ -64,14 +66,14 @@ ts 中 为了 使代码更规范，更有利于维护，增加了类型校验
 | 1 | 布尔类型 | boolean | [true/false] | ```let flag:boolean=false``` | √ |
 | 2 | 数字类型 | number | [\d+.\d+] | 未区分浮点类型和整数类型 | √ |
 | 3 | 字符串类型 | string | [char+] | 单、双引号包裹 | √ |
-| 4 | 数组类型 | array | [number...] | 必须指定数组类型，如 ``` let arr:number[] = [1,2,3] ```, 第二种定义方式 ``` let arr:Array<number> = [1,2] ``` *泛型* | √ |
-| 5 | 元组类型 | tuple | 数组的一种，可以指定每个数组元素的类型 | ``` let arr:[string, number, boolean] = ['ts', 3.18, true] ```  | √ |
-| 6 | 枚举类型 | enum | 事先考虑某个变量可能取得值 | ``` enum 枚举名 { 标识符[=整型常数], ... } ``` ，类似C语言,其中值默认为索引值， 示例： ``` enum Flag {success=1, error} let f:Flag=Flag.success ``` | √ |
+| 4 | 数组类型 | array | [number...] | 必须指定数组类型，如 ```let arr:number[] = [1,2,3]```, 第二种定义方式 ```let arr:Array<number> = [1,2]``` *泛型* | √ |
+| 5 | 元组类型 | tuple | 数组的一种，可以指定每个数组元素的类型 | ```let arr:[string, number, boolean] = ['ts', 3.18, true]```  | √ |
+| 6 | 枚举类型 | enum | 事先考虑某个变量可能取得值 | ```enum 枚举名 { 标识符[=整型常数], ... }``` ，类似C语言,其中值默认为索引值， 示例： ```enum Flag {success=1, error} let f:Flag=Flag.success``` | √ |
 | 7 | 任意类型 | any | 可以赋值为任意类型 | Object类型可以指定该类型 | × |
-| 8 | null | null | 一个变量可以是基本数据类型，或者null或者undefined |  ``` let num:number | null ``` | × |
-| 9 | undefined | undefined | 其他类型未初始化变量为undefined，但是引用会报错；如果直接指定undefined没有初始化就不会报错 | ``` let num:number |null | undefined ```  | × |
-| 10 | 空类型 | void | 一般用于方法没有返回值 | ``` function run():void{} ``` | × |
-| 11 | never类型 | never | 从来不会出现 | ``` let a:never  a=(()=>{ throw new Error('错误') })() ``` | × |
+| 8 | null | null | 一个变量可以是基本数据类型，或者null或者undefined |  ```let num:number | null``` | × |
+| 9 | undefined | undefined | 其他类型未初始化变量为undefined，但是引用会报错；如果直接指定undefined没有初始化就不会报错 | ```let num:number |null | undefined```  | × |
+| 10 | 空类型 | void | 一般用于方法没有返回值 | ```function run():void{}``` | × |
+| 11 | never类型 | never | 从来不会出现 | ```let a:never  a=(()=>{ throw new Error('错误') })()``` | × |
 
 
 ### 2.函数
@@ -116,22 +118,25 @@ ts 中 为了 使代码更规范，更有利于维护，增加了类型校验
 - 函数重载   
 java 中方法的重载指的是两个或两个以上同名函数，但它们的参数不一样，这时会出现函数重载的情况   
 ts 中重载指的是通过为同一个函数提供多个函数类型定义来实现多种功能的目的
-ts 需要兼容 es5 和 es6 重载的写法， 与 java 有区别
+ts 需要兼容 es5 和 es6 重载的写法， 与 java 有区别  
+
     ``` typescript
-        function getInfo(str: string): string
-        function getInfo(str: number): number
-        function getInfo(str: any): any {
-            if (typeof str === 'string') {
-                return '我的名字是' + str
-            } else {
-                return '我的年龄是' + str
-            }
+    function getInfo(str: string): string
+    function getInfo(str: number): number
+    function getInfo(str: any): any {
+        if (typeof str === 'string') {
+            return '我的名字是' + str
+        } else {
+            return '我的年龄是' + str
         }
-        console.log(getInfo('张三')) // 我的名字是张三
-        console.log(getInfo(20)) // 我的年龄是20
-    ```
-- 箭头函数 es6 () => {}
+    }
+    console.log(getInfo('张三')) // 我的名字是张三
+    console.log(getInfo(20)) // 我的年龄是20
+    ```    
+
+- 箭头函数 es6 ```() => {}```
   this 上下文指向函数运行的上下文， 非私有
+
 ### 3.类(上) —— es5 中的类
 - Es5中的类和静态方法 
     ``` javascript
@@ -217,9 +222,11 @@ ts 需要兼容 es5 和 es6 重载的写法， 与 java 有区别
     console.info(w.work()) // 可以继承原型链上的属性和方法
 
     ```
+
 ### 4.类(下) —— ts 中的类
 - 类的定义   
-```class``` 关键字
+```class``` 关键字 
+
     ``` typescript
     class Person {
         name:string;  // 属性，前面省略了 public 关键字【默认】
@@ -237,6 +244,7 @@ ts 需要兼容 es5 和 es6 重载的写法， 与 java 有区别
 
 - 继承   
 ```extends``` 关键字， ```super``` 关键字
+
     ``` typescript
     // 继承 Person
     class worker extends Person {
@@ -247,18 +255,18 @@ ts 需要兼容 es5 和 es6 重载的写法， 与 java 有区别
     }
     let w = new Web('李四')
     console.log(w.run())
-
     ```
 
-- 类里面的修饰符 - public,protected,private   
-public: 公有 ， 全都可以访问【默认】   
-protected： 保护 ， 类和子类可以访问     
-private: 私有 ， 类可以访问   
+- 类里面的修饰符 - ```public,protected,private``` 
+    ```public```: 公有 ， 全都可以访问【默认】   
+    ```protected```： 保护 ， 类和子类可以访问     
+    ```private```: 私有 ， 类可以访问   
 
   ![](./img/2.png)
 
 
-- 静态属性或者静态方法  - static 关键字
+- 静态属性或者静态方法  - ```static``` 关键字
+
     ``` typescript
     class Person{
         public name:string;
@@ -321,6 +329,7 @@ private: 私有 ， 类可以访问
             abstract eat(): any; // 抽象方法， 抽象方法只能在抽象类中定义
         }
         ```
+
 ### 5.接口
 ```interface``` 关键字
 
@@ -331,109 +340,110 @@ private: 私有 ， 类可以访问
 ts 中的接口类似于 java, 同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等。
 
 - 属性类接口  —— 对 json 的约束
-``` typescript
-function printLabel(labelInfo: { label: string }):void {
-    // 对传参 labelInfo 进行了规定，必须要有 string类型的 label属性
-}
-// 对传入对象的约束 ： 属性接口
-interface Label {
-    label: string; // 必须要有 label
-    fontSize?: number; // 可选参数，可传可不传
-}
-// 规定形参
-function print(label:Label):void {
-    // console.info(label.name + label.name) // 语法报错
-    // 需要严格遵守规则
-}
-let obj = {
-    name: 1,
-    label: 'hah'
-}
-print(obj) // 可以有其他属性
-print({ label: 'jajja'  }) // 只能有 label 属性，否则报错
+    ``` typescript
+    function printLabel(labelInfo: { label: string }):void {
+        // 对传参 labelInfo 进行了规定，必须要有 string类型的 label属性
+    }
+    // 对传入对象的约束 ： 属性接口
+    interface Label {
+        label: string; // 必须要有 label
+        fontSize?: number; // 可选参数，可传可不传
+    }
+    // 规定形参
+    function print(label:Label):void {
+        // console.info(label.name + label.name) // 语法报错
+        // 需要严格遵守规则
+    }
+    let obj = {
+        name: 1,
+        label: 'hah'
+    }
+    print(obj) // 可以有其他属性
+    print({ label: 'jajja'  }) // 只能有 label 属性，否则报错
 
-```
+    ```
 
 
 - 函数类型接口 : 对方法传入的参数 以及返回值进行 约束
-``` typescript
-// 加密的函数类型接口
-interface encrypt {
-    (key:string,value:string):string;
-}
-let md5: encrypt = function (k: string, v: string): string { return k + v; }
-console.log(md5('1', '2'))
-```
+    ``` typescript
+    // 加密的函数类型接口
+    interface encrypt {
+        (key:string,value:string):string;
+    }
+    let md5: encrypt = function (k: string, v: string): string { return k + v; }
+    console.log(md5('1', '2'))
+    ```
 
-- 可索引接口 : 数组、对象的约束（不常用）
-``` typescript
-// 对数组的约束
-interface UserArr {
-    [index: number]: string; // 索引值为 string 类型， index 为索引
-}
-let arr: UserArr = ['aaa', 'bbb']
-console.log(arr[0]) // 0 是指 index
+    - 可索引接口 : 数组、对象的约束（不常用）
+    ``` typescript
+    // 对数组的约束
+    interface UserArr {
+        [index: number]: string; // 索引值为 string 类型， index 为索引
+    }
+    let arr: UserArr = ['aaa', 'bbb']
+    console.log(arr[0]) // 0 是指 index
 
-// 对对象的约束，  可索引接口
-interface UserObj {
-    [index: string]: number; // 索引值为 number 类型， index 为索引
-}
-let obj1:UserObj = { name: 1, k: 2 }
-console.log(obj1.name) // name 是指 index
+    // 对对象的约束，  可索引接口
+    interface UserObj {
+        [index: string]: number; // 索引值为 number 类型， index 为索引
+    }
+    let obj1:UserObj = { name: 1, k: 2 }
+    console.log(obj1.name) // name 是指 index
 
-```
+    ```
 
 - 类类型接口: 对类的约束 和 抽象类有的相似
-```implements``` 关键字
-``` typescript
-// 类类型接口： 对类的约束 和 抽象类有点相似
-interface Animal2 {
-    name: string;
-    eat(): string;
-}
-class Dog1 implements Animal2 {
-    name: string
-    constructor(name: string) {  // 构造函数 初始化 name
-        this.name = name
+    ```implements``` 关键字
+    ``` typescript
+    // 类类型接口： 对类的约束 和 抽象类有点相似
+    interface Animal2 {
+        name: string;
+        eat(): string;
     }
-    eat() {
-        return `${this.name}在吃饭`
+    class Dog1 implements Animal2 {
+        name: string
+        constructor(name: string) {  // 构造函数 初始化 name
+            this.name = name
+        }
+        eat() {
+            return `${this.name}在吃饭`
+        }
     }
-}
-let d1 = new Dog1('嘿嘿')
-console.log(d1.eat())
-```
-- 接口扩展: 接口可以继承接口
-关键字 ```interface``` 和 ```extends``` 的合用
-``` typescript
-// 接口扩展：接口可以继承接口
-interface Animal3 {
-    eat(): void;
-}
-interface Person1 extends Animal3 {
-    work(): void;
-}
-class Programmer {
-    name: string
-    constructor(name: string) {
-        this.name = name
-    }
-    coding() {
-        return this.name + '在敲代码中...'
-    }
-}
-class Web implements Person1 {
-    eat() {}
-    work() {}
-}
+    let d1 = new Dog1('嘿嘿')
+    console.log(d1.eat())
+    ```
 
-class Web1 extends Programmer implements Person1 {
-    eat() {}
-    work() {}
-}
-let web1 = new Web1('zhang')
-console.info(web1.coding())
-```
+- 接口扩展: 接口可以继承接口
+    关键字 ```interface``` 和 ```extends``` 的合用
+    ``` typescript
+    // 接口扩展：接口可以继承接口
+    interface Animal3 {
+        eat(): void;
+    }
+    interface Person1 extends Animal3 {
+        work(): void;
+    }
+    class Programmer {
+        name: string
+        constructor(name: string) {
+            this.name = name
+        }
+        coding() {
+            return this.name + '在敲代码中...'
+        }
+    }
+    class Web implements Person1 {
+        eat() {}
+        work() {}
+    }
+
+    class Web1 extends Programmer implements Person1 {
+        eat() {}
+        work() {}
+    }
+    let web1 = new Web1('zhang')
+    console.info(web1.coding())
+    ```
 
 ### 6.泛型
 泛型： 软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。   
@@ -459,6 +469,7 @@ console.info(web1.coding())
     getPerson1<number>(111, 'aa')
     getPerson1<string>('ahhahah', 'aaa')
     ```
+
 - 泛型类: 
     ``` typescript
     // 比如有个最小堆算法，需要同时支持返回数字和字符串两种类型
@@ -524,9 +535,9 @@ console.info(web1.coding())
     var mysql1 = new MysqlDb<User>()
     mysql1.add(user1)
     ```
-**NOTES:**  
-1. 语法和 java 大差不差 ， 都是为了面向对象进行服务  
-2. 这种复用性又让我想起了原生es5，原型链方法  
+    **NOTES:**  
+    1. 语法和 java 大差不差 ， 都是为了面向对象进行服务  
+    2. 这种复用性又让我想起了原生es5，原型链方法  
 
 - 泛型接口
     ``` typescript
@@ -540,14 +551,15 @@ console.info(web1.coding())
 
     getData<string>('hahha', 'hhah')
     ```
+
 ### 7. ts 中的类型、接口、类、泛型的综合使用案例  —— ts 封装统一操作 Mysql 、 Mongodb 、 Mssql 的底层库
 需求分析如下：  
 功能：定义一个操作数据库的库， 支持 Mysql Mssql Mongodb  
 要求1：Mysql Mssql Mongodb 功能一样， 都有 增删改查（add,update,delet,get）方法  
 注意：约束统一的规范，以及代码重用  
-解决方案：需要约束规范所以要定义接口，需要代码重用所以用到泛型  
-    1. 接口： 在面向对象的过程中，接口是一种规范的定义，它定义了行为和动作的规范
-    2. 泛型： 通俗理解，泛型就是提高 类、接口、方法的复用性  
+解决方案：需要约束规范所以要定义接口，需要代码重用所以用到泛型    
+    1. 接口： 在面向对象的过程中，接口是一种规范的定义，它定义了行为和动作的规范   
+    2. 泛型： 通俗理解，泛型就是提高 类、接口、方法的复用性   
 ``` typescript
 interface DBI<T>{
     add(info: T): boolean;
@@ -620,14 +632,14 @@ mMsSql.add(u1)
 ```
 
 ### 8. ts 模块
-[js 模块化 学习](../jsModules)
-ts 模块的概念（官方）：
-    ts1.5发生了一些术语的变化，‘内部模块’ 称为 ‘命名空间’   
-    ‘外部模块’现在简称为‘模块’，模块在其自身的作用域里执行，而不是在全局作用域里，说明在一个模块里的变量、函数、类等等在模块外部不可见（不暴露、封装性），除非 ```export``` ， 需要使用的时候使用 ```import``` 引入 ```export``` 暴露的方法、类、变量等等。
+[js 模块化 学习](../jsModules)   
+ts 模块的概念（官方）：   
+    · ts1.5发生了一些术语的变化，‘内部模块’ 称为 ‘命名空间’   
+    · ‘外部模块’现在简称为‘模块’，模块在其自身的作用域里执行，而不是在全局作用域里，说明在一个模块里的变量、函数、类等等在模块外部不可见（不暴露、封装性） ，除非 ```export``` ， 需要使用的时候使用 ```import``` 引入 ```export``` 暴露的方法、类、变量等等。
 
-语法与 es6 相同
+*语法与 es6 相同*
 
-    ```typescript
+    ``` typescript
     // index.ts 使用
     import {User, UserModel} from './7-ts-modules/model/User'
     import {Article, ArticleModel} from './7-ts-modules/model/Article'
@@ -768,6 +780,7 @@ ts 模块的概念（官方）：
     let dog = new PersonA.Dog('花花')
     dog.eat()
     ```
+
 ### 10. 装饰器
 定义：  
 装饰器是一种特殊类型的声明，它能够被附加到类声明、方法、属性或参数上，可以修改类的行为。   
