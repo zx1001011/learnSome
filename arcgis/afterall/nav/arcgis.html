@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>全国农业物联网数据共用服务平台</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <!-- nav -->
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/map.css">
+
+    <!-- video  -->
+    <link rel="stylesheet" type="text/css" href="../css/video-js.min.css" />
+
+    <!-- arcgis -->
+    <link rel="stylesheet" href="http://218.94.8.117:9011/arcgis/arcgis_js_api/library/4.15/esri/css/main.css">
+    <!-- 引入js -->
+    <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/videojs-flash@2/dist/videojs-flash.min.js"></script>-->
+
+    <link rel="stylesheet" href="../css/arcgis.css">
+
+    <!-- video -->
+    <style type="text/css">
+        img {
+            margin-top: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <img src="../image/nav/logo.png" class="logo f-left" alt="">
+        <a class="f-right back" href="../../home.html"></a>
+        <a class="link f-right" href="./jsmap.html">热力图</a>
+        <a class="link f-right active" href="./map.html">地图</a>
+    </div>
+    <div id="nav-content">
+        <div id="side-nav" class="nav-content bg index-2">
+            <div class="side-nav">
+                <a class="side-link all active" href="./map.html">全国</a>
+                <a class="side-link icon-side-js" href="javascript:;"></a>
+                <a class="side-link icon-side-bj" href="javascript:;"></a>
+                <a class="side-link icon-side-sh" href="javascript:;"></a>
+                <a class="side-link icon-side-tj" href="javascript:;"></a>
+                <a class="side-link icon-side-jl" href="javascript:;"></a>
+                <a class="side-link icon-side-ah" href="javascript:;"></a>
+            </div>
+        </div>
+        <div id="type-num" class="index-2 bg">
+            <div class="btns">
+                <button class="type-btn">大田</button>
+                <button class="type-btn">设施</button>
+                <button class="type-btn">水产</button>
+                <button class="type-btn">畜禽</button>
+            </div>
+            <div class="values">
+                <div class="item">
+                    <img src="../image/map/unit_icon.png">
+                    <div>
+                        <p class="num color-1">-</p>
+                        <p class="name">应用主体数量</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../image/map/dev_icon.png">
+                    <div>
+                        <p class="num color-2">-</p>
+                        <p class="name">物联网设备</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../image/map/camera_icon.png">
+                    <div>
+                        <p class="num color-3">-</p>
+                        <p class="name">网络摄像头</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map" class=""></div>
+        <div id="nav-info" class="nav-content index-0"  style="display: none;">
+            <!-- 传感器弹窗 -->
+            <div id="my-popup-sensor" class="my-popup bg my-popup-sensor">
+<!--                <p class="my-popup-title">监控详情</p>-->
+<!--                <img class="my-popup-close" src="../image/map/close-one.png">-->
+                <div class="my-popup-time">更新时间：-</div>
+                <div class="infos">
+                    <div class="item">
+                        <span class="item-name">单元名称:</span>
+                        <span class="value text-hidden">-</span>
+                    </div>
+                    <div class="item">
+                        <span class="item-name">管理人员:</span>
+                        <span class="value text-hidden">-</span>
+                        <span class="item-name">联系方式:</span>
+                        <span class="value text-hidden">-</span>
+                    </div>
+                    <div class="item">
+                        <span class="item-name">种植作物:</span>
+                        <span class="value text-hidden">-</span>
+                        <span class="item-name">生产领域:</span>
+                        <span class="value text-hidden">-</span>
+                    </div>
+                </div>
+                <div class="values">
+                    <div class="item">
+                        <img src="../image/map/空气温度.png">
+                        <p class="name text-hidden">-</p>
+                        <p class="value text-hidden">-</p>
+                    </div>
+                    <div class="item">
+                        <img src="../image/map/空气湿度.png">
+                        <p class="name text-hidden">-</p>
+                        <p class="value text-hidden">-</p>
+                    </div>
+                    <div class="item">
+                        <img src="../image/map/土壤温度.png">
+                        <p class="name text-hidden">-</p>
+                        <p class="value text-hidden">-</p>
+                    </div>
+                    <div class="item">
+                        <img src="../image/map/土壤湿度.png">
+                        <p class="name text-hidden">-</p>
+                        <p class="value text-hidden">-</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 视频弹窗 -->
+            <div id="my-popup-ipc" class="my-popup bg my-popup-ipc">
+<!--                <p class="my-popup-title">监控详情</p>-->
+<!--                <img class="my-popup-close" src="../image/map/close-one.png">-->
+                <div class="my-popup-time">更新时间：-</div>
+                <div id="playWind" class="my-popup-video">
+<!--                    <video id="popup_video" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay-->
+<!--                        style="height: 100%; width: 100%;" src="">-->
+<!--                    </video>-->
+                </div>
+                <div class="item text-hidden">
+                    <span class="item-name">监控地点:</span>
+                    <span class="value">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- nav -->
+<script src="../assets/ezuikit.js"></script>
+<script type="text/javascript" src="../assets/js/jquery-3.4.1.min.js"></script>
+<!-- video  -->
+<script type="text/javascript" src="../assets/js/typedarray.js"></script>
+<!-- <script src="http://api.html5media.info/1.1.4/html5media.min.js"></script> -->
+<script type="text/javascript" src="../assets/js/video.min.js"></script>
+<script type="text/javascript" src="../assets/js/videojs-flash.min.js"></script>
+<script src="../echarts/echarts.min.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/session.js"></script>
+<script>
+    var dojoConfig = {
+        parseOnLoad: true,
+        packages: [{
+            name: "src",
+            location: location.pathname.replace(/\/[^/]+$/, "")+"/src"
+        }]
+    };
+</script>
+<script src="http://218.94.8.117:9011/arcgis/arcgis_js_api/library/4.15/init.js"></script>
+<script src="../js/arcgis.js"></script>
+</html>

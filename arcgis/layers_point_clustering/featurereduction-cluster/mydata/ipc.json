@@ -1,0 +1,1108 @@
+[{
+    "name": "宜兴螃蟹养殖池塘4",
+    "address": "http://210.12.220.212:10800/hls/stream_4/stream_4_live.m3u8",
+    "l1": "119.918067",
+    "l2": "31.902980",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘5",
+    "address": "http://210.12.220.212:10800/hls/stream_6/stream_6_live.m3u8",
+    "l1": "120.739090",
+    "l2": "31.554115",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘6",
+    "address": "http://210.12.220.212:10800/hls/stream_7/stream_7_live.m3u8",
+    "l1": "120.490256",
+    "l2": "31.362854",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘7",
+    "address": "http://210.12.220.212:10800/hls/stream_8/stream_8_live.m3u8",
+    "l1": "120.582915",
+    "l2": "31.492516",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘8",
+    "address": "http://210.12.220.212:10800/hls/stream_9/stream_9_live.m3u8",
+    "l1": "120.779516",
+    "l2": "31.758547",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘9",
+    "address": "http://210.12.220.212:10800/hls/stream_10/stream_10_live.m3u8",
+    "l1": "119.700955",
+    "l2": "31.275599",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘10",
+    "address": "http://210.12.220.212:10800/hls/stream_11/stream_11_live.m3u8",
+    "l1": "119.924846",
+    "l2": "31.494216",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘11",
+    "address": "http://210.12.220.212:10800/hls/stream_12/stream_12_live.m3u8",
+    "l1": "119.662933",
+    "l2": "32.206329",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京凤茸梅花鹿养殖有限公司",
+    "address": "http://hls.open.ys7.com/openlive/673a965487d24cbc89b95c7be5a02baa.m3u8",
+    "l1": "119.761230",
+    "l2": "31.741438",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京太和水稻种植专业合作社",
+    "address": "http://hls01open.ys7.com/openlive/198480d440624d909db2541e993a5881.m3u8",
+    "l1": "120.310158",
+    "l2": "31.734438",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京绿泽园林有限公司",
+    "address": "http://hls.open.ys7.com/openlive/af0a0af8fbe449d49509c1659df844a4.m3u8",
+    "l1": "119.843831",
+    "l2": "32.070753",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "金色庄园溧水基地",
+    "address": "http://hls01open.ys7.com/openlive/b4e80f9f9a9d4a9099f4b656c719af0c.m3u8",
+    "l1": "120.598778",
+    "l2": "31.460587",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "江宁区台湾农民创业园发展有限公司",
+    "address": "http://hls.open.ys7.com/openlive/ecc00ff400f142048ba53b524f32e50a.m3u8",
+    "l1": "120.646562",
+    "l2": "31.442925",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "海门煌景家庭农场泵房",
+    "address": "http://49.79.241.42:83/openUrl/QnpYHHq/live.m3u8",
+    "l1": "120.518391",
+    "l2": "31.596414",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "海门合东合物专业合作社_南3号球机",
+    "address": "http://49.79.241.42:83/openUrl/OIbWVWM/live.m3u8",
+    "l1": "119.704953",
+    "l2": "31.962402",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "海门合东合物专业合作社_南4号球机",
+    "address": "http://49.79.241.42:83/openUrl/NfCurIs/live.m3u8",
+    "l1": "120.100084",
+    "l2": "31.961715",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "如东翔鸿有机肥_U形发酵池",
+    "address": "http://49.79.241.42:83/openUrl/Lzhcye4/live.m3u8",
+    "l1": "120.302789",
+    "l2": "31.457240",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "海安成通家庭农场所鱼塘球机",
+    "address": "http://49.79.241.42:83/openUrl/Hx6UYMM/live.m3u8",
+    "l1": "119.769061",
+    "l2": "31.555635",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "海安九久乐家庭农场1",
+    "address": "http://49.79.241.42:83/openUrl/E4jXTq0/live.m3u8",
+    "l1": "120.770593",
+    "l2": "31.946170",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "如东鸿轩生态农业蔬菜基地1号棚南球",
+    "address": "http://49.79.241.42:83/openUrl/AKW2TdK/live.m3u8",
+    "l1": "120.524673",
+    "l2": "31.461929",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "太仓现代农业园1号球机",
+    "address": "http://49.79.241.42:83/openUrl/ygbfOuY/live.m3u8",
+    "l1": "120.253508",
+    "l2": "31.498368",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "太仓现代农业园3号球机",
+    "address": "http://49.79.241.42:83/openUrl/sYl7Mf6/live.m3u8",
+    "l1": "120.581982",
+    "l2": "31.948423",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区观景台西",
+    "address": "http://hls01open.ys7.com/openlive/98bc61c5693e4ea5952f500a21ddb9c7.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区常西控制",
+    "address": "http://hls01open.ys7.com/openlive/b94e9046886e4d71a4cbd3f6273a1f1a.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区观景台东",
+    "address": "http://hls01open.ys7.com/openlive/baa831dd4af64634a6f31e0949964e70.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京太和水稻种植专业合作社",
+    "address": "http://hls01open.ys7.com/openlive/198480d440624d909db2541e993a5881.m3u8",
+    "l1": "119.087154",
+    "l2": "32.008578",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "金色庄园溧水基地",
+    "address": "http://hls01open.ys7.com/openlive/b4e80f9f9a9d4a9099f4b656c719af0c.m3u8",
+    "l1": "119.037094",
+    "l2": "31.736142",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "江宁区台湾农民创业园发展有限公司",
+    "address": "http://hls.open.ys7.com/openlive/ecc00ff400f142048ba53b524f32e50a.m3u8",
+    "l1": "118.856571",
+    "l2": "31.95944",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘1",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_1",
+    "l1": "119.836097",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘2",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_2",
+    "l1": "119.836907",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘4",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_4",
+    "l1": "119.836807",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘5",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_6",
+    "l1": "119.836707",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘6",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_7",
+    "l1": "119.836607",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘7",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_8",
+    "l1": "119.836507",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘8",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_9",
+    "l1": "119.836407",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘9",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_10",
+    "l1": "119.836307",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘10",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_11",
+    "l1": "119.836207",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘11",
+    "address": "rtmp://210.12.220.212:10935/hls/stream_12",
+    "l1": "119.836107",
+    "l2": "31.35325",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京凤茸梅花鹿养殖有限公司",
+    "address": "http://hls.open.ys7.com/openlive/673a965487d24cbc89b95c7be5a02baa.m3u8",
+    "l1": "118.62",
+    "l2": "32.05",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京绿泽园林有限公司",
+    "address": "http://hls.open.ys7.com/openlive/af0a0af8fbe449d49509c1659df844a4.m3u8",
+    "l1": "118.88",
+    "l2": "31.33",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚",
+    "address": "http://210.12.220.212:10800/hls/stream_56/stream_56_live.m3u8",
+    "l1": "118.85",
+    "l2": "31.95",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚2",
+    "address": "http://210.12.220.212:10800/hls/stream_55/stream_55_live.m3u8",
+    "l1": "118.8556",
+    "l2": "31.9556",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚3",
+    "address": "http://210.12.220.212:10800/hls/stream_46/stream_46_live.m3u8",
+    "l1": "118.8477",
+    "l2": "31.9522",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚4",
+    "address": "http://210.12.220.212:10800/hls/stream_43/stream_43_live.m3u8",
+    "l1": "118.8552",
+    "l2": "31.9523",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚5",
+    "address": "http://210.12.220.212:10800/hls/stream_40/stream_40_live.m3u8",
+    "l1": "118.8511",
+    "l2": "31.9511",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京市畜牧家禽科学研究所",
+    "address": "http://hls.open.ys7.com/openlive/7e14628ea6d34d15910a34359b244eef.m3u8",
+    "l1": "118.949734",
+    "l2": "31.911757",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京桥丰农业发展有限公司",
+    "address": "http://hls01open.ys7.com/openlive/0335dfd86a014a69ab1299ff3727c30e.m3u8",
+    "l1": "118.473539",
+    "l2": "31.953618",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区常西",
+    "address": "http://hls.open.ys7.com/openlive/bfd14772d331475a8c2949c504917b5f.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区常南",
+    "address": "http://hls01open.ys7.com/openlive/b74eb670ec5143e09b7674768a077ea6.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区常东1",
+    "address": "http://hls01open.ys7.com/openlive/1226d9d72f5c4f0fb011f94c2429f1ea.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "常阴沙现代农业园区常东2",
+    "address": "http://hls01open.ys7.com/openlive/6e27252e0f154513922b12f71b9ac1e9.m3u8",
+    "l1": "120.80232",
+    "l2": "31.873989",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京红松生态农业发展有限公司",
+    "address": "http://hls01open.ys7.com/openlive/ca6f233136114d5397e848133e2d6dde.m3u8",
+    "l1": "119.968238",
+    "l2": "32.190622",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京桥丰农业发展有限公司",
+    "address": "http://hls01open.ys7.com/openlive/0335dfd86a014a69ab1299ff3727c30e.m3u8",
+    "l1": "120.338260",
+    "l2": "31.430158",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京市浦口区望月农庄",
+    "address": "http://hls.open.ys7.com/openlive/12d184805c3046e98e4e1e6d00c3a5f6.m3u8",
+    "l1": "120.793723",
+    "l2": "31.339401",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京市畜牧家禽科学研究所",
+    "address": "http://hls.open.ys7.com/openlive/7e14628ea6d34d15910a34359b244eef.m3u8",
+    "l1": "120.043710",
+    "l2": "32.192791",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京天纬农业科技有限公司",
+    "address": "http://hls01open.ys7.com/openlive/af97e104d4c04ffe8f11113d1a9a2040.m3u8",
+    "l1": "120.470363",
+    "l2": "31.464783",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京福朝农业发展有限公司",
+    "address": "http://hls01open.ys7.com/openlive/983c80961597406d9dd3a59476a533d4.m3u8",
+    "l1": "120.024197",
+    "l2": "31.394371",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚#1",
+    "address": "http://210.12.220.212:10800/hls/stream_13/stream_13_live.m3u8",
+    "l1": "120.634514",
+    "l2": "31.938098",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚#2",
+    "address": "http://210.12.220.212:10800/hls/stream_14/stream_14_live.m3u8",
+    "l1": "120.842188",
+    "l2": "31.491639",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚#3",
+    "address": "http://210.12.220.212:10800/hls/stream_15/stream_15_live.m3u8",
+    "l1": "119.947286",
+    "l2": "31.595783",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚#4",
+    "address": "http://210.12.220.212:10800/hls/stream_16/stream_16_live.m3u8",
+    "l1": "120.615137",
+    "l2": "31.653287",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "南京大邦农业基地设施大棚#5",
+    "address": "http://210.12.220.212:10800/hls/stream_17/stream_17_live.m3u8",
+    "l1": "120.250863",
+    "l2": "31.346241",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "如东县绿源设施大棚",
+    "address": "http://210.12.220.212:10800/hls/stream_31/stream_31_live.m3u8",
+    "l1": "120.033918",
+    "l2": "31.495131",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘1",
+    "address": "http://210.12.220.212:10800/hls/stream_1/stream_1_live.m3u8",
+    "l1": "120.257332",
+    "l2": "31.840274",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘2",
+    "address": "http://210.12.220.212:10800/hls/stream_2/stream_2_live.m3u8",
+    "l1": "119.821455",
+    "l2": "32.102818",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "宜兴螃蟹养殖池塘3",
+    "address": "http://210.12.220.212:10800/hls/stream_3/stream_3_live.m3u8",
+    "l1": "120.230221",
+    "l2": "31.374246",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "如东一康田园_南棚",
+    "address": "http://49.79.241.42:83/openUrl/1d2krZK/live.m3u8",
+    "l1": "120.130149",
+    "l2": "31.810839",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "如东绿源-1号棚",
+    "address": "http://49.79.241.42:83/openUrl/VZOTh72/live.m3u8",
+    "l1": "120.125780",
+    "l2": "31.278479",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "如东绿源-2号棚1",
+    "address": "http://49.79.241.42:83/openUrl/Ti6vN9C/live.m3u8",
+    "l1": "120.596775",
+    "l2": "32.273217",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "3",
+    "address": "rtmp://live.cctvcj.com/cctvcj/live1",
+    "l1": "116.693915",
+    "l2": "39.999184",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "4",
+    "address": "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8",
+    "l1": "116.673802",
+    "l2": "39.879855",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市朝阳区孙河地区（孙河乡）原北京军区工程兵营院管理科孙河农场",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000557$0/substream/1.m3u8",
+    "l1": "116.301219",
+    "l2": "39.878545",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市房山区长阳镇原北京军区联勤部北京农副业基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000544$0/substream/1.m3u8",
+    "l1": "116.476513",
+    "l2": "40.141050",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市大兴区旧宫地区（旧宫镇）北京卫戍区农副业基地1",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000565$0/substream/1.m3u8",
+    "l1": "116.688687",
+    "l2": "39.944220",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "1",
+    "address": "1",
+    "l1": "118.456799",
+    "l2": "32.172466",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度鸡舍1号正北",
+    "address": "http://210.12.220.212:10800/hls/stream_29/stream_29_live.m3u8",
+    "l1": "116.641665",
+    "l2": "39.840099",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度牛棚001牛棚001南侧",
+    "address": "http://210.12.220.212:10800/hls/stream_27/stream_27_live.m3u8",
+    "l1": "116.187981",
+    "l2": "40.053244",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度1号日光室西北",
+    "address": "http://210.12.220.212:10800/hls/stream_30/stream_30_live.m3u8",
+    "l1": "116.173714",
+    "l2": "40.046167",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "通州基地蔬菜种植区3号温室12",
+    "address": "http://210.12.220.212:10800/hls/stream_31/stream_31_live.m3u8",
+    "l1": "116.105914",
+    "l2": "40.062726",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "房山",
+    "address": "rtmp://rtmp01open.ys7.com/openlive/06409f71c4054be59a209b946764ba7f.hd",
+    "l1": "116.251138",
+    "l2": "40.158615",
+    "ipctype": "rtmp",
+    "videotype": "rtmp/flv",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市房山区长阳镇海军原装备研究院农副业基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000550$0/substream/1.m3u8",
+    "l1": "116.110288",
+    "l2": "39.896900",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市顺义区杨镇地区原北京卫戍区警卫第三师农副业基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000562$0/substream/1.m3u8",
+    "l1": "116.265146",
+    "l2": "40.114988",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市怀柔区宝山镇原北京军区农业新技术培训试验基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000515$0/substream/1.m3u8",
+    "l1": "116.205136",
+    "l2": "40.018574",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市朝阳区大屯街道原军航农业新技术试验基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000556$0/substream/1.m3u8",
+    "l1": "116.681840",
+    "l2": "39.866647",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市通州区马驹桥镇原空军飞行试验训练基地农副业基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000563$0/substream/1.m3u8",
+    "l1": "116.566834",
+    "l2": "40.063905",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市通州区张家湾镇原北京卫戍区警卫第三师装甲团农场",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000564$0/substream/1.m3u8",
+    "l1": "116.520566",
+    "l2": "39.931434",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市大兴区礼贤镇原中部战区地空导弹兵第五师农副业",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000555$0/substream/1.m3u8",
+    "l1": "116.672744",
+    "l2": "39.854340",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市平谷区山东庄镇",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000424$0/substream/1.m3u8",
+    "l1": "116.463744",
+    "l2": "39.854619",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市平谷区王辛庄镇#1",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000421$0/substream/1.m3u8",
+    "l1": "116.378397",
+    "l2": "40.163845",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市平谷区王辛庄镇#2",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000423$0/substream/1.m3u8",
+    "l1": "116.169995",
+    "l2": "40.113630",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市平谷区大兴庄镇",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000422$0/substream/1.m3u8",
+    "l1": "116.316001",
+    "l2": "39.808414",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市延庆县康庄镇原65军农副业生产基地",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000524$0/substream/1.m3u8",
+    "l1": "116.105053",
+    "l2": "39.851222",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市房山区良乡镇",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000473$0/substream/1.m3u8",
+    "l1": "116.552903",
+    "l2": "39.949457",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "北京市平谷区南独乐河镇",
+    "address": "http://111.26.161.196:7086/live/cameraid/1000425$0/substream/1.m3u8",
+    "l1": "116.352767",
+    "l2": "39.930871",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "藁城1",
+    "address": "http://jnbv4.365960.com/cam/camaca06d4ccc0690553ef6bd22fdc6ddc7/index.m3u8",
+    "l1": "116.613604",
+    "l2": "39.839055",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜东大区1号温室西北角",
+    "address": "http://210.12.220.212:10800/hls/stream_13/stream_13_live.m3u8",
+    "l1": "116.631806",
+    "l2": "40.026908",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蛋鸡养殖区1号鸡舍鸡舍东南角",
+    "address": "http://210.12.220.212:10800/hls/stream_14/stream_14_live.m3u8",
+    "l1": "116.412236",
+    "l2": "40.075572",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "通州基地蔬菜种植区2号温室西北角",
+    "address": "http://210.12.220.212:10800/hls/stream_15/stream_15_live.m3u8",
+    "l1": "116.375156",
+    "l2": "39.967072",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "温室种植区3号温室正北",
+    "address": "http://210.12.220.212:10800/hls/stream_17/stream_17_live.m3u8",
+    "l1": "116.684910",
+    "l2": "39.881791",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度3号温室西南角",
+    "address": "http://210.12.220.212:10800/hls/stream_18/stream_18_live.m3u8",
+    "l1": "116.120619",
+    "l2": "39.888823",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区2号温室西南角",
+    "address": "http://210.12.220.212:10800/hls/stream_19/stream_19_live.m3u8",
+    "l1": "116.117467",
+    "l2": "39.856608",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度鸡舍1号鸡舍一号中间",
+    "address": "http://210.12.220.212:10800/hls/stream_16/stream_16_live.m3u8",
+    "l1": "116.433409",
+    "l2": "39.992242",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特菜大观园东区1号棚全景",
+    "address": "http://210.12.220.212:10800/hls/stream_20/stream_20_live.m3u8",
+    "l1": "116.318837",
+    "l2": "40.135502",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农密云养殖基地1号种植大棚东南",
+    "address": "http://210.12.220.212:10800/hls/stream_21/stream_21_live.m3u8",
+    "l1": "116.350176",
+    "l2": "39.980789",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农密云养殖基地2号种植大棚东南",
+    "address": "http://210.12.220.212:10800/hls/stream_22/stream_22_live.m3u8",
+    "l1": "116.203622",
+    "l2": "40.110058",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农密云养殖基地3号种植大棚东",
+    "address": "http://210.12.220.212:10800/hls/stream_23/stream_23_live.m3u8",
+    "l1": "116.540601",
+    "l2": "40.152208",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "天安农业-安心农场47西东南",
+    "address": "http://210.12.220.212:10800/hls/stream_4/stream_4_live.m3u8",
+    "l1": "116.535225",
+    "l2": "40.034710",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度鸡舍1号西北",
+    "address": "http://210.12.220.212:10800/hls/stream_7/stream_7_live.m3u8",
+    "l1": "116.636429",
+    "l2": "39.966480",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特色蔬菜种植区测试基地名称长度鸡舍1号正北",
+    "address": "http://210.12.220.212:10800/hls/stream_28/stream_28_live.m3u8",
+    "l1": "116.422003",
+    "l2": "39.949184",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "大棚",
+    "address": "http://210.12.220.212:10800/hls/stream_25/stream_25_live.m3u8",
+    "l1": "118.324197",
+    "l2": "31.021947",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农养殖基地2鸡舍1北",
+    "address": "http://210.12.220.212:10800/hls/stream_12/stream_12_live.m3u8",
+    "l1": "118.862446",
+    "l2": "31.031357",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特菜大观园东区8号温室东",
+    "address": "http://210.12.220.212:10800/hls/stream_11/stream_11_live.m3u8",
+    "l1": "118.215644",
+    "l2": "30.498415",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特菜大观园东区7号温室西南",
+    "address": "http://210.12.220.212:10800/hls/stream_10/stream_10_live.m3u8",
+    "l1": "118.735301",
+    "l2": "30.883882",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特菜大观园东区6号温室东南",
+    "address": "http://210.12.220.212:10800/hls/stream_9/stream_9_live.m3u8",
+    "l1": "118.511129",
+    "l2": "30.709803",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "特菜大观园东区40号东东南",
+    "address": "http://210.12.220.212:10800/hls/stream_8/stream_8_live.m3u8",
+    "l1": "118.217126",
+    "l2": "31.020984",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农养殖基地33号鸡舍西",
+    "address": "http://210.12.220.212:10800/hls/stream_6/stream_6_live.m3u8",
+    "l1": "118.912847",
+    "l2": "30.937502",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农养殖基地32号鸡舍南",
+    "address": "http://210.12.220.212:10800/hls/stream_5/stream_5_live.m3u8",
+    "l1": "118.712647",
+    "l2": "31.131034",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "爱农养殖基地31号鸡舍东",
+    "address": "http://210.12.220.212:10800/hls/stream_4/stream_4_live.m3u8",
+    "l1": "118.820038",
+    "l2": "30.393537",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": " 养殖基地5鸡舍一212东",
+    "address": "http://210.12.220.212:10800/hls/stream_3/stream_3_live.m3u8",
+    "l1": "118.639405",
+    "l2": "30.566676",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "212--1",
+    "address": "http://210.12.220.212:10800/hls/stream_1/stream_1_live.m3u8",
+    "l1": "118.519778",
+    "l2": "30.312392",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "212--2",
+    "address": "http://210.12.220.212:10800/hls/stream_2/stream_2_live.m3u8",
+    "l1": "118.578800",
+    "l2": "30.499007",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "藁城3",
+    "address": "http://jnbv4.365960.com/cam/cam1d2d6950d14eb9c13aa01a49cfc90575/index.m3u8",
+    "l1": "118.606808",
+    "l2": "31.044959",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}, {
+    "name": "藁城2",
+    "address": "http://jnbv4.365960.com/cam/camd668f4e5203996bda80e1db93cc62a48/index.m3u8",
+    "l1": "118.244331",
+    "l2": "30.371332",
+    "ipctype": "m3u8",
+    "videotype": "application/x-mpegURL",
+    "appkey": "",
+    "appsecret": ""
+}]

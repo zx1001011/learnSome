@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <title>
+        Point clustering - basic configuration | Sample | ArcGIS API for
+        JavaScript 4.18
+    </title>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(50, 50, 50);
+        }
+
+        #infoDiv {
+            padding: 10px;
+        }
+    </style>
+
+    <link rel="stylesheet"
+        href="http://218.94.8.117:9011/arcgis/arcgis_js_api/library/4.15/esri/themes/dark-blue/main.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        var dojoConfig = {
+            parseOnLoad: true,
+            packages: [{
+                name: "src",
+                location: location.pathname.replace(/\/[^/]+$/, "") + "/src"
+            }]
+        };
+    </script>
+    <script src="http://218.94.8.117:9011/arcgis/arcgis_js_api/library/4.15/init.js"></script>
+    <script>
+        require([
+            "esri/Map",
+            "esri/layers/FeatureLayer",
+            "esri/views/MapView",
+            "esri/widgets/Legend",
+            "esri/widgets/Expand",
+            "esri/widgets/Home",
+            "esri/Graphic",
+            "esri/layers/GraphicsLayer",
+            "src/gaodeMapLayer",
+            "src/gaodeImageLayer",
+        ], function (
+            Map,
+            FeatureLayer,
+            MapView,
+            Legend,
+            Expand,
+            Home,
+            Graphic,
+            GraphicsLayer,
+            gaodeMapLayer,
+            gaodeImageLayer
+        ) {
+            // Configures clustering on the layer. A cluster radius
+            // of 100px indicates an area comprising screen space 100px
+            // in length from the center of the cluster
+            const clusterConfig = {
+                type: "cluster",
+                clusterRadius: "100px",
+                // {cluster_count} is an aggregate field containing
+                // the number of features comprised by the cluster
+                popupTemplate: {
+                    content: "This cluster represents {cluster_count} sensors.",
+                    fieldInfos: [{
+                        fieldName: "cluster_count",
+                        format: {
+                            places: 0,
+                            digitSeparator: true
+                        }
+                    }]
+                },
+                clusterMinSize: "24px",
+                clusterMaxSize: "60px",
+                // labelingInfo: [{
+                //     deconflictionStrategy: "none",
+                //     labelExpressionInfo: {
+                //         expression: "$feature.cluster_count"
+                //     },
+                //     symbol: {
+                //         type: "text",
+                //         color: "#004a5d",
+                //         font: {
+                //             weight: "bold",
+                //             family: "Noto Sans",
+                //             size: "12px"
+                //         }
+                //     },
+                //     labelPlacement: "center-center"
+                // }]
+            };
+            const layer = new FeatureLayer({
+                title: "Earthquakes from the last month",
+                featureReduction: clusterConfig,
+                geometryType: "point",
+                source: getPointGraphics(),
+                fields: [{
+                    name: "ObjectID",
+                    alias: "ObjectID",
+                    type: "oid"
+                }, {
+                    name: "sn",
+                    alias: "sn",
+                    type: "string"
+                }, {
+                    name: "name",
+                    alias: "name",
+                    type: "string"
+                }, {
+                    name: "type",
+                    alias: "type",
+                    type: "string"
+                }],
+                popupTemplate: {
+                    title: "数据",
+                    content: "数据 {name} {type} sn: {sn}"
+                },
+                popupEnabled: true,
+                renderer: {
+                    type: "simple",
+                    field: "name",
+                    symbol: {
+                        type: "simple-marker",
+                        size: 4,
+                        color: "#69dcff",
+                        outline: {
+                            color: "rgba(0, 139, 174, 0.5)",
+                            width: 5
+                        }
+                    }
+                },
+                labelingInfo: [{
+                    labelExpressionInfo: {
+                        expression: "$feature.cluster_count"
+                    },
+                    symbol: {
+                        type: "text",
+                        color: "#004a5d",
+                        font: {
+                            weight: "bold",
+                            family: "Noto Sans",
+                            size: "12px"
+                        }
+                    },
+                    labelPlacement: "center-center"
+                }]
+            });
+            console.log(layer)
+            var gaodeMapLayer = new gaodeMapLayer();
+            var gaodeImageLayer = new gaodeImageLayer();
+            const map = new Map({
+                layers: [gaodeMapLayer, gaodeImageLayer, layer]
+            });
+
+            const view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [107.561493, 33.10955],
+                zoom: 4
+            });
+
+            // 其他控件
+            view.ui.add(
+                new Home({
+                    view: view
+                }),
+                "top-left"
+            );
+
+            const legend = new Legend({
+                view: view,
+                container: "legendDiv"
+            });
+
+            const infoDiv = document.getElementById("infoDiv");
+            view.ui.add(
+                new Expand({
+                    view: view,
+                    content: infoDiv,
+                    expandIconClass: "esri-icon-layer-list",
+                    expanded: false
+                }),
+                "top-left"
+            );
+
+            const toggleButton = document.getElementById("cluster");
+
+            // To turn off clustering on a layer, set the
+            // featureReduction property to null
+            toggleButton.addEventListener("click", function () {
+                let fr = layer.featureReduction;
+                layer.featureReduction =
+                    fr && fr.type === "cluster" ? null : clusterConfig;
+                toggleButton.innerText =
+                    toggleButton.innerText === "Enable Clustering" ?
+                    "Disable Clustering" :
+                    "Enable Clustering";
+            });
+
+            function getPointGraphics() {
+                var graphics = []
+                $.ajaxSettings.async = false
+                $.getJSON('./mydata/sensor.json', function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        var obj = result[i]
+                        var point = {
+                            type: "point",
+                            longitude: obj.l1,
+                            latitude: obj.l2
+                        };
+                        var markerSymbol = {
+                            type: "simple-marker",
+                            color: [226, 119, 40], // orange
+                            // url: "../image/map/map_equ.png",
+                            height: 10,
+                            width: 10
+                        };
+                        var pointGraphic = new Graphic({
+                            geometry: point,
+                            symbol: markerSymbol,
+                            attributes: {
+                                ObjectID: i,
+                                sn: obj.sn,
+                                name: obj.name,
+                                type: 'sensor',
+                            }
+                        });
+                        graphics.push(pointGraphic)
+                    }
+                })
+                return graphics
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="viewDiv"></div>
+    <div id="infoDiv" class="esri-widget">
+        <button id="cluster" class="esri-button">Disable Clustering</button>
+        <div id="legendDiv"></div>
+    </div>
+</body>
+
+</html>

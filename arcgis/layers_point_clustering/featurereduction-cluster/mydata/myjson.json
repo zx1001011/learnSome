@@ -1,0 +1,122 @@
+{
+    "type": "FeatureCollection",
+    "metadata": {
+        "generated": 1610589829000,
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+        "title": "USGS All Earthquakes, Past Month",
+        "status": 200,
+        "api": "1.10.3",
+        "count": 2
+    },
+    "features": [{
+            "type": "Feature",
+            "properties": {
+                "mag": 0.8,
+                "place": "20km E of Julian, CA",
+                "time": 1610589151630,
+                "updated": 1610589383985,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci39756648",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci39756648.geojson",
+                "felt": null,
+                "cdi": null,
+                "mmi": null,
+                "alert": null,
+                "status": "automatic",
+                "tsunami": 0,
+                "sig": 10,
+                "net": "ci",
+                "code": "39756648",
+                "ids": ",ci39756648,",
+                "sources": ",ci,",
+                "types": ",nearby-cities,origin,phase-data,scitech-link,",
+                "nst": 18,
+                "dmin": 0.1729,
+                "rms": 0.23,
+                "gap": 78,
+                "magType": "ml",
+                "type": "earthquake",
+                "title": "M 0.8 - 20km E of Julian, CA",
+                "lng": "-116.396",
+                "lat": "33.0453333"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-116.396, 33.0453333, 2.34]
+            },
+            "id": "ci39756648"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 0.55,
+                "place": "8km SSW of Idyllwild, CA",
+                "time": 1610588733220,
+                "updated": 1610588966920,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci39756640",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci39756640.geojson",
+                "felt": null,
+                "cdi": null,
+                "mmi": null,
+                "alert": null,
+                "status": "automatic",
+                "tsunami": 0,
+                "sig": 5,
+                "net": "ci",
+                "code": "39756640",
+                "ids": ",ci39756640,",
+                "sources": ",ci,",
+                "types": ",nearby-cities,origin,phase-data,scitech-link,",
+                "nst": 15,
+                "dmin": 0.08056,
+                "rms": 0.12,
+                "gap": 186,
+                "magType": "ml",
+                "type": "earthquake",
+                "title": "M 0.6 - 8km SSW of Idyllwild, CA"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-116.7438333, 33.6726667, 13.88]
+            },
+            "id": "ci39756640"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 3,
+                "place": "20 km SSE of Volcano, Hawaii",
+                "time": 1610588051801,
+                "updated": 1610589464014,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000d85m",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000d85m.geojson",
+                "felt": 2,
+                "cdi": 2.7,
+                "mmi": null,
+                "alert": null,
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 139,
+                "net": "us",
+                "code": "6000d85m",
+                "ids": ",us6000d85m,",
+                "sources": ",us,",
+                "types": ",dyfi,origin,phase-data,",
+                "nst": null,
+                "dmin": 0.02,
+                "rms": 0.9,
+                "gap": 184,
+                "magType": "ml",
+                "type": "earthquake",
+                "title": "M 3.0 - 20 km SSE of Volcano, Hawaii"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-155.1472, 19.2739, 10]
+            },
+            "id": "us6000d85m"
+        }],
+    "bbox": [-179.9927, -63.2139, -3.52, 179.9919, 78.6091, 640.12]
+}

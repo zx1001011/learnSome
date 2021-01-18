@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>KMLLayer - 4.7</title>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.7/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/KMLLayer",
+      "esri/widgets/ScaleBar",
+      "dojo/domReady!"
+    ], function(
+      Map,
+      MapView,
+      KMLLayer,
+      ScaleBar
+    ) {
+
+      var layer = new KMLLayer({
+        url: "http://quickmap.dot.ca.gov/data/lcs.kml" // lane closures from California Dept of Transportation
+      });
+
+      var map = new Map({
+        basemap: "topo",
+        layers: [layer]
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-120, 38],
+        zoom: 6
+      });
+
+      var scalebar = new ScaleBar({
+        view: view
+      });
+      view.ui.add(scalebar, "bottom-left");
+
+    });
+  </script>
+
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>

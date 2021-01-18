@@ -1,0 +1,286 @@
+html,
+body {
+    position: relative;
+}
+
+.index-2 {
+    z-index: 1000;
+}
+
+.index-1 {
+    z-index: 1;
+}
+
+.index-0 {
+    z-index: -1;
+}
+
+#side-nav {
+    position: absolute;
+    height: calc(100% - 33px - 120px);
+}
+
+#nav-info {
+    padding-left: 316px;
+}
+
+#type-num {
+    width: 493px;
+    height: 154px;
+    right: 24px;
+    top: 130px;
+    position: absolute;
+}
+
+#type-num .btns {
+    font-size: 0;
+}
+
+#type-num .btns > .type-btn {
+    width: 25%;
+    height: 39px;
+    text-align: center;
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    color: #FFFFFF;
+    line-height: 37px;
+    background-color: transparent;
+    border-width: 0;
+    border-bottom: 1px solid #0077EC;
+}
+
+#type-num .btns > .type-btn + .type-btn {
+    border-left: 1px solid #0077EC;
+}
+
+#type-num .btns > .type-btn:hover,
+#type-num .btns > .type-btn.active {
+    height: 39px;
+    background-color: #00A7CC;
+    boreder: 1px solid #00A7CC;
+}
+
+#type-num .values {
+    padding-top: 35px;
+    padding-left: 18px;
+    padding-right: 18px;
+    box-sizing: border-box;
+    height: 115px;
+}
+
+#type-num .values .item {
+    width: calc(100% / 3);
+    float: left;
+}
+
+#type-num .values > .item:nth-child(1) {
+    text-align: left;
+}
+
+#type-num .values > .item:nth-child(2) {
+    text-align: center;
+}
+
+#type-num .values > .item:nth-child(3) {
+    text-align: right;
+}
+
+#type-num .values > .item > img {
+    height: 46px;
+    width: 46px;
+    vertical-align: top;
+}
+
+#type-num .values > .item > div {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    margin-left: 8px;
+}
+
+#type-num .values .name {
+    height: 19px;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    color: #FFFFFF;
+    line-height: 19px;
+    margin-top: 7px;
+}
+
+#type-num .values .num {
+    height: 24px;
+    font-size: 26px;
+    font-family: MicrosoftYaHeiSemibold;
+    line-height: 24px;
+}
+
+#type-num .values .color-1 {
+    color: #FAFD18;
+}
+
+#type-num .values .color-2 {
+    color: #00FFC4;
+}
+
+#type-num .values .color-3 {
+    color: #FF830A;
+}
+
+#nav-info {
+    position: relative;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 82px;
+    left: 0;
+}
+
+/* 弹窗 */
+.my-popup {
+    width: 405px;
+    height: 260px;
+    position: relative;
+}
+
+.my-popup-title {
+    width: 161px;
+    height: 35px;
+    margin-left: 120px;
+    margin-top: -17.5px;
+    background-image: url("../image/map/popubox-1.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-size: 18px;
+    font-family: MicrosoftYaHeiSemibold;
+    color: #FFFFFF;
+    line-height: 33px;
+    text-align: center;
+}
+
+.my-popup-close {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    height: 19px;
+    width: 19px;
+    z-index: 999;
+}
+
+.my-popup-time {
+    height: 16px;
+    font-size: 12px;
+    font-family: MicrosoftYaHei;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 16px;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+#my-popup-sensor {
+    position: absolute;
+    left: 500px;
+    top: 300px;
+}
+
+#my-popup-sensor .infos {
+    width: 378px;
+    height: 105px;
+    background-image: url("../image/map/popubox-2.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-left: 14px;
+    box-sizing: border-box;
+    padding-top: 12px;
+    padding-left: 20px;
+}
+
+#my-popup-sensor .infos .item + .item {
+    margin-top: 8px;
+}
+
+#my-popup-sensor .infos .item-name {
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    color: #00F5FF;
+    vertical-align: top;
+}
+
+#my-popup-sensor .infos .value {
+    color: white;
+    width: calc(50% - 72px);
+    display: inline-block;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    vertical-align: top;
+}
+
+#my-popup-sensor .infos .item:first-child > .value {
+    width: calc(100% - 72px);
+}
+
+#my-popup-sensor .values {
+    text-align: center;
+    margin-top: 13px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+#my-popup-sensor .values img {
+    height: 37px;
+    margin-bottom: 3px;
+}
+
+#my-popup-sensor .values .item {
+    width: 25%;
+    float: left;
+    font-family: MicrosoftYaHei;
+    color: #FFFFFF;
+    line-height: 18px;
+}
+
+#my-popup-sensor .values .name{
+    font-size: 12px;
+}
+
+#my-popup-sensor .values .value{
+    font-size: 14px;
+}
+
+#my-popup-ipc {
+    position: absolute;
+    top: 300px;
+    left: 500px;
+    height: 270px;
+    padding: 0 14px;
+}
+
+#my-popup-ipc .my-popup-video {
+    width: 405px;
+    height: 170px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+#my-popup-ipc .item {
+    text-align: center;
+}
+
+#my-popup-ipc .item .item-name {
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    color: #00F5FF;
+    vertical-align: top;
+}
+
+#my-popup-ipc .item .value {
+    color: white;
+    display: inline-block;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    vertical-align: top;
+}

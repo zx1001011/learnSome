@@ -1,0 +1,150 @@
+
+
+.esri-ui .esri-popup {
+    background-color: rgba(5, 24, 64, 1);
+}
+
+/* 比起 popup-sensor + 30px */
+.esri-view-width-xlarge .esri-popup__main-container {
+    width: 435px;
+    background-color: rgba(5, 24, 64, 0.88);
+}
+
+.esri-popup--aligned-top-center .esri-popup__pointer-direction,
+.esri-popup--aligned-bottom-center .esri-popup__pointer-direction{
+    background-color: rgba(5, 24, 64, 0.88);
+}
+
+.esri-popup__header-title {
+    color: white;
+}
+
+.esri-popup__header-title:hover {
+    opacity: 0.5;
+}
+
+.esri-popup__navigation {
+    /*display: none;*/
+}
+
+
+.esri-popup__main-container {
+    max-height: 350px;
+}
+
+.esri-popup__content {
+    overflow: unset;
+}
+
+#map {
+    top: 0;
+}
+
+.my-popup-sensor {
+    width: 100%;
+    height: 258px;
+}
+
+.my-popup-sensor .infos {
+    width: 378px;
+    height: 105px;
+    background-image: url("../image/map/popubox-2.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-left: 14px;
+    box-sizing: border-box;
+    padding-top: 12px;
+    padding-left: 20px;
+}
+
+.my-popup-sensor .infos .item + .item {
+    margin-top: 8px;
+}
+
+.my-popup-sensor .infos .item-name {
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    color: #00F5FF;
+    vertical-align: top;
+}
+
+.my-popup-sensor .infos .value {
+    color: white;
+    width: calc(50% - 72px);
+    display: inline-block;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    vertical-align: top;
+}
+
+.my-popup-sensor .infos .item:first-child > .value {
+    width: calc(100% - 72px);
+}
+
+.my-popup-sensor .values {
+    text-align: center;
+    margin-top: 13px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.my-popup-sensor .values img {
+    height: 37px;
+    margin-bottom: 3px;
+}
+
+.my-popup-sensor .values .item {
+    width: 25%;
+    float: left;
+    font-family: MicrosoftYaHei;
+    color: #FFFFFF;
+    line-height: 18px;
+}
+
+.my-popup-sensor .values .name{
+    font-size: 12px;
+}
+
+.my-popup-sensor .values .value{
+    font-size: 14px;
+}
+
+.my-popup-ipc {
+    /*position: absolute;*/
+    /*top: 300px;*/
+    /*left: 500px;*/
+    width: 100%;
+    height: 258px;
+    padding: 0 14px;
+}
+
+.my-popup-ipc .my-popup-video {
+    /*width: 375px;*/
+    height: 170px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.my-popup-ipc .item {
+    text-align: center;
+}
+
+.my-popup-ipc .item .item-name {
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    color: #00F5FF;
+    vertical-align: top;
+}
+
+.my-popup-ipc .item .value {
+    color: white;
+    display: inline-block;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    vertical-align: top;
+}
+
+#nav-content #playWind {
+    width: 375px;
+}

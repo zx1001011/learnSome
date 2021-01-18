@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    color: white;
+    font-family: 'Microsoft YaHei', Arial;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background-image: url(../image/nav/bg.png);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+a,a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+button:hover,
+button:focus,
+a:focus {
+    outline-width: 0;
+}
+
+.f-right {
+    float: right;
+}
+
+.f-left {
+    float: left;
+}
+
+.bg {
+    background: rgba(5, 24, 64, 0.88);
+    border: 1px solid #0077EC;
+}
+
+/*.hide {*/
+/*    display: none;*/
+/*}*/
+
+/*.show {*/
+/*    display: block;*/
+/*}*/
+
+.text-hidden {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#nav {
+    color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 97px;
+    position: relative;
+    background-color: transparent;
+    background-image: url(../image/nav/nav.png);
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+#nav .logo {
+    height: 73px;
+    width: 615px;
+    margin-top: 12px;
+    margin-left: 16px;
+}
+
+#nav .back {
+    height: 37px;
+    width: 37px;
+    background-image: url(../image/nav/home.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    margin-top: 23px;
+    margin-right: 24px;
+    margin-left: 47px;
+}
+
+#nav .link {
+    height: 50px;
+    width: 160px;
+    line-height: 50px;
+    font-size: 18px;
+    font-family: MicrosoftYaHei;
+    color: rgba(255, 255, 255, 0.8);
+    background-image: url(../image/nav/link-1.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-top: 17px;
+}
+
+#nav .link + .link {
+    margin-left: 28px;
+}
+
+#nav .link:hover,
+#nav .link.active {
+    background-image: url(../image/nav/link-2.png);
+    font-family: MicrosoftYaHeiSemibold;
+    color: #FFFFFF;
+    text-shadow: 0px 0px 24px #01A9FD;
+}
+
+#nav-content {
+    height: calc(100% - 97px);
+    width: 100%;
+    padding-top: 34px;
+    padding-left: 24px;
+    padding-right: 24px;
+    box-sizing: border-box;
+}
+
+#nav-content .nav-content {
+    float: left;
+}
+
+#side-nav {
+    overflow: hidden;
+    height: calc(100% - 33px);
+    width: 316px;
+    font-size: 24px;
+    font-family: MicrosoftYaHei;
+    color: #18DBFD;
+}
+
+#side-nav .side-nav {
+    height: 100%;
+    width: calc(100% + 17px);
+    overflow-x: hidden;
+    color: inherit;
+    padding-top: 22px;
+    padding-left: 12px;
+}
+
+#side-nav .side-nav > a {
+    display: block;
+    color: inherit;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 20px;
+}
+
+#side-nav .side-nav > a.all {
+    padding-left: 14px;
+}
+
+#side-nav .side-nav > a.active{
+    color: #05DBFE;
+}
+
+#side-nav .side-nav > a[class*="icon-side-"] {
+    height: 83px;
+    width: 206px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-side-jl {
+    background-image: url("../image/nav/吉林省.png");
+}
+.icon-side-jl:hover,
+.icon-side-jl.active {
+    background-image: url("../image/nav/吉林省-active.png");
+}
+
+.icon-side-js {
+    background-image: url("../image/nav/江苏省.png");
+}
+.icon-side-js:hover,
+.icon-side-js.active {
+    background-image: url("../image/nav/江苏省-active.png");
+}
+
+.icon-side-sh {
+    background-image: url("../image/nav/上海市.png");
+}
+.icon-side-sh:hover,
+.icon-side-sh.active {
+    background-image: url("../image/nav/上海市-active.png");
+}
+
+.icon-side-ah {
+    background-image: url("../image/nav/安徽省.png");
+}
+.icon-side-ah:hover,
+.icon-side-ah.active {
+    background-image: url("../image/nav/安徽省-active.png");
+}
+
+.icon-side-bj {
+    background-image: url("../image/nav/北京市.png");
+}
+.icon-side-bj:hover,
+.icon-side-bj.active {
+    background-image: url("../image/nav/北京市-active.png");
+}
+
+.icon-side-tj {
+    background-image: url("../image/nav/天津市.png");
+}
+.icon-side-tj:hover,
+.icon-side-tj.active {
+    background-image: url("../image/nav/天津市-active.png");
+}
+
+#nav-info {
+    width: calc(100% - 318px);
+    height: 100%;
+    overflow: hidden;
+}

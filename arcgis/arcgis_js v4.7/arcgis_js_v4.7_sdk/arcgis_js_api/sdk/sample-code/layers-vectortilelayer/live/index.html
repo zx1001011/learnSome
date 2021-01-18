@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"
+  />
+  <title>VectorTileLayer - 4.7</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.7/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/VectorTileLayer",
+      "dojo/domReady!"
+    ], function(Map, MapView, VectorTileLayer) {
+
+      // Create a Map
+      var map = new Map();
+
+      // Make map view and bind it to the map
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-98.5795, 39.8282],
+        zoom: 3,
+      });
+
+      /********************************************************************
+       * Add a vector tile layer to the map
+       *
+       * The url must point to the style or the vector tile service
+       *********************************************************************/
+      var tileLyr = new VectorTileLayer({
+        url: "http://jsapi.maps.arcgis.com/sharing/rest/content/items/75f4dfdff19e445395653121a95a85db/resources/styles/root.json"
+      });
+      map.add(tileLyr);
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
