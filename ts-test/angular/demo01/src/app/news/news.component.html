@@ -1,1 +1,29 @@
-<h2>我是一个新闻组件</h2>
+<!DOCTYPE html>
+<h2>{{title}}</h2>
+<div>
+  <span [innerHTML]="tmp1"></span>
+  <ul>
+    <li *ngFor="let item of list;let key=index" [title]="item">{{key}} --- {{item}}</li>
+  </ul>
+</div>
+<div>
+  <li *ngIf="flag">收藏</li>
+  <li *ngIf="!flag">取消收藏</li>
+</div>
+
+<span [ngSwitch]="flag">
+  <p *ngSwitchCase="true">
+    1
+  </p>
+  <p *ngSwitchCase="false">
+    2
+  </p>
+  <p *ngSwitchDefault>
+    3
+  </p>
+</span>
+
+<p [ngClass]="{'red': false, 'blue': true}">ngClass 测试</p>
+<p [ngStyle]="{'color': redAttr}">jajajj</p>
+<!-- <span>{{todayD|data: 'yyyy-MM-dd HH:mm:ss'}}</span> -->
+<span>{{'hah' | uppercase}}</span>
