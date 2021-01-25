@@ -1,11 +1,12 @@
 # 学习 arcgis
 ## 介绍：
 ### 官网：
-[arcgis](https://developers.arcgis.com/javascript/)
-[博客园1](https://www.cnblogs.com/onsummer/p/9080187.html)
-
-[b站视频1](https://www.bilibili.com/video/BV1Nx411Y7Er)
-
+[arcgis](https://developers.arcgis.com/javascript/)   
+[arcgis中国社区网站](http://zhihu.geoscene.cn/)   
+[博客园1](https://www.cnblogs.com/onsummer/p/9080187.html)   
+[b站视频1](https://www.bilibili.com/video/BV1Nx411Y7Er)   
+[geojson数据](http://datav.aliyun.com/tools/atlas/#&lat=30.332329214580188&lng=106.72278672066881&zoom=3.5)   
+ 
 ### Arcgis Server:
 地图数据 - 数据库 GeoJson   
 地图影像 -  tif, tnf...   
@@ -60,3 +61,6 @@ c. 看视频
 3. 点聚合设置 labelingInfo 无效： 
     - 4.16之后直接添加了一个smartMapping/cluster的类， 部署版本为 4.15 
     - 4.15 的 featurelayer 将 labelingInfo 设置在该 layer 第一级即可
+4. 难点： 
+    - arcgis 本身是在一种 GIS 法中的前提下，产生的
+    - 只用英文文档，更加详细、准确

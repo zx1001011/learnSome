@@ -8,8 +8,9 @@
 
 
 ### 3. 官网：
-[typescript](https://ts.xcatliu.com/introduction/hello-typescript.html)
-[ts](https://www.typescriptlang.org/)
+[typescript](https://ts.xcatliu.com/introduction/hello-typescript.html)   
+[ts](https://www.typescriptlang.org/)  
+[angular](https://angular.cn/start)
 
 ### 学习日记
 | 序号 | 时间 | 阶段 | 视频集数 | 内容 | 备注 | 
@@ -17,8 +18,9 @@
 | 1 | 2021.1.6 | 初步详细输入阶段 | 01 - 07 | 从初步认识，搭建编译环境，数据类型，函数，类 | 较为详细的接触 |
 | 2 | 2021.1.7 | 初步详细输入阶段 | 08 - 18 | 接口，泛型，泛型类，泛型接口，模块化，命名空间 | 主要意识到了面向对象的思想, 其中 视频17的案例需要补充 |
 | 3 | 2021.1.8上午 | 初步详细输入阶段 | 19 - 20 | 装饰器 | 补充视频17的案例，学习装饰器，下午有其他事情 |
-
-
+| 4 | 2021.1.21 | 初步认识阶段 | 21 - 23 | ts + angular | 学习angular的安装、目录、语法的组件和绑定数据语法 | 
+| 5 | 2021.1.22 - 23 | 初步认识 | 23 - end/ 24 | angular | 学习 angular 的一些语法, 视频刷了一遍 | 
+| 6 | 2021.1.25下午 | 初步认识 | 24 - 27 | 一些语法，vue是参照angular来的，有些相似，有点懈怠，听不下去了 |
 ## 一、简介  
 google研发，为了面向大型复杂的项目，使用javascript可以搭建   
 ts 是 javascript 的超集，包含 es6 和 es5   
@@ -984,3 +986,300 @@ ts 模块的概念（官方）：
 | 2 | 方法装饰器 |  |
 | 3 | 方法参数装饰器 | 先执行后面的，从后向前 | 
 | 4 | 类装饰器 | 先执行后面的，从后向前 | 
+
+
+## 四.案例 【 ts + angular 】
+
+### 前提：
+安装angular/cli:  
+```npm|cnpm install -g @angular/cli```
+验证：  
+```ng version```
+新建项目：  
+```ng new demo01```
+
+scss 和 sass 的区别：scss是sass的一个升级版本，完全兼容sass之前的功能，又有了些新增能力     
+1. 文件扩展名不同，sass是以“.sass”后缀为扩展名，而SCSS是以“.scss”后缀为扩展名。    
+2. 语法不同，sass是以严格的缩进式语法规则来书写，而scss的语法与css语法非常相似。
+
+运行项目：  
+```ng serve --open```
+
+### angular 介绍
+[github](https://github.com/angular/angular)   
+
+- 目录结构分析
+![](./img/angular/1.png)
+1. e2e: 端到端（end-end）的测试   
+2. **node_modules**: 安装的第三方模块   
+3. **src**: 项目的所有文件/源码   
+    - **app**: 组件以及app.module.ts 定义的模块
+    - assets: 静态资源
+    - environments: 文件夹中包括为各个目标环境准备的文件
+    - **index.html**： 主页面
+    - main.ts: 应用的主要入口点
+    - polyfills.ts: 填充库(polyfill)，能帮我们把不同的地方(由于浏览器引擎的差异)进行标准化
+    - **styles.css**: 全局样式
+    - test.ts: 单元测试的主要入口点
+    - tsconfig.[app|spec|d].json: ts编译器的配置文件
+4. .angular-cli.json： angular cli的配置文件
+5. .editorconfig: 给你的编辑器看的一个简单配置文件
+6. .gitignore: 一个git的配置文件
+7. karma.conf.js: 给Karma的单元测试配置
+8. package.json: npm 配置文件
+9. tslint.json: 给tslint和codelyzer用的配置信息
+
+- angular 核心文件：
+src/app/*:
+1. app.module.ts: 根组件   
+    - BrowserModule, 浏览器解析的模块   
+    - NgModule, Angular核心模块
+    - AppComponent, 根组件
+    - ![](./img/angular/2.png)
+2. app.component.ts/scss/spec.ts/html 组成一个组件
+3. app-routing.module.ts 路由模块
+### angular 语法
+1. 创建组件、组件详解、绑定数据   
+```ng g component [component-name]``` 
+会出现如下组件文件和app.module.ts配置文件的变化：
+![](./img/angular/3.png)
+![](./img/angular/4.png)
+
+根组件放入 news 组件，在文件 app.component.html:
+``` html
+// 组件名称看 new.component.ts中 selector
+<app-news></app-news>
+<div style="text-align: center;">
+  你好 angular
+</div>
+```
+
+在 app.component.ts 中定义和暴露全局变量:
+```typescript
+export class AppComponent {
+  public title = 'demo01';  // 定义属性, 全局
+  constructor() {
+
+  }
+  ngOnInit() {
+    
+  }
+}
+```
+使用方法 - 插值表达式：  
+```html
+<h2>{{title}}</h2>
+```
+2. angular 组件以及组件里面的模板
+- 绑定属性： 
+```html
+// public student:any = "我是一个学生"
+<div [title]="student"></div>
+```
+- 解析 html(字符串) 代码：
+```html
+// public content:string = "<h2>哈哈哈</h2>"
+<div [innerHTML]="content"></div>
+```
+- 简单运算：
+```html
+<div >{{1+2}}</div>
+```
+- *ngFor(支持对象、多维数组) - key为索引值: 
+```html
+// public arr:string[] = ["哈哈哈>_<"]
+<div *ngFor="let item of arr;let key=index">{{key}}----{{item}}</div>
+```
+- 条件判断  *ngIf:
+```html
+// private flag:boolean = true
+<div>
+  <li *ngIf="flag">收藏</li>
+  <li *ngIf="!flag">取消收藏</li>
+</div>
+```   
+- *ngSwitch
+```html
+<span [ngSwitch]="flag">
+  <p *ngSwitchCase="true">
+    1
+  </p>
+  <p *ngSwitchCase="false">
+    2
+  </p>
+  <p *ngSwitchDefault>
+    3
+  </p>
+</span>
+```
+- [ngClass] - 在MVVM框架中，尽量不要通过dom改变class：  
+用于动态改变样式   
+```html
+<p [ngClass]="{'red': false, 'blue': false}">ngClass 测试1</p> // inherit
+<p [ngClass]="{'red': false, 'blue': true}">ngClass 测试2</p> // blue
+<p [ngClass]="{'red': true, 'blue': true}">ngClass 测试3</p> // blue
+<p [ngClass]="{'red': flag}">ngClass 测试4</p> // blue
+```    
+```css
+.red {
+    color: red;
+}
+.blue {
+    color: blue;
+}
+```   
+- [ngStyle]：
+```html
+// private redAttr:string = 'red'
+<p [ngStyle]="{'color': redAttr}">jajajj</p>
+```
+- [管道](https://angular.cn/guide/pipes): 
+    ![](./img/angular/5.png)
+    - 日期
+    ``` html
+    <p>{{today | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+    ```
+    - 大小写
+    ``` html
+    <p>{{'hah' | lowercase}}</p>
+    <p>{{'hah' | uppercase}}</p>
+    ```
+    - 小数位数
+    ``` html
+    <p>{{1.23564789 | number: '1.2-4'}}</p>
+    ```
+    - js 对象序列化
+    ``` html
+    <p>{{ { name: 'lily'} | json }}</p>
+    ```
+    - slice
+    ``` html
+    <p>{{ 'lily' | slice:0:3 }}</p>
+    ```
+    - 管道链
+    ``` html
+    <p>{{ 'lily' | slice:0:3 | uppercase }}</p>
+    ```
+    - 自定义管道 - 自定义方法，用到插值模板里面
+        * 同@Component({})和@NgModel({})一样，@Pipe({})代表这是一个管道，里面定义了一组元数据，用来告诉angular这个管道是如何工作的；
+
+        * 每一个自定义管道都需要实现PipeTransform接口， transform方法用来对传入的值进行一系列处理，最后转化为需要的值后return即可；
+
+        * transform()方法参数格式 - transform(value: string, args1: any, args2: any): value为传入的值（即为需要用此管道处理的值， | 前面的值）; args 为传入的参数(?:代表可选)；
+
+        * html中使用管道格式 - {{ 数据 | 管道名 : 参数1 : 参数2 }}
+        
+    1. sex-reform.pipe.ts创建：
+    ```shell
+    ng g pipe sex-reform
+    ```
+    2. sex-reform.pipe.ts文件
+    ```ts
+    import { Pipe, PipeTransform } form '@angular/core'; //引入PipeTransform是为了继承transform方法
+
+    @Pipe({ name: 'sexReform' }) //name属性值惯用小驼峰是写法, name的值为html中| 后面的名称
+
+    export class SexReformPipe implements PipeTransform {
+        transform(value: string, args?: any): string {
+            switch(value){
+                case 'male': return '男';
+                case 'female': return '女';
+                default: return '雌雄同体';
+            } 
+        }
+    }
+    ```
+    3. 使用demo组件中使用自定义管道
+    ``` html
+    // demo.component.html
+    <span>{{ 'male' | sexReform }}</span>
+    ```
+
+- 执行事件   
+```html
+<button (click)="getData($event)"></button>
+```
+```ts
+getData (event) {
+    console.log('哈哈哈哈')
+}
+```
+- 表单事件
+```html
+<input (keydown)="keyDown($event)" />
+<input (keyup)="keyDown($event)" />
+```
+- 双向数据绑定    
+M(数据) <=> V(视图)  with VM(angular/vue框架)
+视图与数据同步，通过angular工具
+> 只针对表单
+``` html
+// public keywords:string = '初始值'
+<input type="text" [(ngModel)]="keywords" />
+<p>您输入的是：{{keywords}}</p>
+```
+问题：报错 Can't bind to 'ngModel' since it isn't a known property of 'input'
+解决办法：
+在 app.module.ts 中加入：
+```ts
+import { FormsModule } from '@angular/forms';
+@NgModule({
+  ...
+  imports: [
+    ...
+    FormsModule
+  ],
+  ...
+})
+```
+
+表单输入案例要点：
+```typescript
+public userInfo: any = {
+    name: 'haha',
+    sex: '1',
+    city: '北京',
+    hobbies: [{
+        name: '吃饭',
+        checked: false
+    }, {
+        name: '睡觉',
+        checked: true
+    }, {
+        name: '敲代码',
+        checked: false
+        }],
+    notes: ''
+}
+
+public cityList:string[] = ['北京', '江苏', '天津']
+
+```
+```html
+<form action="">
+  姓名：<input type="text" [(ngModel)]="userInfo.name" name="name"><br>
+  性别<input type="radio" value="1" name="sex" [(ngModel)]="userInfo.sex"> 男
+  <input type="radio" value="2" name="sex" [(ngModel)]="userInfo.sex"> 女
+  <br>
+  城市：
+  <select name="city" [(ngModel)]="userInfo.city">
+    <option *ngFor="let item of cityList" [value]="item">{{item}}</option>
+  </select>
+  <br>
+  爱好：
+  <span *ngFor="let item of userInfo.hobbies;let key = index">
+    <!-- name 需要为不同值 -->
+    <input type="checkbox" [name]="'hobby' + key" [(ngModel)]="item.checked">
+    {{item.name}}
+  </span>
+  <br>
+  备注：
+  <textarea name="notes" cols="30" rows="10" [(ngModel)]="userInfo.notes"></textarea>
+</form>
+{{userInfo | json}}
+```
+
+todolist + 类似淘宝搜索缓存的功能 案例要点：
+
+
+- Angular内置模块的使用
