@@ -15,5 +15,13 @@ export class AppComponent {
     
   }
 
+  run(childName) {
+    console.log("儿子" + childName + "，你成功利用了我的权利！")
+  }
+
+  runInP(e) {
+    console.log('哪个儿子喊我？')
+    console.log(e)  // 子组件 emit 事件的数据
+  }
 
 }

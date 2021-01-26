@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'; // 根组件
 import { NewsComponent } from './news/news.component';
 import { SexReformPipe } from './sex-reform.pipe';  
+import { StorageService } from './services/storage.service';
 
 /*@NgModule装饰器，@NgModule接受一个元数据对象，告诉 angular 如何编译和启动应用*/
 @NgModule({
@@ -20,7 +21,7 @@ import { SexReformPipe } from './sex-reform.pipe';
     FormsModule
   ],
   /*配置项目所需要的服务*/
-  providers: [],
+  providers: [StorageService],
   /*指定应用的主视图（根组件），通过引导根 AppModule 来启动应用*/
   bootstrap: [AppComponent]
 })

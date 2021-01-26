@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<h2>{{title}}</h2>
+
+<h2>{{title1}}</h2>
 <div>
   <span [innerHTML]="tmp1"></span>
   <ul>
@@ -25,6 +26,10 @@
 
 <p [ngClass]="{'red': false, 'blue': true}">ngClass 测试</p>
 <p [ngStyle]="{'color': redAttr}">jajajj</p>
+<br>
+<br>
+<br>
+
 <p>{{today | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
 <p>{{'Home' | lowercase}}</p>
 <p>{{'hah' | uppercase}}</p>
@@ -38,7 +43,9 @@
 <p>您的输入是:{{input1}}</p>
 <input type="text" [(ngModel)]="keywords" />
 <p>您输入的是：{{keywords}}</p>
-
+<br>
+<br>
+<br>
 <form action="">
   姓名：<input type="text" [(ngModel)]="userInfo.name" name="name"><br>
   性别<input type="radio" value="1" name="sex" [(ngModel)]="userInfo.sex"> 男
@@ -60,3 +67,17 @@
   <textarea name="notes" cols="30" rows="10" [(ngModel)]="userInfo.notes"></textarea>
 </form>
 {{userInfo | json}}
+
+<br>
+<br>
+<br>
+<div id="main">main box</div>
+<div #viewChild>viewChild test</div>
+<br>
+<br>
+<br>
+<div class="red">父组件传值</div>
+<h2>{{title}}</h2>
+<button (click)="run('news')">利用爸爸的权利</button>
+<button (click)="getParentRun('news')">利用爸爸的权利2</button>
+<button (click)="sendParent()">通过 @Output 给父组件广播数据</button>
