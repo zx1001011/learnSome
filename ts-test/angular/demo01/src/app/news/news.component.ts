@@ -106,4 +106,6 @@ export class NewsComponent implements OnInit {
     console.log('老爸，我是你的大儿子news！')
     this.outer.emit('我是news！')
   }
+
+
 }

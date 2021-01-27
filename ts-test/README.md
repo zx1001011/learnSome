@@ -22,6 +22,8 @@
 | 5 | 2021.1.22 - 23 | 初步认识 | 23 - end/ 24 | angular | 学习 angular 的一些语法, 视频刷了一遍 | 
 | 6 | 2021.1.25下午 | 初步认识 | 24 - 27 | 一些语法，vue是参照angular来的，有些相似 | 有点懈怠，听不下去了 | 
 | 7 | 2021.1.26上午+ 1/4 * 下午 | 初步认识 | 27 - 30 | 服务、DOM操作、父子组件传值和生命周期函数 | 最近身体状况影响，容易犯困，视频也较长 | 
+| 8 | 2021.1.27 下午 | 初步认识 | 31 - 32 | Rxjs6.x异步编程和数据交互(get,post,jsonp | axios第三方模块) | |
+
 ## 一、简介  
 google研发，为了面向大型复杂的项目，使用javascript可以搭建   
 ts 是 javascript 的超集，包含 es6 和 es5   
@@ -1481,3 +1483,166 @@ ngOnDestroy 销毁函数
 
 
 ### Rxjs6.x异步数据流编程
+官网：[https://cn.rx.js.org/](https://cn.rx.js.org/)  
+[ReactiveX](http://reactivex.io/intro.html) 编程理念：[csdn一个博客](https://blog.csdn.net/windboy2014/article/details/52764241)
+
+有多种语言[RxJava/Rx.NET]，被广泛使用和认可，微软推出，它利用了观察者模式，将一切数据包括HTTP请求，DOM事件等包装成流的形式，然后用强大丰富的操作符对流进行处理，可以用同步编程的方式来异步编程并组合不同的操作符来轻松优雅的实现你所需要的功能等。   
+相比 Promise 功能更强大。  
+
+目前常见的异步编程的几种方法：   
+1. 回调函数 callback
+2. 事件监听/发布订阅 (观察者模式)
+3. Promise (.then 允许一些操作运行等待结果返回再运行其他操作，异步编程的一种解决方案)
+有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。   
+Promise也有一些缺点。   
+首先，无法取消Promise，一旦新建它就会立即执行，无法中途取消。    
+其次，如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。    
+第三，当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。      
+4. Rxjs --- angularJS 自带了  
+    - 实现异步
+    ![](./img/angular/8.png)
+    Observable 来处理异步，与 Promise 相似
+        ```ts
+        // home.component.ts
+        // 可以中途撤回
+        // 3. Rxjs 异步编程
+        let stream = this.request.getRxJSData()
+        stream.subscribe(val => {
+            console.log(val)
+        })
+
+        // 过一秒以后撤回刚才的操作
+        // setTimeout(() => {
+        //     d.unsubscribe() // 取消订阅
+        // }, 1000)
+        ```
+        ```ts
+        // request.service.ts
+        // 定义方法
+        import { Observable } from 'rxjs';
+        getRxJSData() {
+            return new Observable((observer) => {
+            // setTimeout(() => {
+            // 多次执行，Promise 无法实现
+            setInterval(() => {
+                observer.next('Rxjs observable timeout') 
+                // observer.error() // 失败返回
+            }, 1000)
+            })
+        }
+        ```
+    - 工具函数 map filter
+        ```ts
+        // request.service.ts
+        getRxJSData() {
+            return new Observable((observer) => {
+                let count = 0
+                // setTimeout(() => {
+                // 多次执行，Promise 无法实现
+                setInterval(() => {
+                count += 1
+                observer.next(count) 
+                // observer.error() // 失败返回
+                }, 1000)
+            })
+        }
+        ```
+        ```ts
+        // 3. Rxjs 异步编程
+        // home.component.ts
+        let stream = this.request.getRxJSData()
+        let d = stream.pipe(
+            filter(val => {
+                if (val%2 === 0) {
+                    return true
+                }
+            }),
+            map(val => {
+                return val * 2
+            })
+        ).subscribe(val => {
+            console.log(val)
+        })
+        ```
+
+
+### 数据交互(get jsonp post)
+app.module.ts 中引入:
+- get: 
+    ```ts
+    import { HttpClientModule } from '@angular/common/http';
+    imports: [
+        HttpClientModule
+    ]
+    ```  
+    ```ts
+    // 组件中调用
+    import { HttpClient } from '@angular/common/http';
+    let api = '.......'
+    // 使用 RxJS 封装的 http
+    this.http.get(api).subscribe((response) => {
+        console.log(response)
+    })
+    ```  
+
+- post:   
+    ```ts
+    import { HttpClientModule } from '@angular/common/http';
+    imports: [
+        HttpClientModule
+    ]
+    ```    
+    ```ts   
+    // 组件中调用
+    import { HttpClient,HttpHeaders } from '@angular/common/http';
+    constructor (public httpOptions:HttpHeaders) {
+
+    }
+    // 手动设置请求的类型
+    const httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    // 存在跨域
+    let api = '.........'
+    this.http.post(api, {'username': 1, 'age': 20}, httpOptions).subscribe((response) => {
+        console.log(response)
+    })
+    ```   
+
+- 后台不允许跨域，通过 jsonp 获取数据（跨域的解决方法之一）：
+    ```ts
+    import { HttpClientModule,HttpClientJsonpModule } from '@angular/common/http';
+    imports: [
+        HttpClientModule,
+        HttpClientJsonpModule
+    ]
+    ```  
+    ```ts
+    // 组件中调用
+    import { HttpClient } from '@angular/common/http';
+    // jsonp 请求，服务器得支持 jsonp
+    // 'http://a.itying.com/api/productlist?callback=xxx'
+    let api = '.......'
+    this.http.jsonp(api, 'callback').subscribe((response) => {
+        console.log(response)
+    }) 
+    ```  
+
+    
+- 第三方模块 axios
+安装：  
+```cnpm/npm install axios --save```
+xxx.component.ts 中引入和使用：   
+    ```ts
+    import axios from 'axios';
+    const axios = require('axios');
+
+    axiosGet(api) {
+        return new Promise((resolve, reject) => {
+            axios.get(api).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        })
+    }
+
+    ```

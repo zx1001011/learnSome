@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-
-<h2>{{title1}}</h2>
+<!DOCTYPE HTML>
+<h3>{{title1}}</h3>
 <div>
   <span [innerHTML]="tmp1"></span>
   <ul>
@@ -8,10 +7,11 @@
   </ul>
 </div>
 <div>
-  <li *ngIf="flag">收藏</li>
-  <li *ngIf="!flag">取消收藏</li>
+  <ul>
+    <li *ngIf="flag">收藏</li>
+    <li *ngIf="!flag">取消收藏</li>
+  </ul>
 </div>
-
 <span [ngSwitch]="flag">
   <p *ngSwitchCase="true">
     1
@@ -23,13 +23,8 @@
     3
   </p>
 </span>
-
 <p [ngClass]="{'red': false, 'blue': true}">ngClass 测试</p>
-<p [ngStyle]="{'color': redAttr}">jajajj</p>
-<br>
-<br>
-<br>
-
+<p [ngStyle]="{'color': redAttr}">jajajj</p><br>
 <p>{{today | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
 <p>{{'Home' | lowercase}}</p>
 <p>{{'hah' | uppercase}}</p>
@@ -42,10 +37,7 @@
 <input (keydown)="keyDown($event)" />
 <p>您的输入是:{{input1}}</p>
 <input type="text" [(ngModel)]="keywords" />
-<p>您输入的是：{{keywords}}</p>
-<br>
-<br>
-<br>
+<p>您输入的是：{{keywords}}</p><br>
 <form action="">
   姓名：<input type="text" [(ngModel)]="userInfo.name" name="name"><br>
   性别<input type="radio" value="1" name="sex" [(ngModel)]="userInfo.sex"> 男
@@ -66,16 +58,9 @@
   备注：
   <textarea name="notes" cols="30" rows="10" [(ngModel)]="userInfo.notes"></textarea>
 </form>
-{{userInfo | json}}
-
-<br>
-<br>
-<br>
+{{userInfo | json}}<br>
 <div id="main">main box</div>
-<div #viewChild>viewChild test</div>
-<br>
-<br>
-<br>
+<div #viewChild>viewChild test</div><br>
 <div class="red">父组件传值</div>
 <h2>{{title}}</h2>
 <button (click)="run('news')">利用爸爸的权利</button>
