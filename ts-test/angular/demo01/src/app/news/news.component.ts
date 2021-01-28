@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { StorageService } from '../services/storage.service';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -53,7 +55,7 @@ export class NewsComponent implements OnInit {
   
   @Output() outer = new EventEmitter()
 
-  constructor(public storage:StorageService) {
+  constructor(public storage:StorageService, public route:ActivatedRoute) {
     console.log(storage)
     console.log(storage.getStorageService()) 
 
@@ -63,6 +65,12 @@ export class NewsComponent implements OnInit {
   ngOnInit(): void {
     // 生命周期钩子函数，组件和指令初始化完成，并没有真正的加载 dom
     // 获取不到 dom 节点
+
+    console.log(this.route.queryParams)
+    this.route.queryParams.subscribe((data) => {
+      console.log(data)
+    })
+
   }
 
   ngAfterViewInit(): void {

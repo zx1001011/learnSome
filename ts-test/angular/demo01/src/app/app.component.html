@@ -1,14 +1,24 @@
 <!DOCTYPE HTML>
-<h1 style="text-align: center;">
+<h1>
   hello, angular!
 </h1>
+
 <ol>
   <li>
-    <h2>一些基础用法</h2>
+    <a routerLink="/" routerLinkActive="active">首页</a>
+  </li>
+  <li>
+    <a routerLink="/news" routerLinkActive="active" [queryParams]="{ name: '1', age: 2 }">一些基础用法</a>
+    <button (click)="toNewsWithParams()">测试js get传值</button>
     <!-- <app-news [title]="title" [run]="run" [home]="this" (outer)="runInP($event)"></app-news> -->
   </li>
   <li>
-    <h2>Rxjs 异步编程方案</h2>
-    <app-home></app-home>
+    <a [routerLink]="['/home/', 1 ]" routerLinkActive="active">Rxjs 异步编程方案</a>
+    <button (click)="toHomeWithParams()">测试js 动态路由</button>
+    <!-- <app-home></app-home> -->
+  </li>
+  <li>
+    <a [routerLink]="['/user']" routerLinkActive="active">嵌套路由</a>
   </li>
 </ol>
+<router-outlet></router-outlet>

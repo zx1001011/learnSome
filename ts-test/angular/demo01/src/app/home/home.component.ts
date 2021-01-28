@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { rejects } from 'assert';
 import { RequestService } from '../services/request.service';
 import { map, filter } from 'rxjs/operators';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { map, filter } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public request:RequestService) { }
+  constructor(public request:RequestService, public route:ActivatedRoute) { }
 
   ngOnInit(): void {
     // 同步方法
@@ -57,6 +57,11 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       d.unsubscribe() // 取消订阅
     }, 1000)
+
+    // get 传值
+    this.route.params.subscribe((data) => {
+      console.log(data)
+    })
 
   }
 

@@ -1,0 +1,15 @@
+<p>user works!</p>
+<h3>导航</h3>
+<div class="n-left">
+  <ul>
+    <ol>
+      <a [routerLink]="['/user/setting']" routerLinkActive="active">设置</a>
+    </ol>
+    <ol>
+      <a [routerLink]="['/user/detail']" routerLinkActive="active">详情</a>
+    </ol>
+  </ul>
+</div>
+<div class="n-right">
+  <router-outlet></router-outlet>
+</div>

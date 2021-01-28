@@ -23,7 +23,7 @@
 | 6 | 2021.1.25下午 | 初步认识 | 24 - 27 | 一些语法，vue是参照angular来的，有些相似 | 有点懈怠，听不下去了 | 
 | 7 | 2021.1.26上午+ 1/4 * 下午 | 初步认识 | 27 - 30 | 服务、DOM操作、父子组件传值和生命周期函数 | 最近身体状况影响，容易犯困，视频也较长 | 
 | 8 | 2021.1.27 下午 | 初步认识 | 31 - 32 | Rxjs6.x异步编程和数据交互(get,post,jsonp | axios第三方模块) | |
-
+| 9 | 2021.1.28 上午 | 初步认识 | 33 - 35 | angular 路由、路由跳转、嵌套路由 | 路由跳转 分成了 get 传值(会请求后端)和 动态路由， 与 vue 不同的是：vue 是在#号后面进行前端的动态路由，不过动态路由都是预加载好了，点击的时候没有进行加载html |
 ## 一、简介  
 google研发，为了面向大型复杂的项目，使用javascript可以搭建   
 ts 是 javascript 的超集，包含 es6 和 es5   
@@ -1645,4 +1645,184 @@ xxx.component.ts 中引入和使用：
         })
     }
 
+    ```  
+### 路由
+单页面不利于SEO优化    
+- 路由配置  
+    1. 自动创建一个带路由的项目，文件 app-routing.module.ts 内容如下,与 app.module.ts 同级目录：  
+    ```ts
+    import { NgModule } from '@angular/core';
+    import { Routes, RouterModule } from '@angular/router';
+
+    const routes: Routes = [];
+
+    @NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+    })
+    export class AppRoutingModule { }
+    ```  
+    2. 新建一个组件，保证在app.component.html中能够引入（需要在 根ts 中引入和注入）  
+    3. 修改 app-routing.module.ts 如下：   
+    ```ts
+    import { NewsComponent } from './news/news.component';
+    import { HomeComponent } from './home/home.component';
+
+    const routes: Routes = [
+    { path: 'home', component: HomeComponent },
+    { path: 'news', component: NewsComponent },
+    { path: '**', redirectTo: '/home' }  // 默认重定向
+    ];
     ```
+    4. 根组件 html 中添加：   
+    ```html
+    <router-outlet></router-outlet>
+    ```
+    5. 访问根组件如 http://localhost:4200, 在后面加上 /home | /news 就可以将 router-outlet 标签替换为相应的组件内容   
+    6. 利用 routeLink :
+    ```html
+    <!-- 根组件 -->
+    <!DOCTYPE HTML>
+    <h1>
+    hello, angular!
+    </h1>
+
+    <ol>
+    <li>
+        <a routerLink="/" routerLinkActive="active">首页</a>
+    </li>
+    <li>
+        <a routerLink="/news" routerLinkActive="active">一些基础用法</a>
+        <!-- <app-news [title]="title" [run]="run" [home]="this" (outer)="runInP($event)"></app-news> -->
+    </li>
+    <li>
+        <a routerLink="/home" routerLinkActive="active">Rxjs 异步编程方案</a>
+        <!-- <app-home></app-home> -->
+    </li>
+    </ol>
+    <router-outlet></router-outlet>
+    ```
+    ```css
+    /* 路由点击之后是红色 */
+    .active {
+        color: red;
+    }
+    ```
+- 路由传值
+    1. get传值 - queryParams
+    ```html
+    <!-- 传值 -->
+    <a routerLink="/news" routerLinkActive="active" [queryParams]="{ name: '1', age: 2 }">一些基础用法</a>
+    <!-- http://localhost:4200/news?name=1&age=2 -->
+    ```
+    ```typescript
+    import { ActivatedRoute } from '@angular/router';
+
+    // ...
+    // 接受值
+    // queryParams 也是一个 RxJS 的 对象
+    constructor(public route:ActivatedRoute) {
+    }
+    
+    ngOnInit(): void {
+        // 生命周期钩子函数，组件和指令初始化完成，并没有真正的加载 dom
+        // 获取不到 dom 节点
+        console.log(this.route.queryParams)
+        this.route.queryParams.subscribe((data) => {
+            console.log(data)  // { name: '1', age: '2' }
+        })
+    }
+    // ...
+    ```
+    2. 动态路由传值 - params
+    ```html
+    <a [routerLink]="['/home/', 1 ]" routerLinkActive="active">Rxjs 异步编程方案</a>
+    ```
+    ```typescript
+    { path: 'home/:id', component: HomeComponent },
+    ```
+    ```ts
+    import { ActivatedRoute } from '@angular/router';
+    constructor(public route:ActivatedRoute) { }
+    // get 传值
+    this.route.params.subscribe((data) => {
+      console.log(data)  // { id: '1' }
+    })
+    ```
+    3. js 的 动态路由跳转
+    ```js
+    import { Router } from '@angular/router';
+    constructor(public route:Router) {}
+    this.route.navigate(['/home/', '2'])
+    ```
+    4. js 的 get 传值跳转
+    ```js
+    import { Router, NavigationExtras } from '@angular/router';
+    constructor(public route:Router) {}
+    toNewsWithParams() {
+        // 引入或者不引入 NavigationExtras 都可以 
+        // let queryParams = {
+        let queryParams:NavigationExtras = {
+        queryParams: { name: 'aa', age: 'aa' },
+        }
+        this.route.navigate(['/news'], queryParams)
+    }
+    ```
+- 父子路由/嵌套路由
+    场景如下：
+    ![](./img/angular/9.png)   
+    1. 创建组件 
+    ```shell
+    ng g component user
+    ng g component user/setting
+    ng g component user/detail
+    ```
+    2. 在 app-routing.module.ts 中引入组件和配置路径：
+    ```ts
+    import { UserComponent } from './user/user.component';
+    import { DetailComponent } from './user/detail/detail.component';
+    import { SettingComponent } from './user/setting/setting.component';
+    // ...
+    {
+        path: 'user',
+        component: UserComponent,
+        children: [
+            {
+                path: 'setting',
+                component: SettingComponent
+            },
+            {
+                path: 'detail',
+                component: DetailComponent
+            },
+            { path: '**', redirectTo: 'setting' } // 默认显示
+        ]
+    },
+    // ...
+    ```
+    3. 配置 routerLink：
+    ```html
+    <!-- app.component.html -->
+    <a [routerLink]="['/user']" routerLinkActive="active">嵌套路由</a>
+    <router-outlet></router-outlet>
+    ```
+    ```html
+    <!-- user.component.html -->
+    <p>user works!</p>
+    <h3>导航</h3>
+    <div class="n-left">
+    <ul>
+        <ol>
+        <a [routerLink]="['/user/setting']" routerLinkActive="active">设置</a>
+        </ol>
+        <ol>
+        <a [routerLink]="['/user/detail']" routerLinkActive="active">详情</a>
+        </ol>
+    </ul>
+    </div>
+    <div class="n-right">
+    <router-outlet></router-outlet>
+    </div>
+    ```
+
+### 

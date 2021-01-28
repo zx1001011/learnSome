@@ -1,0 +1,10 @@
+.n-left {
+    width: 200px;
+    border: 1px solid #000;
+    float: left;
+}
+.n-right {
+    width: calc(100% - 205px);
+    border: 1px solid #f2f2f2;
+    float: right;
+}

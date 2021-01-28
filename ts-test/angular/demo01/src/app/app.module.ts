@@ -4,18 +4,22 @@ import { FormsModule } from '@angular/forms';
 // import { HttpClientModule,HttpClientJsonpModule } from '@angular/common/http';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'; // 根组件
 import { NewsComponent } from './news/news.component';
 import { SexReformPipe } from './sex-reform.pipe';  
 import { StorageService } from './services/storage.service';
 import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { DetailComponent } from './user/detail/detail.component';
+import { SettingComponent } from './user/setting/setting.component';
 
 /*@NgModule装饰器，@NgModule接受一个元数据对象，告诉 angular 如何编译和启动应用*/
 @NgModule({
   /*配置当前项目运行的组件*/
   declarations: [  
-    AppComponent, NewsComponent, SexReformPipe, HomeComponent
+    AppComponent, NewsComponent, SexReformPipe, HomeComponent, UserComponent, DetailComponent, SettingComponent
   ],
   /*配置当前模块运行依赖的其他模块*/
   imports: [
@@ -31,4 +35,4 @@ import { HomeComponent } from './home/home.component';
   bootstrap: [AppComponent]
 })
 //根模块不需要导出任何东西，因为其他组件不需要导入根模块
-export class AppModule { }
+export class AppModule {}
