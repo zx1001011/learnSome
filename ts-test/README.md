@@ -75,8 +75,8 @@ ts 中 为了 使代码更规范，更有利于维护，增加了类型校验
 | 5 | 元组类型 | tuple | 数组的一种，可以指定每个数组元素的类型 | ```let arr:[string, number, boolean] = ['ts', 3.18, true]```  | √ |
 | 6 | 枚举类型 | enum | 事先考虑某个变量可能取得值 | ```enum 枚举名 { 标识符[=整型常数], ... }``` ，类似C语言,其中值默认为索引值， 示例： ```enum Flag {success=1, error} let f:Flag=Flag.success``` | √ |
 | 7 | 任意类型 | any | 可以赋值为任意类型 | Object类型可以指定该类型 | × |
-| 8 | null | null | 一个变量可以是基本数据类型，或者null或者undefined |  ```let num:number | null``` | × |
-| 9 | undefined | undefined | 其他类型未初始化变量为undefined，但是引用会报错；如果直接指定undefined没有初始化就不会报错 | ```let num:number |null | undefined```  | × |
+| 8 | null | null | 一个变量可以是基本数据类型，或者null或者undefined |  ```let num:number / null``` | × |
+| 9 | undefined | undefined | 其他类型未初始化变量为undefined，但是引用会报错；如果直接指定undefined没有初始化就不会报错 | ```let num:number / null / undefined```  | × |
 | 10 | 空类型 | void | 一般用于方法没有返回值 | ```function run():void{}``` | × |
 | 11 | never类型 | never | 从来不会出现 | ```let a:never  a=(()=>{ throw new Error('错误') })()``` | × |
 
