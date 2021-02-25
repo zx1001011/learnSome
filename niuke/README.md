@@ -7,6 +7,7 @@
 | 序号 | 时间 | 题目数量 | 知识点 | 通过率 | 题目内容 | 
 | ---- | ---- | --- | --- | --- | --- |
 | 1 | 2021.2.24 | 10 | js | 0.8 | js基础 | 
+| 2 | 2021.2.25 | 10 | js | 0.8 | js、css 基础 | 
 
 
 ## 内容
@@ -78,4 +79,104 @@ JavaScript中实现异步编程模式的4种方法,回调函数、事件监听�
  +[] 隐式类型转换，因为[]是对象，所以toPrimitive->valueOf->toString为''，结果就是+''===0
  - [1,2,-3].reduce((a, b) => a - b, 0)        
   reduce对数组中的每个元素执行一个reducer函数(升序执行)，将其结果汇总为单个返回值。a为累计器累计回调的返回值，b为数组的每一项元素，传入初始值0->0-(1)->(-1)-2->(-3)-(-3)->0    
+
+### 2021.2.25
+1. 字符串相加 、'+'、'-'
+    - console.log(1+ "2"+"2");   
+    做加法时要注意双引号，当使用双引号时，JavaScript认为是字符串，字符串相加等于字符串合并。
+    因此，这里相当于字符串的合并，即为122.
+    - console.log(1+ +"2"+"2");   
+    第一个+"2"中的加号是一元加操作符，+"2"会变成数值2，因此1+ +"2"相当于1+2=3.
+    然后和后面的字符串“2”相合并，变成了字符串"32".
+    - console.log("A"- "B"+"2");    
+    "A"-"B"的运算中，需要先把"A"和"B"用Number函数转换为数值，其结果为NaN，在剪发操作中，如果有一个是NaN，则结果是NaN，因此"A"-"B"结果为NaN。
+    然后和"2"进行字符串合并，变成了NaN2.
+    - console.log("A"- "B"+2);    
+    根据上题所述，"A"-"B"结果为NaN，然后和数值2进行加法操作，在加法操作中，如果有一个操作数是NaN，则结果为NaN。
+
+2. instanceof、=== 、==
+    - instanceof 运算符希望左操作数是一个对象，右操作数表示对象的类（初始化对象的构造函数）。如果左侧的对象是右侧对象的实例，返回true，否则返回false。
+    例如：计算 o instanceof f  
+    首先计算f.prototype，然后在原型链中查找o，找到返回true
+
+    - === 严格相等运算符：首先计算其操作数的值，然后比较这两个值，比较过程中没有任何类型转换
+
+    - == 相等运算符：如果两个操作数不是同一类型，那么会尝试进行一些类型转换，然后进行比较   
+    1)尽管null和undefined是不同的，但它们都表示“值的空缺”，两者往往可以互换，因此==运算符认为两者是相等的   
+    2)NaN表示非数字值，特殊之处：它和任何值都不相等，包括自身。判断NaN的方法：x!=x返回true
+
+3. xx is not defined 报错   
+    本 scope(作用域) 内找不到 xx, 就会报错
+
+4. Ajax 的 XMLHttpRequest 对象   
+    Ajax不是新的编程语言，而是一门提供网页局部刷新的技术。    
+    Ajax最大的优点是在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页内容。    
+    Ajax技术核心就是 XMLHttpRequest 对象。    
+    Ajax技术的工作原理：*分为3步*    
+    1）创建Ajax对象：```var xhr = new XMLHttpRequest()```;
+    2）xhr 发送请求：```xhr.open('get','test.html','true');xhr.send();```    
+
+    3）xhr获取响应：
+    ```
+    xhr.onreadystatechange = function(){
+        if(xhr.readystate == 4){//请求的状态码
+            /*
+            0：请求还没有建立（open执行前）
+            1：请求建立了还没发送（执行了open）
+            2：请求正式发送（执行了send）
+            3：请求已受理，有部分数据可以用，但还没有处理完成
+            4：请求完全处理完成
+            */
+            alert(xhr.responseText);//返回的数据
+        }
+    }
+    ```
+
+    get 的 ajax 请求的代码：
+    ```
+    function loadXMLDoc()
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function(){
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET", "/ajax/demo_get.asp",true);
+        xmlhttp.send();
+    }```
+
+5. enum 是 ts 中的语法    
+   es6 中 [generator](https://es6.ruanyifeng.com/#docs/generator)   
+   Generator 函数是ES6的一种异步编程解决方案    
+ 
+6. 函数和变量声明提前，然后赋值    
+    ```
+    var x = foo();
+    var foo=function foo() {...}
+    ```
+    语句中变量的声明会提升，但是定义不会提升。以上代码等同于：
+
+    ```
+    var x;
+    var foo;
+    x = foo();
+    foo = function foo() {...}
+    ```
+    当执行到 x = foo() 时，由于foo未被定义为函数，所以会返回
+
+    ```TypeError: foo is not a function```
+
+
+### 2021.2.26
+
+
+
+
 
