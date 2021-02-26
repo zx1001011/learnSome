@@ -13,7 +13,7 @@
 
 ### 2021.2.26 
 #### 题目描述：
-![描述](https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/)
+[描述](https://leetcode-cn.com/problems/number-of-valid-words-for-each-puzzle/)
 
 #### 题目理解：
 ```javascript
@@ -26,6 +26,7 @@
 *    给字母排序？
 */
 ```
+
 #### 解决办法：
 1. 自己的解法，超时，用的 Map 数据结构来解决的，最后一个测试案例通不过
 ```javascript
@@ -207,3 +208,5 @@ function CountOne(n) {
 #### 其他：
 1. 合理利用题目给出的条件
 2. 丝毫没有想到 <em><strong>二进制位压缩</strong></em> 来记录，只想到 map 来记录，顺序是否考虑感觉不是那么重要，该用的循环都用了
+
+

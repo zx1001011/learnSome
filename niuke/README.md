@@ -8,7 +8,7 @@
 | ---- | ---- | --- | --- | --- | --- |
 | 1 | 2021.2.24 | 10 | js | 0.8 | js基础 | 
 | 2 | 2021.2.25 | 10 | js | 0.8 | js、css 基础 | 
-
+| 
 
 ## 内容
 
@@ -175,6 +175,38 @@ JavaScript中实现异步编程模式的4种方法,回调函数、事件监听�
 
 
 ### 2021.2.26
+1. ECMAScript 中有 5 中简单数据类型（也称为基本数据类型）： Undefined、Null、Boolean、Number 和 string。还有一种复杂数据类型——Object。（摘自高级程序设计）
+
+2. this 指向问题：   
+JS中this关键字， 它代表函数 <strong>运行</strong> 时，自动生成的一个内部对象，只能在函数内部使用。   
+this有四种情况:    
+1) 当在函数调用的时候指向widow   
+2) 当方法调用的时候指向调用对象    
+3) 当用apply和call上下文调用的时候指向传入的第一个参数    
+4) 构造函数调用指向实例对象    
+
+3. innerHTML 和 innerText 的区别
+https://blog.csdn.net/shueiyuan1983/article/details/52960950
+
+4. call、apply、bind   
+菜鸟教程的解释：https://www.runoob.com/w3cnote/js-call-apply-bind.html     
+call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：    
+call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔     
+apply 的所有参数都必须放在一个数组里面传进去      
+bind 除了返回是函数以外，它 的参数和 call 一样。    
+
+5. react 的 jsx 模板    
+在jsx中直接写行内样式时不能采用引号，而是style={{color:'red'}}的方式。    
+
+6. typeof   
+![](./img/2.png)    
+
+
+### 2021.2.27
+
+
+
+
 
 
 
