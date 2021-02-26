@@ -35,3 +35,37 @@
     not.toBe   
     ...   
     toBeCloseTo 解决浮点数问题, 计算机精度问题 
+
+4) 使用 babel 转换器来使用 es6 语法（默认nodejs 支持 commonjs 模块化语法）   
+``` npm install -D @babel/core@7.4.5 @babel/preset-env@7.4.5 ```
+新建 .babelrc 文件：
+```json
+{
+    "presets": [
+        [
+            "@babel/preset-env", {
+                "targets": {
+                    "node": "current"
+                }
+            }
+        ]
+    ]
+}
+```
+
+步骤：
+在 输入命令 ```npm run test``` 或者 ```yarn test``` 的时候,   
+会先检查 babel 是否在 package.json 中即是否引入 babel,    
+如果引入了，就找 .babelrc 文件来设置然后......    
+
+5) 异步代码测试方法 - 回调函数
+```npm install axios@0.19.0 --save``` 或者
+```yarn add axios@0.19.0 --save```   
+
+jest.config.js 文件中设置：
+```json
+testRegex: ['fetchData.test.js'], // 就只会跑 fetchData.test.js 文件
+```
+
+
+

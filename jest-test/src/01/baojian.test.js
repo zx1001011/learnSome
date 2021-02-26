@@ -1,4 +1,5 @@
-const { baojian1, baojian2 } = require('./baojian')
+// const { baojian1, baojian2 } = require('./baojian')
+import { baojian1, baojian2 } from './baojian'
 
 test("baojian1", () => {
     /**
