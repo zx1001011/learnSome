@@ -7,6 +7,7 @@
 | 序号 | 时间 | 题目 | 知识点 | 难度 | 自行是否做出 | 是否理解 | 有几种方法 | 
 | ---- | ---- | --- | --- | --- | --- | --- | --- |
 | 1 | 2021.2.26 | 1178. 猜字谜 | 位压缩 | 困难 | 超时TT | 暂未全部理解 | 2 |
+| 2 | 2021.3.1 | 303. 区域和检索 - 数组不可变 | 前缀和 | 简单 | 是 | 理解 | 3 |
 
 
 ## 内容
@@ -208,5 +209,134 @@ function CountOne(n) {
 #### 其他：
 1. 合理利用题目给出的条件
 2. 丝毫没有想到 <em><strong>二进制位压缩</strong></em> 来记录，只想到 map 来记录，顺序是否考虑感觉不是那么重要，该用的循环都用了
+
+### 2021.3.1 
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/range-sum-query-immutable/)
+
+#### 题目理解：
+```javascript
+/**
+* 实现一个类
+* 原型链上实现一个简单计算的函数（肯定是要对数组遍历一遍的）
+*/
+```
+
+#### 解决办法：
+主要理解 prototype ：   
+定义一个简单的类 :   
+```javascript
+function MyClass() {
+
+};
+```
+给类增加属性和方法 :    
+```javascript
+// 添加属性用 this 
+function MyClass(name, age) {
+  // 属性
+  this.name = name;
+  this.age = age;
+  // 方法
+  this.toString() = function(){
+    alert(this.name +":"+ this.age);
+  };
+};
+```
+每一个函数都会包含一个 prototype 属性，这个属性指向了一个prototype对象，我们可以指定函数对应的 prototype 对象。如果不指定，则函数的 prototype 属性将指向一个默认的 prototype 对象，并且次默认的 prototype 对象的 constructor 属性又会指向该函数。
+当用构造函数创建一个新的对象时，新的对象会获取构造函数的 prototype 属性所指向的 prototype 对象的所有属性和方法，这样一来，构造函数对应的 prototype 对象所做的任何操作都会反映到它所生成的对象上，所有的这些对象将共享与构造函数对应的 prototype 对象的属性和方法。
+虽然新创建的对象可以使用它的构造函数所指向的 prototype 对象的属性和方法，但不能像构造函数那样直接调用 prototype 对象（对象没有 prototype 属性）。
+简而言之，就是如果我们使用函数的 prototype 对象来给函数添加方法，那么在创建一个新的对象的时候，并不会复制这个函数的所有方法，而是指向了这函数的所有方法。
+```javascript
+function MyClass(name,age){
+  this.name = name;
+  this.age = age;
+}
+// 利用 prototype 来实现封装的, 给类添加方法的实现
+MyClass.prototype = {
+  toString:function(){
+    //
+  },
+  sayHellow:function(){
+    //
+  }
+};
+var cls1 = new MyClass("liming",10);
+cls1.toString(); //
+var cls2 = new MyClass("zhang",10);
+cls2.toString();
+```
+
+
+1. 直接写
+```javascript
+var NumArray = function(nums) {
+    this.array = nums
+};
+
+NumArray.prototype.sumRange = function(i, j) {
+    var sum = 0
+    for (var index = i; index <= j; index++) {
+        sum += this.array[index]
+    }
+    return sum
+};
+```
+
+2. 官方题解 - 前缀和
+```javascript
+var NumArray = function(nums) {
+    const n = nums.length;
+    this.sums = new Array(n + 1).fill(0);
+    for (let i = 0; i < n; i++) {
+        this.sums[i + 1] = this.sums[i] + nums[i];
+    }
+};
+
+NumArray.prototype.sumRange = function(i, j) {
+    return this.sums[j + 1] - this.sums[i];
+};
+```
+
+3. 分块来优化暴力
+```C++
+class NumArray {
+private:
+    static constexpr int block_size = 100;
+    vector<int> nums;
+    vector<int> block_sum;
+
+public:
+    NumArray(vector<int>& nums) {
+        this->nums = nums;
+
+        int i = 0;
+        while (i + block_size <= nums.size()) {
+            block_sum.push_back(accumulate(nums.begin() + i, nums.begin() + i + block_size, 0));
+            i += block_size;
+        }
+    }
+    
+    int sumRange(int i, int j) {
+        int k = i, ans = 0;
+        while (k <= j) {
+            if (k % block_size == 0 && k + block_size - 1 <= j) {
+                ans += block_sum[k / block_size];
+                k += block_size;
+            }
+            else {
+                ans += nums[k];
+                ++k;
+            }
+        }
+        return ans;
+    }
+};
+```
+
+
+
+#### 其他：
+nothing...  
 
 
