@@ -8,7 +8,8 @@
 | ---- | ---- | --- | --- | --- | --- |
 | 1 | 2021.2.24 | 10 | js | 0.8 | js基础 | 
 | 2 | 2021.2.25 | 10 | js | 0.8 | js、css 基础 | 
-| 
+| 3 | 2021.3.1 | 10 | js | 0.7 | js、jquery 基础 |
+|
 
 ## 内容
 
@@ -202,9 +203,20 @@ bind 除了返回是函数以外，它 的参数和 call 一样。
 ![](./img/2.png)    
 
 
-### 2021.2.27
+### 2021.3.1
+1. jquery 匹配包含文本的元素  - contains()
+    - text() 设置或获取被选元素的文本内容   
+    - contains 选择器，检测元素是否包含指定字符串的元素     
+    - input() 选择器，选取表单元素    
+    - attr(name, value) 属性操作，设置或获取被选元素的属性和属性值   
 
-
+2. javascript中实现跨域的方式总结   
+    1) jsonp 请求；jsonp的原理是利用 ```<script>``` 标签的跨域特性，可以不受限制地从其他域中加载资源，类似的标签还有 ```<img>```.
+    2) document.domain；这种方式用在主域名相同子域名不同的跨域访问中
+    3) window.name；window 的 name 属性有个特征：在一个窗口 (window) 的生命周期内, 窗口载入的所有的页面都是共享一个 window.name 的，每个页面对window.name 都有读写的权限，window.name 是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。
+    4) window.postMessage；window.postMessages 是 html5 中实现跨域访问的一种新方式，可以使用它来向其它的 window 对象发送消息，无论这个 window 对象是属于同源或不同源。
+    5) CORS；CORS 背后的基本思想，就是使用自定义的 HTTP 头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是应该失败。
+    6) Web Sockets；web sockets 原理：在 JS 创建了 web socket 之后，会有一个 HTTP 请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP 升级从 HTTP 协议交换为 web socket 协议。
 
 
 
