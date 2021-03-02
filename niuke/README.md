@@ -9,6 +9,7 @@
 | 1 | 2021.2.24 | 10 | js | 0.8 | js基础 | 
 | 2 | 2021.2.25 | 10 | js | 0.8 | js、css 基础 | 
 | 3 | 2021.3.1 | 10 | js | 0.7 | js、jquery 基础 |
+| 4 | 2021.3.2 | 10 | js | 0.7 | js、angular数据绑定基础 |
 |
 
 ## 内容
@@ -218,9 +219,36 @@ bind 除了返回是函数以外，它 的参数和 call 一样。
     5) CORS；CORS 背后的基本思想，就是使用自定义的 HTTP 头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是应该失败。
     6) Web Sockets；web sockets 原理：在 JS 创建了 web socket 之后，会有一个 HTTP 请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP 升级从 HTTP 协议交换为 web socket 协议。
 
+### 2021.3.2
+1. angular 绑定数据
+    - 直接使用 {{value}} 绑定变量，会因为加载先后顺序，出现闪屏的现象，官方建议使用 ng-bind
+    - ng-model 属于双向绑定 用于 Input 的输入值和变量绑定起来，不能绑定在 div 等标签上
+    - ng-bind="value" 直接把变量绑定在标签上，当超过一定数量时，会出现性能问题
+    - ng-bind="obj.value"，官方建议把对象的属性绑定在视图上，其次才是对象本身
 
+2. 表单元素设置不可用状态
+    - Readonly 只针对 input(text/password) 和 textarea 有效      
+    - disabled 对于所有的表单元素有效，包括 select, radio, checkbox, button 等。
 
-
+3. 数组方法
+    - 会改变数组的方法：
+    ```javascript
+        push()
+        pop()
+        shift()
+        unshift()
+        splice()
+        sort()
+        reverse()
+        forEach()
+    ```
+    - 不会改变数组的方法：
+    ```javascript
+        filter()
+        concat() 
+        slice()
+        map()
+    ```
 
 
 
