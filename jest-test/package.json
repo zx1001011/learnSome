@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "autoTest": "jest --watchAll",
     "coverage": "jest --coverage"
   },
   "author": "",

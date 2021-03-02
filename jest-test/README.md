@@ -67,5 +67,8 @@ jest.config.js 文件中设置：
 testRegex: ['fetchData.test.js'], // 就只会跑 fetchData.test.js 文件
 ```
 
+6) 自动测试 - ```jest --watchAll```
+在 package.json 中加入：```"autoTest": "jest --watchAll",```
 
+7) 
 
