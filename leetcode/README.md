@@ -8,7 +8,8 @@
 | ---- | ---- | --- | --- | --- | --- | --- | --- |
 | 1 | 2021.2.26 | 1178. 猜字谜 | 位压缩 | 困难 | 超时TT | 暂未全部理解 | 2 |
 | 2 | 2021.3.1 | 303. 区域和检索 - 数组不可变 | 前缀和 | 简单 | 是 | 理解 | 3 |
-
+| 3 | 2021.3.3 | 304. 二维区域和检索 - 矩阵不可变 | 前缀和 | 中等 | 是 | 理解 | 2 |
+| 
 
 ## 内容
 
@@ -339,4 +340,99 @@ public:
 #### 其他：
 nothing...  
 
+### 2021.3.2
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/range-sum-query-2d-immutable/)
 
+#### 题目理解：
+```
+/**
+ * 昨天是数组不可变, 使用的方法是前缀和
+ * 今天也是的, 应该.
+ */
+```
+
+#### 解决办法：
+1. 照昨天的理解写
+```javascript
+/**
+ * @param {number[][]} matrix
+ */
+var NumMatrix = function(matrix) {
+    /**
+     * 昨天是数组不可变, 使用的方法是前缀和
+     * 今天也是的, 应该.
+     */
+    this.matrix = matrix
+    this.sumMatrix = matrix
+    for (var i = 0; i < this.sumMatrix.length; i++) {
+        for (var j = 0; j < this.sumMatrix[i].length; j++) {
+            if (j >= 1) {
+                if (i >= 1) {
+                    this.sumMatrix[i][j] = matrix[i][j] + this.sumMatrix[i - 1][j] + this.sumMatrix[i][j - 1]
+                        - this.sumMatrix[i - 1][j - 1]
+                } else {
+                    this.sumMatrix[i][j] += this.sumMatrix[i][j - 1]
+                }
+            } else {
+                if (i >= 1) {
+                    this.sumMatrix[i][j] += this.sumMatrix[i - 1][j]
+                }
+            }
+        }
+    }
+};
+
+/** 
+ * @param {number} row1 
+ * @param {number} col1 
+ * @param {number} row2 
+ * @param {number} col2
+ * @return {number}
+ */
+NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
+    if (row1 === 0) {
+        if (col1 === 0) {
+            return this.sumMatrix[row2][col2]
+        } else {
+            return this.sumMatrix[row2][col2] - this.sumMatrix[row2][col1 - 1]
+        }
+    } else {
+        if (col1 === 0) {
+            return this.sumMatrix[row2][col2] - this.sumMatrix[row1 - 1][col2]
+        } else {
+            return this.sumMatrix[row2][col2] - this.sumMatrix[row2][col1 - 1] 
+            - this.sumMatrix[row1 - 1][col2] + this.sumMatrix[row1 - 1][col1 - 1] 
+        }
+    }
+};
+```
+
+2. 官方题解 - [一维|二维]前缀和
+```javascript
+var NumMatrix = function(matrix) {
+    const m = matrix.length;
+    if (m > 0) {
+        const n = matrix[0].length;
+        this.sums = new Array(m).fill(0).map(() => new Array(n + 1).fill(0));
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                this.sums[i][j + 1] = this.sums[i][j] + matrix[i][j];
+            }
+        }
+    }
+};
+
+NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
+    let sum = 0;
+    for (let i = row1; i <= row2; i++) {
+        sum += this.sums[i][col2 + 1] - this.sums[i][col1];
+    }
+    return sum;
+};
+```
+
+#### 其他：
+考验对昨天知识点的理解
+
+### 2021.3.3
