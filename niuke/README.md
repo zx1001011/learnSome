@@ -4,13 +4,15 @@
 ## 日记表格
 
 ## 记录
-| 序号 | 时间 | 题目数量 | 知识点 | 通过率 | 题目内容 | 
-| ---- | ---- | --- | --- | --- | --- |
-| 1 | 2021.2.24 | 10 | js | 0.8 | js基础 | 
-| 2 | 2021.2.25 | 10 | js | 0.8 | js、css 基础 | 
-| 3 | 2021.3.1 | 10 | js | 0.7 | js、jquery 基础 |
-| 4 | 2021.3.2 | 10 | js | 0.7 | js、angular数据绑定基础 |
-|
+| 序号 | 时间 | 题目数量 | 知识点 | 通过率 | 题目内容 | 备注 | 
+| ---- | ---- | --- | --- | --- | --- | --- |
+| 1 | 2021.2.24 | 10 | js | 0.8 | js基础 |  |
+| 2 | 2021.2.25 | 10 | js | 0.8 | js、css 基础 |  |
+| 3 | 2021.3.1 | 10 | js | 0.7 | js、jquery 基础 |  |
+| 4 | 2021.3.2 | 10 | js | 0.7 | js、angular数据绑定基础 |  |
+| 5 | 2021.3.3 | 10 | js | 0.7 | js | 由于3.3号忘记了，4号补上 |
+| 6 | 2021.3.4 | 10 | js |   | js |  | 
+| 7 | 
 
 ## 内容
 
@@ -252,3 +254,91 @@ bind 除了返回是函数以外，它 的参数和 call 一样。
 
 
 
+### 2021.3.3 
+1. 鼠标触发事件
+[w3cschool](https://www.w3cschool.cn/xqw2e7/67yk19wx.html)
+onContextMenu: 当浏览者按下鼠标右键出现菜单时或者通过键盘的按键触发页面菜单时触发的事件 [试试在页面中的<body>中加入onContentMenu="return false"就可禁止使用鼠标右键了]
+- 常见的事件：
+    1. 点击事件：
+        1. onclick：单击事件
+        2. ondblclick：双击事件
+    2. 焦点事件
+        1. onblur：失去焦点
+        2. onfocus:元素获得焦点。
+    3. 加载事件：
+        1. onload：一张页面或一幅图像完成加载。
+    4. 鼠标事件：
+        1. onmousedown    鼠标按钮被按下。
+        2. onmouseup    鼠标按键被松开。
+        3. onmousemove    鼠标被移动。
+        4. onmouseover    鼠标移到某元素之上。
+        5. onmouseout    鼠标从某元素移开。
+    5. 键盘事件：
+        1. onkeydown    某个键盘按键被按下。    
+        2. onkeyup        某个键盘按键被松开。
+        3. onkeypress    某个键盘按键被按下并松开。
+    6. 选择和改变
+        1. onchange    域的内容被改变。
+        2. onselect    文本被选中。
+    7. 表单事件：
+        1. onsubmit    确认按钮被点击。
+        2. onreset    重置按钮被点击。
+
+2. 白屏时间(first paint) 和 可交互时间(dom ready)
+白屏时间（first Paint Time）——用户从打开页面开始到页面开始有东西呈现为止
+首屏时间——用户浏览器首屏内所有内容都呈现出来所花费的时间
+用户可操作时间(dom Interactive)——用户可以进行正常的点击、输入等操作，默认可以统计domready时间，因为通常会在这时候绑定事件操作
+总下载时间——页面所有资源都加载完成并呈现出来所花的时间，即页面 onload 的时间
+    **firstPaint：白屏时间，也就是开始解析DOM耗时，用户在没有滚动时候看到的内容渲染完成并且可以交互的时间。
+    domReadyTime：用户可操作时间。**
+
+3. js 中 数字在计算机中内存储： 8 Byte
+    1. Javascript中，由于其变量内容不同，变量被分为基本数据类型变量和引用数据类型变量。基本类型变量用八字节内存，存储基本数据类型(数值、布尔值、null和未定义)的值，引用类型变量则只保存对对象、数组和函数等引用类型的值的引用(即内存地址)。
+    JavaScript内部，所有数字都是以 64 位浮点数形式储存，即使整数也是如此。
+    64 bit = 8 Byte
+    2. JS中的数字是不分类型的，也就是没有byte/int/float/double等的差异。
+
+
+4. 块级元素与行内元素
+块级元素与行内元素有几个关键区别：
+格式默认情况下，块级元素会新起一行。内容模型一般块级元素可以包含行内元素和其他块级元素。这种结构上的包含继承区别可以使块级元素创建比行内元素更”大型“的结构。
+![行内元素](./img/3.png)
+![块级元素](./img/4.png)
+
+### 2021.3.4 
+1. '+'、'-'算法的不同
+```javascript
+/**
+ * a. 加法有字符串会自动转为 String 类型
+ * b. 减法会转为 Number 类型
+ * /
+var foo = "10" + 3 - "1";  // = "103" - "1"
+console.log(foo); // number 类型的 102
+```
+2. common.js 用到的四个变量
+浏览器不兼容CommonJS的根本原因，在于缺少四个Node.js环境的变量。```module exports require global```
+—— 来自阮一峰http://www.ruanyifeng.com/blog/2015/05/commonjs-in-browser.html 
+
+3. History 对象
+History 对象包含用户（在浏览器窗口中）访问过的 URL。
+History 对象是 window 对象的一部分，可通过 window.history 属性对其进行访问。
+注意： 没有应用于 History 对象的公开标准，不过所有浏览器都支持该对象。
+![History对象属性](./img/5.png)
+![History 对象方法](./img/6.png)
+
+4. Number 类型转为 String 类型 - toString
+```javascript
+/**
+ * 数字后面.会被解析为小数点
+ * 2.toString() 将会优先将小数点解析为数字小数点
+ * 2..toString() 因为连续的两个小数点不符合 number 的格式规则，第二个小数点才会被解析为调用方法
+ */
+2.toString()
+// VM3872:1 Uncaught SyntaxError: Invalid or unexpected token
+2..toString()
+// "2"
+2 .toString()
+// "2"
+(2).toString()
+// "2"
+```
