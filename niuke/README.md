@@ -342,3 +342,5 @@ History 对象是 window 对象的一部分，可通过 window.history 属性对
 (2).toString()
 // "2"
 ```
+
+### 2021.3.5

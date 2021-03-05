@@ -4,12 +4,14 @@
 ## 日记表格
 
 ## 记录
-| 序号 | 时间 | 题目 | 知识点 | 难度 | 自行是否做出 | 是否理解 | 有几种方法 | 
-| ---- | ---- | --- | --- | --- | --- | --- | --- |
-| 1 | 2021.2.26 | 1178. 猜字谜 | 位压缩 | 困难 | 超时TT | 暂未全部理解 | 2 |
-| 2 | 2021.3.1 | 303. 区域和检索 - 数组不可变 | 前缀和 | 简单 | 是 | 理解 | 3 |
-| 3 | 2021.3.3 | 304. 二维区域和检索 - 矩阵不可变 | 前缀和 | 中等 | 是 | 理解 | 2 |
-| 
+| 序号 | 时间 | 题目 | 知识点 | 难度 | 自行是否做出 | 是否理解 | 有几种方法 | 备注 |
+| ---- | ---- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2021.2.26 | 1178. 猜字谜 | 位压缩 | 困难 | 超时TT | 暂未全部理解 | 2 |  |
+| 2 | 2021.3.1 | 303. 区域和检索 - 数组不可变 | 前缀和 | 简单 | 是 | 理解 | 3 |  |
+| 3 | 2021.3.3 | 304. 二维区域和检索 - 矩阵不可变 | 前缀和 | 中等 | 是 | 理解 | 2 |  |
+| 4 | 2021.3.5 | 232. 用栈实现队列 | 模拟队列 | 简单 | 是 | x(直接用数组实现的##) |  |
+| 5 | 2021.3.5 | 338. 比特位计数 | 位运算 + 动态规划 | 中等 | 是 | 是 | 3 | 补偿 |
+| 6 | 2021.3.5 | 354. 俄罗斯套娃信封问题 | 二分查找 + 动态规划 | 困难 | 否 | 否 | 2 | 补卡 |
 
 ## 内容
 
@@ -435,4 +437,205 @@ NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
 #### 其他：
 考验对昨天知识点的理解
 
-### 2021.3.3
+### 2021.3.5
+- 栈实现队列 : 简单
+
+- 比特为计数
+    #### 题目描述：
+    [描述](https://leetcode-cn.com/problems/counting-bits/)
+
+    #### 题目理解：
+    ```javascript
+    /**
+    * 需要看每个数的二进制值组成,然后计算
+    * 位运算：
+    * 1. & 同1为1
+    * 2. | 同0为0
+    * 3. ~ 取反
+    * 4. ^(异或) 同为0，异为1
+    */
+    ```
+
+    #### 解决办法：
+    1. 直接计算
+    ```javascript
+    /**
+    * @param {number} num
+    * @return {number[]}
+    */
+    var countBits = function(num) {
+        /**
+        * 需要看每个数的二进制值组成,然后计算
+        * 位运算：
+        * 1. & 同1为1
+        * 2. | 同0为0
+        * 3. ~ 取反
+        * 4. ^(异或) 同为0，异为1
+        */
+        var res = []
+        for (var i = 0; i <= num; i++){
+            var tnum = i
+            var c = 0
+            // while(tnum > 0) { 
+            while((tnum | 0) !== 0) { 
+                c += tnum & 1
+                tnum = tnum >> 1
+            }
+            res.push(c)
+        }
+        return res
+    };
+    ```
+
+    2. 官方题解 -> 动态规划
+    ```javascript 
+    // 最高有效位
+    /**
+    * i & (i - 1)可以去掉i最右边的一个1（如果有），因此 i & (i - 1）是比 i 小的，
+    * 而且i & (i - 1)的1的个数已经在前面算过了，所以i的1的个数就是 i & (i - 1)的1的个数加上1
+    **/
+    var countBits = function(num) {
+        const bits = new Array(num + 1).fill(0);
+        let highBit = 0;
+        for (let i = 1; i <= num; i++) {
+            if ((i & (i - 1)) == 0) {
+                highBit = i;
+            }
+            bits[i] = bits[i - highBit] + 1;
+        }
+        return bits;
+    };
+
+    // 最低有效位
+    /**
+    * i >> 1会把最低位去掉，因此i >> 1 也是比i小的，同样也是在前面的数组里算过。
+    * 当 i 的最低位是0，则 i 中1的个数和i >> 1中1的个数相同；当i的最低位是1，
+    * i 中1的个数是 i >> 1中1的个数再加1
+    **/
+    var countBits = function(num) {
+        const bits = new Array(num + 1).fill(0);
+        for (let i = 1; i <= num; i++) {
+            bits[i] = bits[i >> 1] + (i & 1);
+        }
+        return bits;
+    };
+    ```
+
+    #### 其他：
+    1. 理解前面算过的与后面的联系
+
+- 俄罗斯套娃信封问题
+    #### 题目描述：
+    [描述](https://leetcode-cn.com/problems/russian-doll-envelopes/)
+
+    #### 题目理解：
+    ```javascript
+     /**
+     * 先按照 x，y 排序？
+     */
+    var res = 1
+    envelopes.sort(function (o1, o2) {
+        if (o1[0] === o2[0]) {
+            return o1[1] - o2[1]
+        } else {
+            return o1[0] - o2[0]
+        }
+    })
+    /**
+     * 然后动态规划？不会
+     * 从大的开始，尽量选接近的套 - > 怎么判断尽量接近呢 ？ 
+     * 答案是错的！！！
+     * 因为不是最佳路径
+     */
+    for (var j = envelopes.length - 1; j > 0; j--) {
+        var sum = 1
+        var cur = j
+        for (var i = cur - 1; i >= 0; i--) {
+            if (envelopes[cur][0] > envelopes[i][0] && envelopes[cur][1] > envelopes[i][1]) {
+                sum += 1
+                cur = i
+            }
+        }
+        if (sum > res) {
+            res = sum
+        }
+        console.log(j)
+        console.log(res)
+    }
+    return res
+    ```
+
+    #### 解决办法：
+    1. 官方题解 -> 动态规划
+    ```javascript 
+    // 直接动态规划
+    var maxEnvelopes = function(envelopes) {
+        if (envelopes.length === 0) {
+            return 0;
+        }
+        
+        const n = envelopes.length;
+        envelopes.sort((e1, e2) => {
+            if (e1[0] !== e2[0]) {
+                return e1[0] - e2[0];
+            } else {
+                return e2[1] - e1[1];
+            }
+        })
+
+        const f = new Array(n).fill(1);
+        let ans = 1;
+        for (let i = 1; i < n; ++i) {
+            for (let j = 0; j < i; ++j) {
+                if (envelopes[j][1] < envelopes[i][1]) {
+                    f[i] = Math.max(f[i], f[j] + 1);
+                }
+            }
+            ans = Math.max(ans, f[i]);
+        }
+        return ans;
+    };
+    // 二分查找 + 动态规划
+    var maxEnvelopes = function(envelopes) {
+        if (envelopes.length === 0) {
+            return 0;
+        }
+        
+        const n = envelopes.length;
+        envelopes.sort((e1, e2) => {
+            if (e1[0] - e2[0]) {
+                return e1[0] - e2[0];
+            } else {
+                return e2[1] - e1[1];
+            }
+        })
+
+        const f = [envelopes[0][1]];
+        for (let i = 1; i < n; ++i) {
+            const num = envelopes[i][1];
+            if (num > f[f.length - 1]) {
+                f.push(num);
+            } else {
+                const index = binarySearch(f, num);
+                f[index] = num;
+            }
+        }
+        return f.length;
+    }
+
+    const binarySearch = (f, target) => {
+        let low = 0, high = f.length - 1;
+        while (low < high) {
+            const mid = Math.floor((high - low) / 2) + low;
+            if (f[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    };
+    ```
+
+    #### 其他：
+    1. 知道是动态规划，完全遍历的问题，但是不知道怎么敲代码
