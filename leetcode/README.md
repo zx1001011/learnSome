@@ -12,7 +12,7 @@
 | 4 | 2021.3.5 | 232. 用栈实现队列 | 模拟队列 | 简单 | 是 | x(直接用数组实现的##) |  |
 | 5 | 2021.3.5 | 338. 比特位计数 | 位运算 + 动态规划 | 中等 | 是 | 是 | 3 | 补偿 |
 | 6 | 2021.3.5 | 354. 俄罗斯套娃信封问题 | 二分查找 + 动态规划 | 困难 | 否 | 否 | 2 | 补卡 |
-
+| 7 | 2021.3.8 | 132. 分割回文串II | 滑动窗口 + 动态规划 | 困难 | 否 | 否 | 2 |  |
 ## 内容
 
 ### 2021.2.26 
@@ -639,3 +639,59 @@ NumMatrix.prototype.sumRegion = function(row1, col1, row2, col2) {
 
     #### 其他：
     1. 知道是动态规划，完全遍历的问题，但是不知道怎么敲代码
+
+### 2021.3.8 妇女节（*.*)
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)
+
+#### 题目理解：
+```
+/**
+* 动态规划 ？
+* 滑动窗口 ？
+* 毫无头绪 TT
+* 对上周知识点的考察 ？？
+*/
+```
+
+#### 解决办法：
+1. 官方题解 - 动态规划
+```javascript
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var minCut = function(s) {
+    const n = s.length;
+    const g = new Array(n).fill(0).map(() => new Array(n).fill(true));
+
+    for (let i = n - 1; i >= 0; --i) {
+        for (let j = i + 1; j < n; ++j) {
+            g[i][j] = s[i] == s[j] && g[i + 1][j - 1];
+        }
+    }
+
+    const f = new Array(n).fill(Number.MAX_SAFE_INTEGER);
+    for (let i = 0; i < n; ++i) {
+        if (g[0][i]) {
+            f[i] = 0;
+        } else {
+            for (let j = 0; j < i; ++j) {
+                if (g[j + 1][i]) {
+                    f[i] = Math.min(f[i], f[j] + 1);
+                }
+            }
+        }
+    }
+
+    return f[n - 1];
+};
+```
+
+#### 其他：
+1. 毫无头绪，一拿到动态规划(所有情况遍历)就卡壳了
+2. 脑子一片浆糊，先cv一下
+
+
+### 2021.3.9
+
