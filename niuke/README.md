@@ -11,8 +11,8 @@
 | 3 | 2021.3.1 | 10 | js | 0.7 | js、jquery 基础 |  |
 | 4 | 2021.3.2 | 10 | js | 0.7 | js、angular数据绑定基础 |  |
 | 5 | 2021.3.3 | 10 | js | 0.7 | js | 由于3.3号忘记了，4号补上 |
-| 6 | 2021.3.4 | 10 | js |   | js |  | 
-| 7 | 
+| 6 | 2021.3.4 | 10 | js | x  | js | x | 
+| 7 | 2021.3.8 | 10 | js | 0.8 | js | js基础 |
 
 ## 内容
 
@@ -343,4 +343,36 @@ History 对象是 window 对象的一部分，可通过 window.history 属性对
 // "2"
 ```
 
-### 2021.3.5
+### 2021.3.8
+1. js 改变作用域的方法 : try catch, with, eval
+while 的话只是在函数局部环境或者全局环境运行，并不会改变作用域链。 
+js 有两种作用域：全局和局部
+在最外层定义的变量拥有全局作用域，对任何内部函数来说，都是可以访问的；而局部作用域则只有内部函数定义的变量才拥有；在函数内部定义变量时，要使用 var ，否则定义的变量时全局变量
+js 是没有块级作用域的，因此 for 循环中的i在执行完循环后，还可以被同作用域的代码获取。js 的作用域都是相对于函数而言，是函数作用域。
+js 的作用域链：
+每个函数执行都会生成一个执行环境，全局执行环境是最外围的执行环境且被认为是 window 对象，因此所有全局变量和函数都会作为 window 对象的属性和方法而被创建；当一个函数被调用时，该函数环境的变量对象就会被压入一个环境栈中。而在函数执行之后，栈将该函数的变量对象弹出，把控制权交给之前的执行环境变量对象
+js 如何来延长作用域链：
+有三种语句可以加强作用域链：try catch；with；eval
+try catch 中的 catch 和 with 语句都会在作用域链的前端添加一个变量对象。对 with 语句来说，将指定的对象添加到作用域链中，对 catch 语句来说，会创建一个新的变量对象，其中包含的是被抛出的错误对象的声明，而eval由于可以被赋值给变量，在被赋值的时候会将 eval 所处的变量作用域也赋值过去，所以可以使得作用域获得扩展。
+    ```javascript
+    var x=1,evalg=eval;
+    function a(){
+    　　var x=3;
+    　　eval("alert(x)");//3
+    　　evalg("alert(x)");//1
+    }
+    ```
+
+2. 一些函数的使用
+    - [for in](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in)   
+        以任意顺序遍历一个对象的除Symbol以外的可枚举属性。   
+        是为遍历对象属性而构建的，    
+    - [object.defineProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)    
+        该方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。  
+        *vue 就是使用这一属性来实现数据的双向绑定的。*   
+    - prototype 属性 : 使您有能力向对象添加属性和方法
+        [百度百科](https://baike.baidu.com/item/prototype/14335187?fr=aladdin)
+    - hasOwnProperty : 判断对象是否包含特定的自身（非继承）属性。
+        [任意搜的](https://www.cnblogs.com/weiqinl/p/8683207.html)
+    - [原型链](https://blog.csdn.net/xiaoermingn/article/details/80745117)
+
