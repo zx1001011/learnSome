@@ -13,6 +13,7 @@
 | 5 | 2021.3.5 | 338. 比特位计数 | 位运算 + 动态规划 | 中等 | 是 | 是 | 3 | 补偿 |
 | 6 | 2021.3.5 | 354. 俄罗斯套娃信封问题 | 二分查找 + 动态规划 | 困难 | 否 | 否 | 2 | 补卡 |
 | 7 | 2021.3.8 | 132. 分割回文串II | 滑动窗口 + 动态规划 | 困难 | 否 | 否 | 2 |  |
+| 8 | 2021.3.9 | 1047. 删除字符串中的所有相邻重复项 | 简单数据结构 - 栈/队列 | 简单 | 是 | 是 | 5 | 主要是用栈、队列 |
 ## 内容
 
 ### 2021.2.26 
@@ -694,4 +695,56 @@ var minCut = function(s) {
 
 
 ### 2021.3.9
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
+
+#### 题目理解：
+```
+/**
+* 递归删除
+*/
+```
+
+#### 解决办法：
+1. 直接递归
+    ```javascript
+    /**
+    * @param {string} S
+    * @return {string}
+    */
+    var removeDuplicates = function(S) {
+        let res = S.split('')
+        let flag = true
+        for (let i = 0; i < res.length - 1; i++) {
+            if (res[i] === res[i + 1]) {
+                flag = false
+                res.splice(i + 1, 1)
+                res.splice(i, 1)
+            }
+        }
+        if (!flag) return removeDuplicates(res.join(''))
+        return res.join('')
+    };
+    ```
+
+2. 官方题解 - 栈
+    ```javascript
+    var removeDuplicates = function(S) {
+        const stk = [];
+        for (const ch of S) {
+            if (stk.length && stk[stk.length - 1] === ch) {
+                stk.pop();
+            } else {
+                stk.push(ch);
+            }
+        }
+        return stk.join('');
+    };
+    ```
+
+3. 其他解法[->](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/solution/cong-30-dao-100wu-chong-shi-xian-jie-jue-vkah/)
+
+#### 其他：
+1. 可以稍微动下脑子，用用数据结构知识。
+
 
