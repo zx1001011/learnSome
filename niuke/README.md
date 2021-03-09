@@ -376,3 +376,38 @@ try catch 中的 catch 和 with 语句都会在作用域链的前端添加一个
         [任意搜的](https://www.cnblogs.com/weiqinl/p/8683207.html)
     - [原型链](https://blog.csdn.net/xiaoermingn/article/details/80745117)
 
+### 2021.3.9
+1. js 中 number 存在精度问题
+```javascript
+/**
+parseFloat() 函数可解析一个字符串，并返回一个浮点数。
+
+该函数指定字符串中的首个字符是否是数字。如果是，则对字符串进行解析，直到到达数字的末端为止，然后以数字返回该数字，而不是作为字符串。
+*/
+parseFloat(0.2 + 0.4) // 0.6000000000000001
+/**
+toFixed() 方法可把 Number 四舍五入为指定小数位数的数字
+num 必需。规定小数的位数，是 0 ~ 20 之间的值，包括 0 和 20，有些实现可以支持更大的数值范围。如果省略了该参数，将用 0 代替。
+*/
+parseFloat((0.2 + 0.4).toFixed(1)) // 0.6  
+Math.round(0.2 + 0.4) // 1
+/**
+toPrecision() 方法可在对象的值超出指定位数时将其转换为指数计数法。
+*/
+parseFloat((0.2 + 0.6).toPrecision(1)) // 0.8
+```
+![](./img/7.png)
+
+2. RegExp对象  
+JavaScript RegExp 对象有 3 个方法：test()、exec() 和 compile()。
+(1) test() 方法用来检测一个字符串是否匹配某个正则表达式，如果匹配成功，返回 true ，否则返回 false；
+(2) exec() 方法用来检索字符串中与正则表达式匹配的值。exec() 方法返回一个数组，其中存放匹配的结果。如果未找到匹配的值，则返回 null；
+(3) compile() 方法可以在脚本执行过程中编译正则表达式，也可以改变已有表达式。
+
+*match 是支持正则表达式的 String 对象的方法*
+
+3. es6 语法
+    - [Symbol](https://es6.ruanyifeng.com/#docs/symbol)
+    - [Object.assign](https://www.jianshu.com/p/f9ec860ecd81)
+    - [Generator](https://es6.ruanyifeng.com/#docs/generator)
+
