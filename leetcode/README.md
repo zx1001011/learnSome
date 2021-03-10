@@ -14,6 +14,7 @@
 | 6 | 2021.3.5 | 354. 俄罗斯套娃信封问题 | 二分查找 + 动态规划 | 困难 | 否 | 否 | 2 | 补卡 |
 | 7 | 2021.3.8 | 132. 分割回文串II | 滑动窗口 + 动态规划 | 困难 | 否 | 否 | 2 |  |
 | 8 | 2021.3.9 | 1047. 删除字符串中的所有相邻重复项 | 简单数据结构 - 栈/队列 | 简单 | 是 | 是 | 5 | 主要是用栈、队列 |
+| 9 | 2021.3.10 | 224. 基本计算器 | 括号展开 + 栈 | 困难 | 否 | 否 | 1 |  主要是利用 栈 |
 ## 内容
 
 ### 2021.2.26 
@@ -747,4 +748,53 @@ var minCut = function(s) {
 #### 其他：
 1. 可以稍微动下脑子，用用数据结构知识。
 
+### 2021.3.10
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/basic-calculator/)
 
+#### 题目理解：
+```
+/**
+* 栈 ？  但是不会写
+*/
+```
+
+#### 解决办法：
+1. 官方题解 - [括号展开 + 栈]
+    ```javascript
+    var caculate = function (s) {
+        const ops = [1];
+        let sign = 1;
+
+        let ret = 0;
+        const n = s.length;
+        let i = 0;
+        while (i < n) {
+            if (s[i] === ' ') {
+                i++;
+            } else if (s[i] === '+') {
+                sign = ops[ops.length - 1];
+                i++;
+            } else if (s[i] === '-') {
+                sign = -ops[ops.length - 1];
+                i++;
+            } else if (s[i] === '(') {
+                ops.push(sign);
+                i++;
+            } else if (s[i] === ')') {
+                ops.pop();
+                i++;
+            } else {
+                let num = 0;
+                while (i < n && !(isNaN(Number(s[i]))) && s[i] !== ' ') {
+                    num = num * 10 + s[i].charCodeAt() - '0'.charCodeAt();
+                    i++;
+                }
+                ret += sign * num;
+            }
+        }
+        return ret;
+    }
+    ```
+#### 其他：
+1. 栈 实现
