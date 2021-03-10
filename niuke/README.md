@@ -13,7 +13,7 @@
 | 5 | 2021.3.3 | 10 | js | 0.7 | js | 由于3.3号忘记了，4号补上 |
 | 6 | 2021.3.4 | 10 | js | x  | js | x | 
 | 7 | 2021.3.8 | 10 | js | 0.8 | js | js基础 |
-
+| 8 | 2021.3.10 | 10 | js | 0.5 | RegExp、promise、... | 必备 | 
 ## 内容
 
 ### 2021.2.24 
@@ -307,14 +307,15 @@ onContextMenu: 当浏览者按下鼠标右键出现菜单时或者通过键盘�
 
 ### 2021.3.4 
 1. '+'、'-'算法的不同
-```javascript
-/**
- * a. 加法有字符串会自动转为 String 类型
- * b. 减法会转为 Number 类型
- * /
-var foo = "10" + 3 - "1";  // = "103" - "1"
-console.log(foo); // number 类型的 102
-```
+    ```javascript
+    /**
+     * a. 加法有字符串会自动转为 String 类型
+     * b. 减法会转为 Number 类型
+     * /
+    var foo = "10" + 3 - "1";  // = "103" - "1"
+    console.log(foo); // number 类型的 102
+    ```
+
 2. common.js 用到的四个变量
 浏览器不兼容CommonJS的根本原因，在于缺少四个Node.js环境的变量。```module exports require global```
 —— 来自阮一峰http://www.ruanyifeng.com/blog/2015/05/commonjs-in-browser.html 
@@ -327,21 +328,21 @@ History 对象是 window 对象的一部分，可通过 window.history 属性对
 ![History 对象方法](./img/6.png)
 
 4. Number 类型转为 String 类型 - toString
-```javascript
-/**
- * 数字后面.会被解析为小数点
- * 2.toString() 将会优先将小数点解析为数字小数点
- * 2..toString() 因为连续的两个小数点不符合 number 的格式规则，第二个小数点才会被解析为调用方法
- */
-2.toString()
-// VM3872:1 Uncaught SyntaxError: Invalid or unexpected token
-2..toString()
-// "2"
-2 .toString()
-// "2"
-(2).toString()
-// "2"
-```
+    ```javascript
+    /**
+     * 数字后面.会被解析为小数点
+     * 2.toString() 将会优先将小数点解析为数字小数点
+     * 2..toString() 因为连续的两个小数点不符合 number 的格式规则，第二个小数点才会被解析为调用方法
+     */
+    2.toString()
+    // VM3872:1 Uncaught SyntaxError: Invalid or unexpected token
+    2..toString()
+    // "2"
+    2 .toString()
+    // "2"
+    (2).toString()
+    // "2"
+    ```
 
 ### 2021.3.8
 1. js 改变作用域的方法 : try catch, with, eval
@@ -410,4 +411,49 @@ JavaScript RegExp 对象有 3 个方法：test()、exec() 和 compile()。
     - [Symbol](https://es6.ruanyifeng.com/#docs/symbol)
     - [Object.assign](https://www.jianshu.com/p/f9ec860ecd81)
     - [Generator](https://es6.ruanyifeng.com/#docs/generator)
+
+### 2021.3.10
+1. RegExp 类型的 exec()   
+exec() 方法用于检索字符串中的正则表达式的匹配。
+返回值 : 返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。
+所以 "e".exec("hello") 中,"e" 是正则表达式，"hello" 是检索的字符串。在 "hello" 字符串中，能够匹配到 "e"。因此 document.write("e"); 最后结果为e。
+说明 : exec() 方法的功能非常强大，它是一个通用的方法，而且使用起来也比 test() 方法以及支持正则表达式的 String 对象的方法更为复杂。
+如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。此数组的第 0 个元素是与正则表达式相匹配的文本，第 1 个元素是与 RegExpObject 的第 1 个子表达式相匹配的文本（如果有的话），第 2 个元素是与 RegExpObject 的第 2 个子表达式相匹配的文本（如果有的话），以此类推。除了数组元素和 length 属性之外，exec() 方法还返回两个属性。index 属性声明的是匹配文本的第一个字符的位置。input 属性则存放的是被检索的字符串 string。我们可以看得出，在调用非全局的 RegExp 对象的 exec() 方法时，返回的数组与调用方法 String.match() 返回的数组是相同的。
+但是，当 RegExpObject 是一个全局正则表达式时，exec() 的行为就稍微复杂一些。它会在 RegExpObject 的 lastIndex 属性指定的字符处开始检索字符串 string。当 exec() 找到了与表达式相匹配的文本时，在匹配后，它将把 RegExpObject 的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置。这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。  
+
+2. Promis.all   
+iterable是一个全部为promise对象的数组，只要数组中有一个promise实例被reject，那么最终的promise触发catch，只有数组中全部promise实例都resolve才会触发then，并且要带上iterable中全部promise，其中promise实例将会被结果代替。
+
+3. ```var a = b = 3;```    
+    ```javascript
+    var a,b;
+    (function(){
+        alert(a); // 这是第一个输出的,先在局部没找到a变量，然后去全局找，找到了但没定义，输出undefined
+        alert(b); // 这是第二个输出的，其他同上
+        var a = b = 3; // 定义一个局部变量 a = 3, 然后给全局变量b赋值 b = 3;
+        alert(a); // 这是第三个输出，局部变量 a = 3
+        alert(b); // 这是第四个输出，全局变量 b = 3
+    })(); // 这个函数体已经执行完毕，里面的内存已经被垃圾回收器回收，局部变量a销毁
+    alert(a); // 这是第五个输出，全局变量 a = undefined
+    alert(b); // 这是第六个输出，全局变量 b = 3
+    // 输出为：undefined，undefined，3,3，undefined，3
+    ```
+
+4. 在大数据量场景下，以下哪种js中字符串连接方式较为高效?  
+比较 "+" 和 Array.join 比较： 
+    ```shell
+    #在旧浏览器 (ie7-) 下用 join 会更高效。
+    #在现代浏览器，尽量用 "+", 更高效。
+    #当然，在少数现代浏览器里 "+" 不一定会比 join 快（如，safari 5.0.5，opera 11.10)
+    #本身是字符串数组的，直接 join 会更好。
+    #在 "+" 与 concat 之间，当然是优选使用 "+"，方便又直观又高效。
+    # "+" 的处理机制是：新建一个临时字符串，将新字符串赋值为 a + b，然后返回这个临新字符串并同时销毁原始字符串，所以字符串连接效率较低。所以用 Array.join() 不会新建临时字符串效率更高。
+    ```
+
+5. 哪些事件可以 bubbling ? 可以触发冒泡事件的有哪些？    
+    https://www.cnblogs.com/rubylouvre/p/5080464.html
+    ![](./img/8.png)
+
+### 2021.3.11
+
 
