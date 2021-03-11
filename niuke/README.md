@@ -14,6 +14,7 @@
 | 6 | 2021.3.4 | 10 | js | x  | js | x | 
 | 7 | 2021.3.8 | 10 | js | 0.8 | js | js基础 |
 | 8 | 2021.3.10 | 10 | js | 0.5 | RegExp、promise、... | 必备 | 
+| 9 | 2021.3.11 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 ## 内容
 
 ### 2021.2.24 
@@ -455,5 +456,64 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
     ![](./img/8.png)
 
 ### 2021.3.11
+1. html 中标签 层级显示优先级 ： 帧元素(frameset) > 表单元素 > 非表单元素   
+    在html中，帧元素（frameset）的优先级最高，表单元素比非表单元素的优先级要高。   
+    表单元素包括：文本输入框，密码输入框，单选框，复选框，文本输入域，列表框等等；    
+    非表单元素包括：连接（a），div,table,span等。    
+    所有的html元素又可以根据其显示分成两类：有窗口元素以及无窗口元素。有窗口元素总是显示在无窗口元素的前面。      
+    有窗口元素包括：select元素，object元素，以及frames元素等等。     
+    无窗口元素：大部分html元素都是无窗口元素。    
 
+2. html5的媒体标签 ```<embed>``` 和 ```<track>```   
+    embed，h5新增标签，可以在页面嵌入任何类型的文档。   
+    <track> 标签为诸如 video 元素之类的媒介规定外部文本轨道。   
+    用于规定字幕文件或其他包含文本的文件，当媒介播放时，这些文件是可见的。   
+    <track> 标签是 HTML 5 中的新标签。    
+    目前所有主流浏览器都不支持 <track> 标签    
 
+3. link 与 @import   
+    - link 属于 HTML 范畴 —— 除了加载 CSS，还能支持其他事务，且在 HTML 页面加载的同时加载，
+      link 是 XHTML 标签，无兼容问题，
+      link 可以使用 JavaScript 控制 DOM 改变样式，
+      link 引用 css 时，页面加载同时加载样式
+    - @import 属于 CSS 范畴 —— 只能加载 CSS，
+      @import 不支持 JavaScript 控制 DOM 改变样式，
+      @import 需要页面完成载入以后加载
+    *性能优化中，@import 尽量不要用 *
+
+4. HTML5 删除的标签
+    ```<acronym>```：被标记的首字母缩略词
+    ```<applet>```：一个嵌入的 Java applet；即能够解析 java 的 class 文件的一个东东
+    ```<basefont>```：该标签可以为文档中的所有文本定义默认字体颜色、字体大小和字体系列。参考：https://www.w3school.com.cn/tags/tag_basefont.asp
+    ```<big>```：让文本比常规的字体大一号
+    ```<center>```：水平居中
+    ```<dir>```：文本方向为从右向左的段落：<bdo dir="rtl">文本方向从右到左!</bdo>
+    ```<font>```：规定文本的尺寸、字体和颜色
+    ```<frame>```：```<frameset>```元素被用来组织一个或者多个 ```<frame>``` 元素
+    ```<frameset>```：HTML5 不支持 ```<frameset>``` 标签
+    ```<noframes>```：noframes 元素可为那些不支持框架的浏览器显示文本。noframes 元素位于 ```<frameset>``` 元素内部。参考：https://www.w3school.com.cn/tags/tag_noframes.asp
+    ```<strike>```：```<strike>``` 标签可定义加删除线文本定义。参考：https://www.w3school.com.cn/tags/tag_strike.asp
+    ```<tt>```：```<tt>``` 标签呈现类似打字机或者等宽的文本效果。参考：https://www.w3school.com.cn/tags/tag_tt.asp
+
+    *废除了能用css代替的元素：basefont、big、center、font、s、strike、tt、u, <small> 没有废除*
+
+5. HTML文档中的图像格式支持：jpg, gif, png 和 bmp   
+    jpg ， gif   和   png 格式的图片特点是体积很小，因为在网上很常见，然而 bmp就不常见了，因为这种格式虽然很清晰色彩丰富，但是所占内存很大，所以很少见，但是也是支持的。TIF 不支持。
+    - GIF 意为 Graphics Interchange format（图形交换格式）;
+    - JPEG 代表Joint Photograhic Experts Group（联合图像专家组），这种格式经常写成JPG，JPG图片的扩展名为jpg; 
+    - 流式网络图形格式(Portable Network Graphic Format，PNG)名称来源于非官方的“PNG's Not GIF”，是一种位图文件(bitmap file)存储格式，读成“ping”。PNG用来存储灰度图像时，灰度图像的深度可多到16位，存储彩色图像时，彩色图像的深度可多到48位，并且还可存储多到16位的α通道数据。
+    - BMP是英文Bitmap（位图）的简写，它是Windows操作系统中的标准图像文件格式，能够被多种Windows应用程序所支持。随着Windows操作系统的流行与丰富的Windows应用程序的开发，BMP位图格式理所当然地被广泛应用。这种格式的特点是包含的图像信息较丰富，几乎不进行压缩，但由此导致了它与生俱来的缺点--占用磁盘空间过大。所以，目前BMP在单机上比较流行。
+    - 标签图像文件格式 （ Tagged Image File Format ，简写为 TIFF ）是一种灵活的 位图 格式，主要用来存储包括照片和艺术图在内的图像。 TIFF文件格式适用于在应用程序之间和计算机平台之间的交换文件，它的出现使得图像数据交换变得简单。 TIFF文件以 .tif 为扩展名。其数据格式是一种3级体系结构，从高到低依次为：文件头、一个或多个称为IFD的包含标记指针的目录和数据。 
+
+6. 浏览器渲染流程   
+    1. 解析HTML并构建DOM树
+    2. 构建render树
+    3. 布局render树
+    4. 绘制render树
+    [看这详细1->](https://blog.csdn.net/sunyuan_software/article/details/50618891)
+    [看这详细点2->](https://www.cnblogs.com/slly/p/6640761.html)
+    [看这2->](https://zhuanlan.zhihu.com/p/121807893)
+    ![主流程](./img/9.png)
+    ![webit的主要渲染流程](./img/10.png)
+    ![Geoko的主要渲染流程](./img/11.jpg)
+### 2021.3.12
