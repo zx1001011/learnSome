@@ -15,6 +15,7 @@
 | 7 | 2021.3.8 | 132. 分割回文串II | 滑动窗口 + 动态规划 | 困难 | 否 | 否 | 2 |  |
 | 8 | 2021.3.9 | 1047. 删除字符串中的所有相邻重复项 | 简单数据结构 - 栈/队列 | 简单 | 是 | 是 | 5 | 主要是用栈、队列 |
 | 9 | 2021.3.10 | 224. 基本计算器 | 括号展开 + 栈 | 困难 | 否 | 否 | 1 |  主要是利用 栈 |
+| 10 | 2021.3.11 | 227. 基本计算器 II | 栈 | 中等 | 是 | 还行 | 1 | 复习昨天 |
 ## 内容
 
 ### 2021.2.26 
@@ -763,38 +764,172 @@ var minCut = function(s) {
 1. 官方题解 - [括号展开 + 栈]
     ```javascript
     var caculate = function (s) {
-        const ops = [1];
-        let sign = 1;
+        // console.info(s)
+        const ops = [1];  // 操作栈，标识是否有操作
+        let sign = 1;  // 为当前 计算的值
 
         let ret = 0;
         const n = s.length;
         let i = 0;
+
+        // console.info(n)
+
         while (i < n) {
+            // console.info('i = ', i)
+            // console.info('s[i] = ', s[i])
+            // console.info('sign = ', sign)
+            // console.info('ops = ', ops)
             if (s[i] === ' ') {
+                // console.info('skip ...')
                 i++;
             } else if (s[i] === '+') {
-                sign = ops[ops.length - 1];
+                // console.info('拿到新 ...')
+                sign = ops[ops.length - 1]; // 拿到最新信息
                 i++;
             } else if (s[i] === '-') {
-                sign = -ops[ops.length - 1];
+                // console.info('拿到新 ...')
+                sign = -ops[ops.length - 1]; // 拿到最新信息
                 i++;
             } else if (s[i] === '(') {
-                ops.push(sign);
+                // console.info('入栈...')
+                ops.push(sign); // 入栈
                 i++;
             } else if (s[i] === ')') {
-                ops.pop();
+                // console.info('出栈...')
+                ops.pop(); // 出栈
                 i++;
             } else {
+                // 是数字就计算...
+                // console.info('计算...')
                 let num = 0;
                 while (i < n && !(isNaN(Number(s[i]))) && s[i] !== ' ') {
                     num = num * 10 + s[i].charCodeAt() - '0'.charCodeAt();
+                    // console.info('s[i]: ', s[i])
+                    // console.info('num: ', num)
                     i++;
                 }
+                // console.info('sign: ', sign)
+                // console.info('num: ', num)
+                // console.info('ret: ', ret)
                 ret += sign * num;
+                // console.info('得到：', ret)
             }
         }
         return ret;
     }
+
+    // var result = caculate(" (2 + (2 - 1)) - 10")
+    // console.log("result = ", result)
     ```
 #### 其他：
 1. 栈 实现
+
+### 2021.3.11
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/basic-calculator-ii/)
+
+#### 题目理解：
+```
+/**
+* 栈 
+*/
+```
+
+#### 解决办法：
+1. 官方题解 - [栈]
+    ```javascript
+    var calculate = function(s) {
+        s = s.trim();
+        const stack = new Array();
+        let preSign = '+';
+        let num = 0;
+        const n = s.length;
+        for (let i = 0; i < n; ++i) {
+            if (!isNaN(Number(s[i])) && s[i] !== ' ') {
+                num = num * 10 + s[i].charCodeAt() - '0'.charCodeAt();
+            }
+            if (isNaN(Number(s[i])) || i === n - 1) {
+                switch (preSign) {
+                    case '+':
+                        stack.push(num);
+                        break;
+                    case '-':
+                        stack.push(-num);
+                        break;
+                    case '*':
+                        stack.push(stack.pop() * num);
+                        break;
+                    default:
+                        stack.push(stack.pop() / num | 0);
+                }   
+                preSign = s[i];
+                num = 0;
+            }
+        }
+        let ans = 0;
+        while (stack.length) {
+            ans += stack.pop();
+        }
+        return ans;
+    }
+    ```
+
+2. 自己的解法
+    ```javascript
+    /**
+    * @param {string} s
+    * @return {number}
+    **/
+    var calculate = function(s) {
+        /**
+        * 先乘除后加减
+        * + - 的数先压入栈中
+        * x / 与栈顶元素进行计算
+        */
+        let arr = []
+        let res = 0
+        let curOpt = 1 // 1:+,2:-,3:*,4:/
+        for (let i = 0; i < s.length; i++) {
+            switch(s[i]) {
+                case ' ': break
+                case '+':
+                    curOpt = 1
+                    break
+                case '-':
+                    curOpt = 2
+                    break
+                case '*':
+                    curOpt = 3
+                    break
+                case '/':
+                    curOpt = 4
+                    break
+                default:
+                    let num = 0
+                    while(i < s.length && !(isNaN(Number(s[i]))) && s[i] !== ' ') {
+                        num = num * 10 + s[i].charCodeAt() - '0'.charCodeAt()
+                        i++
+                    }
+                    i -= 1
+                    if (curOpt === 2) {
+                        arr.push(-num)    
+                    } else if (curOpt === 3) {
+                        arr[arr.length - 1] = arr[arr.length - 1] * num
+                    } else if (curOpt === 4) {
+                        arr[arr.length - 1] = parseInt(arr[arr.length - 1] / num)
+                    } else {
+                        arr.push(num)
+                    }
+                    break
+            }
+        }
+        for (let i = 0; i < arr.length; i++) {
+            res += arr[i]
+        }
+        return res
+    };
+    ```
+
+#### 其他：
+1. 搞懂了昨天的就知道今天的怎么搞了
+
