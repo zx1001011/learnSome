@@ -15,6 +15,7 @@
 | 7 | 2021.3.8 | 10 | js | 0.8 | js | js基础 |
 | 8 | 2021.3.10 | 10 | js | 0.5 | RegExp、promise、... | 必备 | 
 | 9 | 2021.3.11 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
+| 10 | 2021.3.12 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 ## 内容
 
 ### 2021.2.24 
@@ -517,3 +518,20 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
     ![webit的主要渲染流程](./img/10.png)
     ![Geoko的主要渲染流程](./img/11.jpg)
 ### 2021.3.12
+1. text-     
+    ```css
+    <!-- 是首字母大写 -->
+    text-transform: capitalize; 
+    <!-- 是全部字母为小写 -->
+    text-transfrom: lowercase; 
+    <!-- 是全部字母为大写 -->
+    text-transfrom: uppercase; 
+    <!-- 字体为粗体， -->
+    font-weight: bold; 
+    ```
+2. 文本区域 与 输入框 区分   
+    - 文本区域：```<textarea></textarea>```
+    - 输入框：```<input type="xxx" />```
+        ![](./img/11.png)
+3. textarea 标签   
+    ![](./img/12.png)
