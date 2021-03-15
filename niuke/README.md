@@ -16,6 +16,7 @@
 | 8 | 2021.3.10 | 10 | js | 0.5 | RegExp、promise、... | 必备 | 
 | 9 | 2021.3.11 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 | 10 | 2021.3.12 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
+| 11 | 2021.3.15 | 10 | html | 0.9 | html 和 html5 基础 | 必备 | 
 ## 内容
 
 ### 2021.2.24 
@@ -535,3 +536,8 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
         ![](./img/11.png)
 3. textarea 标签   
     ![](./img/12.png)
+### 2021.3.15
+1. MVVM 框架 、 MVP 、 MVC
+    - react.js 是 单向数据流绑定，但是也属于 MVVM框架。vue.js 和 angular.js 是双向数据流绑定，也是 MVVM 框架
+    - vue.js 和 react.js 本身还不能算一个框架，经过整合资源之后才算是，angular.js 本身就是一个完整的框架。
+    - ember.js 不知道，很古老好像，然后不常用，是一个很有异议的 MVVM 框架，也不知道是不是。
