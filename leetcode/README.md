@@ -16,6 +16,8 @@
 | 8 | 2021.3.9 | 1047. 删除字符串中的所有相邻重复项 | 简单数据结构 - 栈/队列 | 简单 | 是 | 是 | 5 | 主要是用栈、队列 |
 | 9 | 2021.3.10 | 224. 基本计算器 | 括号展开 + 栈 | 困难 | 否 | 否 | 1 |  主要是利用 栈 |
 | 10 | 2021.3.11 | 227. 基本计算器 II | 栈 | 中等 | 是 | 还行 | 1 | 复习昨天 |
+| 11 | 2021.3.12 | 331. 验证二叉树的前序序列化 | 栈 | 中等 | 否 | 否 | 2 | 没看懂题目 |
+| 12 | 2021.3.15 | 54. 螺旋矩阵 | 模拟、按层模拟 | 中等 | 否 | 否 | 2 | 看懂题目，突然不知道怎么组织代码 |
 ## 内容
 
 ### 2021.2.26 
@@ -933,3 +935,181 @@ var minCut = function(s) {
 #### 其他：
 1. 搞懂了昨天的就知道今天的怎么搞了
 
+### 2021.3.12
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/)
+
+#### 题目理解：
+```
+/**
+* 没看懂题目 
+*/
+```
+
+#### 解决办法：
+1. 官方题解 - [栈]
+    ```javascript
+    var isValidSerialization = function(preorder) {
+        const n = preorder.length;
+        let i = 0;
+        const stack = [1];
+        while (i < n) {
+            if (!stack.length) {
+                return false;
+            }
+            if (preorder[i] === ',') {
+                ++i;
+            } else if (preorder[i] === '#') {
+                stack[stack.length - 1]--;
+                if (stack[stack.length - 1] === 0) {
+                    stack.pop();
+                } 
+                ++i;
+            } else {
+                // 读一个数字
+                while (i < n && preorder[i] !== ',') {
+                    ++i;
+                }
+                stack[stack.length - 1]--;
+                if (stack[stack.length - 1] === 0) {
+                    stack.pop();
+                }
+                stack.push(2);
+            }
+        }
+        return stack.length === 0;
+    };
+    ```
+
+2. 官方题解 - [计数]
+    ```javascript
+    var isValidSerialization = function(preorder) {
+        const n = preorder.length;
+        let i = 0;
+        let slots = 1;
+        while (i < n) {
+            if (slots === 0) {
+                return false;
+            }
+            if (preorder[i] === ',') {
+                ++i;
+            } else if (preorder[i] === '#') {
+                --slots;
+                ++i;
+            } else {
+                // 读一个数字
+                while (i < n && preorder[i] !== ',') {
+                    ++i;
+                }
+                ++slots; // slots = slots - 1 + 2
+            }
+        }
+        return slots === 0;
+    };
+    ```
+
+#### 其他：
+1. 无效题目，不知道干啥，脑子疼
+
+### 2021.3.15
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/spiral-matrix/)
+
+#### 题目理解：
+```
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var spiralOrder = function(matrix) {
+    /**
+     * 搞清方向即可： 顺时针旋转
+     */
+    var arr = []
+    var i = 0, j = 0
+    var m = matrix.length - 1, n = matrix[0].length - 1
+    var layer = 0
+    while(arr.length < matrix[0].length * matrix.length) {
+        arr.push(matrix[i][j])
+        /**
+         * 怎么转？
+         * 转折条件： (layer 随变化改变)
+         *    第一个弯：i === layer, j === n - layer
+         *      递进: j++
+         *    第二个弯：j === n - layer, i === m - layer
+         *      递进: i++
+         *    第三个弯：j === layer, i === m - layer
+         *      递进: j--
+         *      完了之后：layer + 1
+         *    第四个弯：j === layer, i === layer
+         *      递进：i--
+         */
+        }
+
+    }
+    return arr
+};
+```
+
+#### 解决办法：
+1. 官方题解 - [模拟]
+    ```javascript
+    var spiralOrder = function(matrix) {
+        if (!matrix.length || !matrix[0].length) {
+            return [];
+        }
+        const rows = matrix.length, columns = matrix[0].length;
+        const visited = new Array(rows).fill(0).map(() => new Array(columns).fill(false));
+        const total = rows * columns;
+        const order = new Array(total).fill(0);
+
+        let directionIndex = 0, row = 0, column = 0;
+        const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+        for (let i = 0; i < total; i++) { 
+            order[i] = matrix[row][column];
+            visited[row][column] = true;
+            const nextRow = row + directions[directionIndex][0], nextColumn = column + directions[directionIndex][1];
+            if (!(0 <= nextRow && nextRow < rows && 0 <= nextColumn && nextColumn < columns && !(visited[nextRow][nextColumn]))) {
+                directionIndex = (directionIndex + 1) % 4;
+            }
+            row += directions[directionIndex][0];
+            column += directions[directionIndex][1];
+        }
+        return order;
+    };
+    ```
+
+2. 官方题解 - [按层模拟]
+    ```javascript
+    var spiralOrder = function(matrix) {
+        if (!matrix.length || !matrix[0].length) {
+            return [];
+        }
+
+        const rows = matrix.length, columns = matrix[0].length;
+        const order = [];
+        let left = 0, right = columns - 1, top = 0, bottom = rows - 1;
+        while (left <= right && top <= bottom) {
+            for (let column = left; column <= right; column++) {
+                order.push(matrix[top][column]);
+            }
+            for (let row = top + 1; row <= bottom; row++) {
+                order.push(matrix[row][right]);
+            }
+            if (left < right && top < bottom) {
+                for (let column = right - 1; column > left; column--) {
+                    order.push(matrix[bottom][column]);
+                }
+                for (let row = bottom; row > top; row--) {
+                    order.push(matrix[row][left]);
+                }
+            }
+            [left, right, top, bottom] = [left + 1, right - 1, top + 1, bottom - 1];
+        }
+        return order;
+    };
+    ```
+
+#### 其他：
+1. 额，只想到一层 for 循环，脑子瓦特了
