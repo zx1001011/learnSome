@@ -18,6 +18,7 @@
 | 10 | 2021.3.11 | 227. 基本计算器 II | 栈 | 中等 | 是 | 还行 | 1 | 复习昨天 |
 | 11 | 2021.3.12 | 331. 验证二叉树的前序序列化 | 栈 | 中等 | 否 | 否 | 2 | 没看懂题目 |
 | 12 | 2021.3.15 | 54. 螺旋矩阵 | 模拟、按层模拟 | 中等 | 否 | 否 | 2 | 看懂题目，突然不知道怎么组织代码 |
+| 13 | 2021.3.16 | 59. 螺旋矩阵 II | 模拟、按层模拟 | 中等 | cv | 否 | 2 | 昨天一样 |
 ## 内容
 
 ### 2021.2.26 
@@ -1113,3 +1114,105 @@ var spiralOrder = function(matrix) {
 
 #### 其他：
 1. 额，只想到一层 for 循环，脑子瓦特了
+
+### 2021.3.16
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/spiral-matrix-ii/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number} n
+ * @return {number[][]}
+ */
+var generateMatrix = function(n) {
+    /**
+     * 昨天的升级版
+     */
+    var res = new Array(n).fill(0).map(() => new Array(n).fill(0));
+    var num = 1
+    const rows = n, columns = n;
+    let left = 0, right = columns - 1, top = 0, bottom = rows - 1;
+    while (left <= right && top <= bottom) {
+        for (let column = left; column <= right; column++) {
+            res[top][column] = num++;
+        }
+        for (let row = top + 1; row <= bottom; row++) {
+            res[row][right] = num++;
+        }
+        if (left < right && top < bottom) {
+            for (let column = right - 1; column > left; column--) {
+                res[bottom][column] = num++;
+            }
+            for (let row = bottom; row > top; row--) {
+                res[row][left] = num++;
+            }
+        }
+        [left, right, top, bottom] = [left + 1, right - 1, top + 1, bottom - 1];
+    }
+    return res
+};
+```
+
+#### 解决办法：
+1. 官方题解 - [模拟]
+    ```javascript
+    var generateMatrix = function(n) {
+        const maxNum = n * n;
+        let curNum = 1;
+        const matrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+        let row = 0, column = 0;
+        const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // 右下左上
+        let directionIndex = 0;
+        while (curNum <= maxNum) {
+            matrix[row][column] = curNum;
+            curNum++;
+            const nextRow = row + directions[directionIndex][0], nextColumn = column + directions[directionIndex][1];
+            if (nextRow < 0 || nextRow >= n || nextColumn < 0 || nextColumn >= n || matrix[nextRow][nextColumn] !== 0) {
+                directionIndex = (directionIndex + 1) % 4; // 顺时针旋转至下一个方向
+            }
+            row = row + directions[directionIndex][0];
+            column = column + directions[directionIndex][1];
+        }
+        return matrix;
+    };
+    ```
+
+2. 官方题解 - [按层模拟]
+    ```javascript
+    var generateMatrix = function(n) {
+        let num = 1;
+        const matrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+        let left = 0, right = n - 1, top = 0, bottom = n - 1;
+        while (left <= right && top <= bottom) {
+            for (let column = left; column <= right; column++) {
+                matrix[top][column] = num;
+                num++;
+            }
+            for (let row = top + 1; row <= bottom; row++) {
+                matrix[row][right] = num;
+                num++;
+            }
+            if (left < right && top < bottom) {
+                for (let column = right - 1; column > left; column--) {
+                    matrix[bottom][column] = num;
+                    num++;
+                }
+                for (let row = bottom; row > top; row--) {
+                    matrix[row][left] = num;
+                    num++;
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+        return matrix;
+    };
+    ```
+
+#### 其他：
+1. 基础....
+
+
+
