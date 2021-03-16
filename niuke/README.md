@@ -17,6 +17,8 @@
 | 9 | 2021.3.11 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 | 10 | 2021.3.12 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 | 11 | 2021.3.15 | 10 | html | 0.9 | html 和 html5 基础 | 必备 | 
+| 12 | 2021.3.16 | 10 | html | 0.1 | html 和 html5 基础 | 必备 | 
+
 ## 内容
 
 ### 2021.2.24 
@@ -541,3 +543,33 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
     - react.js 是 单向数据流绑定，但是也属于 MVVM框架。vue.js 和 angular.js 是双向数据流绑定，也是 MVVM 框架
     - vue.js 和 react.js 本身还不能算一个框架，经过整合资源之后才算是，angular.js 本身就是一个完整的框架。
     - ember.js 不知道，很古老好像，然后不常用，是一个很有异议的 MVVM 框架，也不知道是不是。
+
+### 2021.3.16
+1. 网页中设置背景颜色
+    - bgground : 不存在
+    - background : CSS2 定义背景设置
+    - backgroundColor : HTML DOM属性，用于设置元素的背景颜色
+    - bgColor : HTML DOM属性，用于设置或返回对象的背景颜色
+
+2. 字体加粗
+    - html 标签： <b> 、 <strong>
+    - css : ```{ font-weight: bold }```
+
+3. dom 中 HTMLDivElement 的继承关系 : HTMLDivElement > HTMLElement > Element > Node > EvenTarget
+    ![1.png](./img/13.png)
+    ![2.png](./img/14.png)
+
+4. 上下标
+    ```html
+    <sup>下标文本</sup>
+    <sub>上标文本</sub>
+    <mark>突出显示</mark>
+    ```
+5. 缩写
+    ```html
+    <!-- The PRC was founded in 1949. -->
+    The <abbr title="People's Republic of China">PRC</abbr> was founded in 1949.
+    ```
+
+6. Audio/Video 的方法
+    load(), play(), pause()
