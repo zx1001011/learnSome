@@ -18,7 +18,7 @@
 | 10 | 2021.3.12 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 | 11 | 2021.3.15 | 10 | html | 0.9 | html 和 html5 基础 | 必备 | 
 | 12 | 2021.3.16 | 10 | html | 0.1 | html 和 html5 基础 | 必备 | 
-
+| 13 | 2021.3.17 | 10 | html | 0.6 | html 和 html5 基础 | 必备 | 
 ## 内容
 
 ### 2021.2.24 
@@ -88,7 +88,6 @@ JavaScript中实现异步编程模式的4种方法,回调函数、事件监听�
  +[] 隐式类型转换，因为[]是对象，所以toPrimitive->valueOf->toString为''，结果就是+''===0
  - [1,2,-3].reduce((a, b) => a - b, 0)        
   reduce对数组中的每个元素执行一个reducer函数(升序执行)，将其结果汇总为单个返回值。a为累计器累计回调的返回值，b为数组的每一项元素，传入初始值0->0-(1)->(-1)-2->(-3)-(-3)->0    
-
 ### 2021.2.25
 1. 字符串相加 、'+'、'-'
     - console.log(1+ "2"+"2");   
@@ -181,8 +180,6 @@ JavaScript中实现异步编程模式的4种方法,回调函数、事件监听�
     当执行到 x = foo() 时，由于foo未被定义为函数，所以会返回
 
     ```TypeError: foo is not a function```
-
-
 ### 2021.2.26
 1. ECMAScript 中有 5 中简单数据类型（也称为基本数据类型）： Undefined、Null、Boolean、Number 和 string。还有一种复杂数据类型——Object。（摘自高级程序设计）
 
@@ -209,8 +206,6 @@ bind 除了返回是函数以外，它 的参数和 call 一样。
 
 6. typeof   
 ![](./img/2.png)    
-
-
 ### 2021.3.1
 1. jquery 匹配包含文本的元素  - contains()
     - text() 设置或获取被选元素的文本内容   
@@ -225,7 +220,6 @@ bind 除了返回是函数以外，它 的参数和 call 一样。
     4) window.postMessage；window.postMessages 是 html5 中实现跨域访问的一种新方式，可以使用它来向其它的 window 对象发送消息，无论这个 window 对象是属于同源或不同源。
     5) CORS；CORS 背后的基本思想，就是使用自定义的 HTTP 头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是应该失败。
     6) Web Sockets；web sockets 原理：在 JS 创建了 web socket 之后，会有一个 HTTP 请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP 升级从 HTTP 协议交换为 web socket 协议。
-
 ### 2021.3.2
 1. angular 绑定数据
     - 直接使用 {{value}} 绑定变量，会因为加载先后顺序，出现闪屏的现象，官方建议使用 ng-bind
@@ -256,9 +250,6 @@ bind 除了返回是函数以外，它 的参数和 call 一样。
         slice()
         map()
     ```
-
-
-
 ### 2021.3.3 
 1. 鼠标触发事件
 [w3cschool](https://www.w3cschool.cn/xqw2e7/67yk19wx.html)
@@ -309,7 +300,6 @@ onContextMenu: 当浏览者按下鼠标右键出现菜单时或者通过键盘�
 格式默认情况下，块级元素会新起一行。内容模型一般块级元素可以包含行内元素和其他块级元素。这种结构上的包含继承区别可以使块级元素创建比行内元素更”大型“的结构。
 ![行内元素](./img/3.png)
 ![块级元素](./img/4.png)
-
 ### 2021.3.4 
 1. '+'、'-'算法的不同
     ```javascript
@@ -348,7 +338,6 @@ History 对象是 window 对象的一部分，可通过 window.history 属性对
     (2).toString()
     // "2"
     ```
-
 ### 2021.3.8
 1. js 改变作用域的方法 : try catch, with, eval
 while 的话只是在函数局部环境或者全局环境运行，并不会改变作用域链。 
@@ -381,7 +370,6 @@ try catch 中的 catch 和 with 语句都会在作用域链的前端添加一个
     - hasOwnProperty : 判断对象是否包含特定的自身（非继承）属性。
         [任意搜的](https://www.cnblogs.com/weiqinl/p/8683207.html)
     - [原型链](https://blog.csdn.net/xiaoermingn/article/details/80745117)
-
 ### 2021.3.9
 1. js 中 number 存在精度问题
 ```javascript
@@ -416,7 +404,6 @@ JavaScript RegExp 对象有 3 个方法：test()、exec() 和 compile()。
     - [Symbol](https://es6.ruanyifeng.com/#docs/symbol)
     - [Object.assign](https://www.jianshu.com/p/f9ec860ecd81)
     - [Generator](https://es6.ruanyifeng.com/#docs/generator)
-
 ### 2021.3.10
 1. RegExp 类型的 exec()   
 exec() 方法用于检索字符串中的正则表达式的匹配。
@@ -458,7 +445,6 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
 5. 哪些事件可以 bubbling ? 可以触发冒泡事件的有哪些？    
     https://www.cnblogs.com/rubylouvre/p/5080464.html
     ![](./img/8.png)
-
 ### 2021.3.11
 1. html 中标签 层级显示优先级 ： 帧元素(frameset) > 表单元素 > 非表单元素   
     在html中，帧元素（frameset）的优先级最高，表单元素比非表单元素的优先级要高。   
@@ -543,22 +529,18 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
     - react.js 是 单向数据流绑定，但是也属于 MVVM框架。vue.js 和 angular.js 是双向数据流绑定，也是 MVVM 框架
     - vue.js 和 react.js 本身还不能算一个框架，经过整合资源之后才算是，angular.js 本身就是一个完整的框架。
     - ember.js 不知道，很古老好像，然后不常用，是一个很有异议的 MVVM 框架，也不知道是不是。
-
 ### 2021.3.16
 1. 网页中设置背景颜色
     - bgground : 不存在
     - background : CSS2 定义背景设置
     - backgroundColor : HTML DOM属性，用于设置元素的背景颜色
     - bgColor : HTML DOM属性，用于设置或返回对象的背景颜色
-
 2. 字体加粗
     - html 标签： <b> 、 <strong>
     - css : ```{ font-weight: bold }```
-
 3. dom 中 HTMLDivElement 的继承关系 : HTMLDivElement > HTMLElement > Element > Node > EvenTarget
     ![1.png](./img/13.png)
     ![2.png](./img/14.png)
-
 4. 上下标
     ```html
     <sup>下标文本</sup>
@@ -570,6 +552,24 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
     <!-- The PRC was founded in 1949. -->
     The <abbr title="People's Republic of China">PRC</abbr> was founded in 1949.
     ```
-
 6. Audio/Video 的方法
     load(), play(), pause()
+### 2021.3.17
+1. js 中，阻止默认事件的默认操作方法： preventDefault()
+    下面三个事件都是事件对象的方法：
+    - stopPropagation() 阻止事件冒泡。 这个事件不会阻止定义在元素上的其他事件。
+    - stopImmediatePropagation() 会彻底的阻止事件， 在其之后的绑定在元素上的其他监听事件都不会触发
+    - preventDefault() 阻止事件的默认动作
+2. touch 事件
+   - touchstart:     //手指放到屏幕上时触发
+   - touchmove:      //手指在屏幕上滑动式触发
+   - touchend:    //手指离开屏幕时触发
+   - touchcancel:     //系统取消touch事件的时候触发，这个好像比较少用
+    每个触摸事件被触发后，会生成一个event对象，event对象里额外包括以下三个触摸列表
+   - touches:     //当前屏幕上所有手指的列表
+   - targetTouches:      //当前dom元素上手指的列表，尽量使用这个代替touches
+   - changedTouches:     //涉及当前事件的手指的列表，尽量使用这个代替touches
+
+### 2021.3.18
+
+
