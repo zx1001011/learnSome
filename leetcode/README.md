@@ -19,6 +19,7 @@
 | 11 | 2021.3.12 | 331. 验证二叉树的前序序列化 | 栈 | 中等 | 否 | 否 | 2 | 没看懂题目 |
 | 12 | 2021.3.15 | 54. 螺旋矩阵 | 模拟、按层模拟 | 中等 | 否 | 否 | 2 | 看懂题目，突然不知道怎么组织代码 |
 | 13 | 2021.3.16 | 59. 螺旋矩阵 II | 模拟、按层模拟 | 中等 | cv | 否 | 2 | 昨天一样 |
+| 14 | 2021.3.17 | 115. 不同的子序列 | 动态规划 | 困难 | cv | 否 | 1 | TT至今没有看 |
 ## 内容
 
 ### 2021.2.26 
@@ -1214,5 +1215,42 @@ var generateMatrix = function(n) {
 #### 其他：
 1. 基础....
 
+### 2021.3.17
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/distinct-subsequences/)
+#### 题目理解：
+```javascript
+/**
+ * 动态规划，全遍历
+*/
+```
+#### 解决办法：
+1. 官方解法 - 动态规划
+    ```javascript
+    var numDistinct = function(s, t) {
+        /**
+         * 动态规划，全遍历
+        */
+        const m = s.length, n = t.length
+        if (m < n) {
+            return 0
+        }
+        const dp = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0))
+        for (let i = 0; i <= m; i++) {
+            dp[i][n] = 1
+        }
+        for (let i = m - 1; i >= 0; i--) {
+            for (let j = n - 1; j >= 0; j--) {
+                if (s[i] == t[j]) {
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j]
+                } else {
+                    dp[i][j] = dp[i + 1][j]
+                }
+            }
+        }
+        return dp[0][0]
+    };
+    ```
 
-
+### 其他：
+1. 又是动态规划，据说有什么状态转移方程
