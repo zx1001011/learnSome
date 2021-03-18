@@ -19,7 +19,8 @@
 | 11 | 2021.3.12 | 331. 验证二叉树的前序序列化 | 栈 | 中等 | 否 | 否 | 2 | 没看懂题目 |
 | 12 | 2021.3.15 | 54. 螺旋矩阵 | 模拟、按层模拟 | 中等 | 否 | 否 | 2 | 看懂题目，突然不知道怎么组织代码 |
 | 13 | 2021.3.16 | 59. 螺旋矩阵 II | 模拟、按层模拟 | 中等 | cv | 否 | 2 | 昨天一样 |
-| 14 | 2021.3.17 | 115. 不同的子序列 | 动态规划 | 困难 | cv | 否 | 1 | TT至今没有看 |
+| 14 | 2021.3.17 | 115. 不同的子序列 | 动态规划 | 困难 | cv | 否 | 1 | TT至今没有看 |  
+| 15 | 2021.3.18 | 92. 反转链表 II | 反转链表 | 中等 | 是 | 是 | 1 | 链表知识，由于c语言指针一点都不可怕，所以慢慢分析，虽然代码可能比较臃肿 |
 ## 内容
 
 ### 2021.2.26 
@@ -1153,7 +1154,6 @@ var generateMatrix = function(n) {
     return res
 };
 ```
-
 #### 解决办法：
 1. 官方题解 - [模拟]
     ```javascript
@@ -1211,7 +1211,6 @@ var generateMatrix = function(n) {
         return matrix;
     };
     ```
-
 #### 其他：
 1. 基础....
 
@@ -1251,6 +1250,136 @@ var generateMatrix = function(n) {
         return dp[0][0]
     };
     ```
-
 ### 其他：
 1. 又是动态规划，据说有什么状态转移方程
+
+### 2021.3.18
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+#### 题目理解：
+```javascript
+/**
+ * 反转链表
+*/
+```
+#### 解决办法：
+1. 直接反转
+    ```javascript
+    /**
+    * Definition for singly-linked list.
+    * function ListNode(val, next) {
+    *     this.val = (val===undefined ? 0 : val)
+    *     this.next = (next===undefined ? null : next)
+    * }
+    */
+    /**
+    * @param {ListNode} head
+    * @param {number} left
+    * @param {number} right
+    * @return {ListNode}
+    */
+    var reverseBetween = function(head, left, right) {
+        /**
+        * 遍历一遍，找到开始反转节点，一个个开始反转，
+        */
+        if (left === right) return head
+        var cur = 1
+        var curP = head
+        var preP = head
+        var start = head
+        while(cur <= right) {
+            if (right === cur) {
+                if (!start.next) {
+                    break
+                }
+                if (!start.next.next) {
+                    start.next = null
+                } else {
+                    if (left === 1) {
+                        start.next = curP.next
+                        curP.next = preP
+                    } else {
+                        start.next.next = curP.next
+                        start.next = curP
+                    }
+                }
+                curP.next = preP
+                if (left === 1) {
+                    head = curP
+                }
+                break
+            }
+            if (left > cur) {
+                cur++
+                preP = curP
+                curP = curP.next
+            } else if (left === cur) {
+                start = preP
+                cur++
+                preP = curP
+                curP = curP.next
+            } else if (cur > left) {
+                var tmp = curP.next
+                curP.next = preP
+                preP = curP
+                curP = tmp
+                cur++ 
+            }
+        }    
+        return head
+    };
+    ```
+
+2. 官方题解 - 穿针引线
+    ```javascript
+    var reverseBetween = function(head, left, right) {
+        // 因为头节点有可能发生变化，使用虚拟头节点可以避免复杂的分类讨论
+        const dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+
+        let pre = dummyNode;
+        // 第 1 步：从虚拟头节点走 left - 1 步，来到 left 节点的前一个节点
+        // 建议写在 for 循环里，语义清晰
+        for (let i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+
+        // 第 2 步：从 pre 再走 right - left + 1 步，来到 right 节点
+        let rightNode = pre;
+        for (let i = 0; i < right - left + 1; i++) {
+            rightNode = rightNode.next;
+        }
+
+        // 第 3 步：切断出一个子链表（截取链表）
+        let leftNode = pre.next;
+        let curr = rightNode.next;
+
+        // 注意：切断链接
+        pre.next = null;
+        rightNode.next = null;
+
+        // 第 4 步：同第 206 题，反转链表的子区间
+        reverseLinkedList(leftNode);
+
+        // 第 5 步：接回到原来的链表中
+        pre.next = rightNode;
+        leftNode.next = curr;
+        return dummyNode.next;
+    };
+
+    const reverseLinkedList = (head) => {
+        let pre = null;
+        let cur = head;
+
+        while (cur) {
+            const next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+    }
+    ```
+### 其他：
+无
+
+### 2021.3.19
