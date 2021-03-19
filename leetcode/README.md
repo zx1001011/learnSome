@@ -21,6 +21,7 @@
 | 13 | 2021.3.16 | 59. 螺旋矩阵 II | 模拟、按层模拟 | 中等 | cv | 否 | 2 | 昨天一样 |
 | 14 | 2021.3.17 | 115. 不同的子序列 | 动态规划 | 困难 | cv | 否 | 1 | TT至今没有看 |  
 | 15 | 2021.3.18 | 92. 反转链表 II | 反转链表 | 中等 | 是 | 是 | 1 | 链表知识，由于c语言指针一点都不可怕，所以慢慢分析，虽然代码可能比较臃肿 |
+| 16 | 2021.3.19 | 1603. 设计停车系统 | 数组或者... | 简单 | 是 | 是 | 2 | 非常简单的构造一个类，考虑数据结构就可以，够用即可 |
 ## 内容
 
 ### 2021.2.26 
@@ -1250,7 +1251,7 @@ var generateMatrix = function(n) {
         return dp[0][0]
     };
     ```
-### 其他：
+#### 其他：
 1. 又是动态规划，据说有什么状态转移方程
 
 ### 2021.3.18
@@ -1379,7 +1380,70 @@ var generateMatrix = function(n) {
         }
     }
     ```
-### 其他：
+#### 其他：
 无
 
 ### 2021.3.19
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/design-parking-system)
+#### 题目理解：
+```javascript
+/**
+ * 简单构造一个类
+*/
+```
+#### 解决办法：
+1. 直接用 Array 或者 Set
+    ```javascript
+    /**
+    * @param {number} big
+    * @param {number} medium
+    * @param {number} small
+    */
+    var ParkingSystem = function(big, medium, small) {
+        this.parkings = [big, medium, small]
+    };
+
+    /** 
+    * @param {number} carType
+    * @return {boolean}
+    */
+    ParkingSystem.prototype.addCar = function(carType) {
+        if (this.parkings[Number(carType) - 1] > 0) {
+            this.parkings[Number(carType) - 1]--
+            return true
+        } else {
+            return false
+        }
+    };
+    ```
+2. 官方题解 - 模拟
+    ```javascript
+    var ParkingSystem = function(big, medium, small) {
+        this.big = big;
+        this.medium = medium;
+        this.small = small;
+    };
+
+    ParkingSystem.prototype.addCar = function(carType) {
+        if (carType === 1) {
+            if (this.big > 0) {
+                this.big--;
+                return true;
+            }
+        } else if (carType === 2) {
+            if (this.medium > 0) {
+                this.medium--;
+                return true;
+            }
+        } else if (carType === 3) {
+            if (this.small > 0) {
+                this.small--;
+                return true;
+            }
+        }
+        return false;
+    };
+    ```
+#### 其他：
+无
