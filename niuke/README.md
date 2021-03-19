@@ -20,6 +20,7 @@
 | 12 | 2021.3.16 | 10 | html | 0.1 | html 和 html5 基础 | 必备 | 
 | 13 | 2021.3.17 | 10 | html | 0.6 | html 和 html5 基础 | 必备 |  
 | 14 | 2021.3.18 | 10 | 网络基础 | 0.5 | 计算机网络基础 | 必备 | 
+| 15 | 2021.3.19 | 10 | 网络基础 | 0.7 | js 基础和模块化知识 | 必备 | 
 ## 内容
 
 ### 2021.2.24 
@@ -570,7 +571,6 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
    - touches:     //当前屏幕上所有手指的列表
    - targetTouches:      //当前dom元素上手指的列表，尽量使用这个代替touches
    - changedTouches:     //涉及当前事件的手指的列表，尽量使用这个代替touches
-
 ### 2021.3.18
 1. ARP 协议： 地址解析协议，即ARP(Address Resolution Protocol)   
    ARP 协议是根据 IP 地址获取物理地址的一个 TCP/IP 协议
@@ -593,3 +593,33 @@ iterable是一个全部为promise对象的数组，只要数组中有一个promi
    - 第三层 网络层 协议：IP (IPv4 · IPv6) · ARP · RARP · ICMP · ICMPv6 · IGMP · RIP · OSPF · BGP · IS-IS · IPsec · 更多 (路由器)
    - 第二层 数据链路层 协议： 802.11 · 802.16 · Wi-Fi · WiMAX · ATM · DTM · 令牌环 · 以太网 · FDDI · 帧中继 · GPRS · EVDO · HSPA · HDLC · PPP · L2TP · ISDN · 更多 (网桥，交换机)
    - 第一层 物理层 协议：  RS-443 、RS-232C、RS-485 、理-2593 (中继器，集线器，网关)
+### 2021.3.19
+1. require('other_modules') 查找模块的顺序：   
+   ![](./img/15.png)
+2. false 值：   
+   | 数据类型 | 转换为 true 的值 | 转换为 false 的值 |
+   | --- | --- | --- |
+   | Boolean | true | false |
+   | String | 任何非空字符串 | 空字符串 |
+   | Number | 任何非零数字值(包括无穷大) | 0 和 Null |
+   | Object | 任何对象 | null |
+   | Undefined | | Undefined | 
+3. == 双等的隐式转换
+   true -> 1
+   [] -> 数字 0
+      -> 字符串 ""
+      -> boolean true
+   ```javascript
+   [] == true // 0 == 1 -> false
+   !![]  // !!true -> true
+   ```
+4. Date 类设置月份：   
+   - x.setMonth(month, day)
+       ![](./img/16.png)
+   - x.setDate(n) 
+       n 表示一个月中的一天的一个数值(1 ~ 31):
+       0 为上一个月的最后一天
+       -1 为上一个月最后一天之前的一天
+       如果当月有 31 天: 32 为下个月的第 1 天
+       如果当月有 30 天: 32 为下一个月的第 2 天; 40 为下一个月的第 9 天;
+5. [模块化基础知识](https://naotu.baidu.com/file/17e62f84906d043342d2051a2ed2ec00)
