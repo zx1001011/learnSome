@@ -23,6 +23,7 @@
 | 15 | 2021.3.18 | 92. 反转链表 II | 反转链表 | 中等 | 是 | 是 | 1 | 链表知识，由于c语言指针一点都不可怕，所以慢慢分析，虽然代码可能比较臃肿 |
 | 16 | 2021.3.19 | 1603. 设计停车系统 | 数组或者... | 简单 | 是 | 是 | 2 | 非常简单的构造一个类，考虑数据结构就可以，够用即可 |
 | 17 | 2021.3.22 | 191. 位1的个数 | 位运算 | 简单 | 是 | 否 | 1 | 最近脑子瓦特了 |
+| 18 | 2021.3.23 | 341. 扁平化嵌套列表迭代器 | 栈或者DFS递归 | 中等 | 否 | 否 | 2 | 没有能够组织好思路，编写代码，但是知道有这两个方法 |
 ## 内容
 
 ### 2021.2.26 
@@ -1484,3 +1485,63 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 无
+### 2021.3.23
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)
+#### 题目理解：
+```javascript
+/**
+ *  栈
+ */
+```
+#### 解决办法：
+1. 官方解答 - [深度优先搜索DFS]
+    ```javascript
+    var NestedIterator = function(nestedList) {
+        vals = [];
+        const dfs = (nestedList) => {
+            for (const nest of nestedList) {
+                if (nest.isInteger()) {
+                    vals.push(nest.getInteger());
+                } else {
+                    dfs(nest.getList());
+                }
+            }
+        }
+        dfs(nestedList);
+    };
+
+    NestedIterator.prototype.hasNext = function() {
+        return vals.length > 0;
+    };
+
+    NestedIterator.prototype.next = function() {
+        const val = vals[0];
+        vals = vals.slice(1);
+        return val;
+    };
+    ```
+2. 官方解答 - [栈]
+    ```javascript
+    var NestedIterator = function(nestedList) {
+        this.stack = nestedList;
+    };
+
+    NestedIterator.prototype.hasNext = function() {
+        while (this.stack.length !== 0) {
+            if (this.stack[0].isInteger()) {
+                return true;
+            } else {
+                let cur = this.stack[0].getList();
+                this.stack.shift();
+                this.stack.unshift(...cur);
+            }
+        }
+    };
+
+    NestedIterator.prototype.next = function() {
+        return this.stack.shift().getInteger();
+    };
+    ```
+#### 其他：
+1. 递归或者栈，但是递归不太对，不太符合迭代器
