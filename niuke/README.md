@@ -23,6 +23,7 @@
 | 15 | 2021.3.19 | 10 | 网络基础 | 0.7 | js 基础和模块化知识 | 必备 | 
 | 16 | 2021.3.22 | 10 | 数据库 | 0.4 | 非常基础 | 必备 | 
 | 17 | 2021.3.23 | 10 | js | 0.6 | 基础和重复以前的 | 必备 |
+| 18 | 2021.3.24 | 10 | js | 0.6 | 基础和重复以前的 | 必备 |
 ## 内容
 ### 2021.2.24 
 1. for ... in    
@@ -698,4 +699,53 @@ DATEADD() : 函数在日期中添加或减去指定的时间间隔。
     String(new function(){ return new String('foo'); })
     "foo"
     ```
-4. 
+### 2021.3.24
+1. angular   
+    ng-route  自带路由
+    ng-template 寄存方式
+    ng-model 指令绑定了 HTML 表单元素到 scope 变量中
+    ng-controller 指定控制器
+2. event 阻止默认事件和冒泡事件方法   
+    阻止默认事件：
+    ```javascript
+    e.preventDefault()
+    e.returnValue = false  (IE)
+    ```
+    阻止冒泡：
+    ```javascript
+    e.stopPropagation()
+    e.cancelBubble = true (IE)
+    ```
+3. 正则表达式的一些组合    
+    - /[^pattern]/ : 表示非
+      /^pattern/ : 表示以...开头
+    - /(?=pattern)/ : 表示正向先行断言，代表字符串中的一个位置，紧接该位置之后的字符序列能够匹配 pattern。
+4. 页面加载完成触发的事件   
+    A. readystatechange
+        document 有 readyState 属性来描述 document 的 loading 状态，readyState 的改变会触发 readystatechange 事件.
+        - loading : 文档仍然在加载
+        - interactive : 文档结束加载并且被解析，但是像图片，样式，frame 之类的子资源仍在加载
+        - complete : 文档和子资源已经结束加载，该状态表明将要触发 load 事件。
+        因此 readystatechange 在 onload 之前触发。
+
+    B.onpageshow
+        onpageshow 事件在用户浏览网页时触发。
+        onpageshow 事件类似于 onload 事件，onload 事件在页面第一次加载时触发， onpageshow 事件在每次加载页面时触发，即 onload 事件在页面从浏览器缓存中读取时不触发。
+
+    C. beforeunload
+        当浏览器窗口，文档或其资源将要卸载时，会触发 beforeunload 事件。这个文档是依然可见的，并且这个事件在这一刻是可以取消的.
+        如果处理函数为 Event 对象的 returnValue 属性赋值非空字符串，浏览器会弹出一个对话框，来询问用户是否确定要离开当前页面（如下示例）。有些浏览器会将返回的字符串展示在弹框里，但有些其他浏览器只展示它们自定义的信息。没有赋值时，该事件不做任何响应。
+
+    D.DOMContentLoaded
+        当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载。
+        另一个不同的事件 load 应该仅用于检测一个完全加载的页面。因此DOMContentLoaded 是 HTML 完全加载和解析完成之后发生的，发生时间点要早于 load，选D。
+        在使用 DOMContentLoaded 更加合适的情况下使用 load 是一个令人难以置信的流行的错误，所以要谨慎。
+        注意：DOMContentLoaded 事件必须等待其所属 script 之前的样式表加载解析完成才会触发。
+5. 隐式转换 : https://blog.csdn.net/y_programmer_ape/article/details/106818488
+    - 非数值类型数据进行算数运算
+        a. 字符串类型的 + 运算
+        b. 数据类型是非字符串类型时进行算数运算
+    - 非布尔值进行逻辑运算
+    - 非数值数据的关系运算
+    - 非布尔值进行条件运算
+    - if 条件句
