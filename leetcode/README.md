@@ -24,6 +24,7 @@
 | 16 | 2021.3.19 | 1603. 设计停车系统 | 数组或者... | 简单 | 是 | 是 | 2 | 非常简单的构造一个类，考虑数据结构就可以，够用即可 |
 | 17 | 2021.3.22 | 191. 位1的个数 | 位运算 | 简单 | 是 | 否 | 1 | 最近脑子瓦特了 |
 | 18 | 2021.3.23 | 341. 扁平化嵌套列表迭代器 | 栈或者DFS递归 | 中等 | 否 | 否 | 2 | 没有能够组织好思路，编写代码，但是知道有这两个方法 |
+| 19 | 2021.3.24 | 456. 132模式 | 单调栈、二分查找 | 中等 | 否 | 否 | 3 | 没有想到枚举每个3 |
 ## 内容
 
 ### 2021.2.26 
@@ -1545,3 +1546,146 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 1. 递归或者栈，但是递归不太对，不太符合迭代器
+2. 合理利用题目所给的辅助函数
+### 2021.3.24
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/132-pattern/)
+#### 题目理解：
+```javascript
+/**
+ *  检查 132 模式即可
+ * 1. 找到除头尾最大值， 然后比较有没有 ai < aj 
+ *    不能覆盖所有情况
+ * 2. 全遍历  超时
+ */
+```
+#### 解决办法：
+1. 官方解答 - [枚举1]
+    ```javascript
+    /**
+     * @param {number[]} nums
+     * @return {boolean}
+     */
+    var find132pattern = function(nums) {
+        const n = nums.length;
+        const candidate_k = [nums[n - 1]];
+        let max_k = -Number.MAX_SAFE_INTEGER;
+
+        for (let i = n - 2; i >= 0; --i) {
+            if (nums[i] < max_k) {
+                return true;
+            }
+            while (candidate_k.length && nums[i] > candidate_k[candidate_k.length - 1]) {
+                max_k = candidate_k[candidate_k.length - 1];
+                candidate_k.pop();
+            }
+            if (nums[i] > max_k) {
+                candidate_k.push(nums[i]);
+            }
+        }
+        return false;
+    };
+    ```
+2. 官方解答 - [枚举3,比较容易想到]
+    ```C++
+    class Solution {
+    public:
+        bool find132pattern(vector<int>& nums) {
+            int n = nums.size();
+            if (n < 3) {
+                return false;
+            }
+
+            // 左侧最小值
+            int left_min = nums[0];
+            // 右侧所有元素
+            multiset<int> right_all;
+
+            for (int k = 2; k < n; ++k) {
+                right_all.insert(nums[k]);
+            }
+
+            for (int j = 1; j < n - 1; ++j) {
+                if (left_min < nums[j]) {
+                    auto it = right_all.upper_bound(left_min);
+                    if (it != right_all.end() && *it < nums[j]) {
+                        return true;
+                    }
+                }
+                left_min = min(left_min, nums[j]);
+                right_all.erase(right_all.find(nums[j + 1]));
+            }
+
+            return false;
+        }
+    };
+    ```
+3. 官方解答 - [枚举2,难度比较大]
+    ```javascript
+    var find132pattern = function(nums) {
+        const n = nums.length;
+        const candidateI = [nums[0]], candidateJ = [nums[0]];
+
+        for (let k = 1; k < n; ++k) {
+            const idxI = binarySearchFirst(candidateI, nums[k]);
+            const idxJ = binarySearchLast(candidateJ, nums[k]);
+            if (idxI >= 0 && idxJ >= 0) {
+                if (idxI <= idxJ) {
+                    return true;
+                }
+            }
+            
+            if (nums[k] < candidateI[candidateI.length - 1]) {
+                candidateI.push(nums[k]);
+                candidateJ.push(nums[k]);
+            } else if (nums[k] > candidateJ[candidateJ.length - 1]) {
+                const lastI = candidateI[candidateI.length - 1];
+                while (candidateJ.length && nums[k] > candidateJ[candidateJ.length - 1]) {
+                    candidateI.pop();
+                    candidateJ.pop();
+                }
+                candidateI.push(lastI);
+                candidateJ.push(nums[k]);
+            }
+        }
+
+        return false;
+    };
+
+    const binarySearchFirst = (candidate, target) => {
+        let low = 0, high = candidate.length - 1;
+        if (candidate[high] >= target) {
+            return -1;
+        }
+        while (low < high) {
+            const mid = Math.floor((high - low) / 2) + low;
+            const num = candidate[mid];
+            if (num >= target) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+
+    const binarySearchLast = (candidate, target) => {
+        let low = 0, high = candidate.length - 1;
+        if (candidate[low] <= target) {
+            return -1;
+        }
+        while (low < high) {
+            const mid = Math.floor((high - low + 1) / 2) + low;
+            const num = candidate[mid];
+            if (num <= target) {
+                high = mid - 1;
+            } else {
+                low = mid;
+            }
+        }
+        return low;
+    }
+    ```
+#### 其他：
+1. 其实举例3已经想到了，但是没有进行枚举，直接想到三个 for 循环
+2. 单调栈，二分查找
