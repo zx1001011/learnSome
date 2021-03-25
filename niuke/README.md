@@ -749,3 +749,28 @@ DATEADD() : 函数在日期中添加或减去指定的时间间隔。
     - 非数值数据的关系运算
     - 非布尔值进行条件运算
     - if 条件句
+### 2021.3.25
+1. cookie 过期时间   
+    cookie 的有效时间默认为 -1，如果不进行设置的话，就会默认在浏览器会话关闭时结束。
+    可以通过 setMaxAge() 方法设置 cookie 的生命期。
+    当 setMaxAge(0) 表示立刻删除该浏览器上指定的 cookie
+2. angularjs : 前端mvc，极大降低前端开发的耦合; 大大减少了对DOM的访问    
+   jQuery : 极大的丰富了DOM操作
+3. ECMAScript 的全局函数
+    - 个人记忆方法：6（编码相关）+ 2（数据处理）+ 4（数字相关）+ 1（特殊）
+    - 编码相关：
+        escape()、unescape()、encodeURI()、decodeURI()、encodeURIComponent()、decodeURIComponent()
+    - 数据处理：
+        Number()、String()
+    - 数字相关：
+        isFinite()、isNaN()、parseFloat()、parseInt()
+    - 特殊：
+        eval()
+    *setTimeout 是在 window 下面的，是宿主环境提供的，即各大浏览器自己实现的 api，不属于 es 标准*
+4. document对象方法叙述辨认   
+    - onload 为 document 对象的属性，而不是方法：
+    - ParentNode.children 是一个只读属性，返回一个节点的子元素，是一个动态更新的 HTMLCollection 类型。不是 document 对象的方法。
+    - AJAX 不是 JavaScript 的规范，它只是一个缩写：Asynchronous JavaScript and XML，意思就是用JavaScript 执行异步网络请求。在现代浏览器中主要依靠 XmlHttpRequest 对象。
+5. 不支持冒泡的事件   
+    冒泡事件很多，常见的不支持冒泡事件有：focus、blur、mouseenter、mouseleave、load、unload、resize
+    *妈 (mouseenter) 妈 (mouseleave) 不 (blur) 放 (focus) 心你 (load,unload,resize)*
