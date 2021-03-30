@@ -25,6 +25,10 @@
 | 17 | 2021.3.22 | 191. 位1的个数 | 位运算 | 简单 | 是 | 否 | 1 | 最近脑子瓦特了 |
 | 18 | 2021.3.23 | 341. 扁平化嵌套列表迭代器 | 栈或者DFS递归 | 中等 | 否 | 否 | 2 | 没有能够组织好思路，编写代码，但是知道有这两个方法 |
 | 19 | 2021.3.24 | 456. 132模式 | 单调栈、二分查找 | 中等 | 否 | 否 | 3 | 没有想到枚举每个3 |
+| 20 | 2021.3.25 | 82. 删除排序链表中的重复元素 II | 链表操作 | 中等 | 是 | 是 | 1 |  |
+| 21 | 2021.3.26 | 83. 删除排序链表中的重复元素 | 链表操作 | 简单 | 是 | 是 | 1 |  |
+| 22 | 2021.3.29 | 190. 颠倒二进制位 | 位操作 | 简单 | 否 | 否 | 1 |  |
+| 23 | 2021.3.30 | 74. 搜索二维矩阵 | 二分查找 | 中等 | 是 | 是 | 2 |  |
 ## 内容
 
 ### 2021.2.26 
@@ -1486,6 +1490,7 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 无
+
 ### 2021.3.23
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)
@@ -1547,6 +1552,7 @@ var generateMatrix = function(n) {
 #### 其他：
 1. 递归或者栈，但是递归不太对，不太符合迭代器
 2. 合理利用题目所给的辅助函数
+
 ### 2021.3.24
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/132-pattern/)
@@ -1689,3 +1695,283 @@ var generateMatrix = function(n) {
 #### 其他：
 1. 其实举例3已经想到了，但是没有进行枚举，直接想到三个 for 循环
 2. 单调栈，二分查找
+
+### 2021.3.25
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
+#### 题目理解：
+```javascript
+/**
+ * 直接删除，添加一个前置头
+ */
+```
+#### 解决办法：
+1. 直接解答 - [链表删除]
+    ```javascript
+    /**
+    * Definition for singly-linked list.
+    * function ListNode(val, next) {
+    *     this.val = (val===undefined ? 0 : val)
+    *     this.next = (next===undefined ? null : next)
+    * }
+    */
+    /**
+    * @param {ListNode} head
+    * @return {ListNode}
+    */
+    var deleteDuplicates = function(head) {
+        if (head === null || head.next === null) return head
+        let cur = head.next
+        let pre = head
+        let ppre = new ListNode(0, head)
+        let h = ppre
+        while(cur) {
+            if (pre.val === cur.val) {
+                let cpre = cur
+                while(cur) {
+                    if (pre.val === cur.val) {
+                        cpre = cur
+                        cur = cur.next
+                    } else {
+                        break
+                    }
+                }
+                cur = cpre
+                ppre.next = cur.next
+                pre = ppre.next
+                if (pre) {
+                    cur = pre.next
+                } else {
+                    break
+                }
+            } else {
+                ppre = pre
+                pre = cur
+                cur = cur.next
+            }
+        }
+        return h.next
+    };
+    ```
+2. 官方解答 - [一次遍历]
+    ```javascript
+    var deleteDuplicates = function(head) {
+        if (!head) {
+            return head;
+        }
+        const dummy = new ListNode(0, head);
+        let cur = dummy;
+        while (cur.next && cur.next.next) {
+            if (cur.next.val === cur.next.next.val) {
+                const x = cur.next.val;
+                while (cur.next && cur.next.val === x) {
+                    cur.next = cur.next.next;
+                } 
+            } else {
+                cur = cur.next;
+            }
+        }
+        return dummy.next;
+    };
+    ```
+#### 其他：
+1. 写的不够简洁
+
+### 2021.3.26
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
+#### 题目理解：
+```javascript
+/**
+ * 比昨天简单
+ */
+```
+#### 解决办法：
+1. 直接解答 - [链表删除]
+    ```javascript
+    /**
+    * Definition for singly-linked list.
+    * function ListNode(val, next) {
+    *     this.val = (val===undefined ? 0 : val)
+    *     this.next = (next===undefined ? null : next)
+    * }
+    */
+    /**
+    * @param {ListNode} head
+    * @return {ListNode}
+    */
+    var deleteDuplicates = function(head) {
+        /**
+        * 比昨天还简单
+        */
+        if (head  === null || head.next === null) return head
+        let cur = head.next, pre = head
+        while(cur) {
+            if (cur.val === pre.val) {
+                pre.next = cur.next
+                cur = pre.next
+            } else {
+                pre = cur
+                cur = cur.next
+            }
+        }
+        return head
+    };
+    ```
+2. 官方解答 - [一次遍历]
+    ```javascript
+    var deleteDuplicates = function(head) {
+        if (!head) {
+            return head;
+        }
+
+        let cur = head;
+        while (cur.next) {
+            if (cur.val === cur.next.val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return head;
+    }; 
+    ```
+#### 其他：
+无
+
+### 2021.3.29
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/reverse-bits/)
+#### 题目理解：
+```javascript
+/**
+ * 移位
+ */
+```
+#### 解决办法：
+1. 官方解答 - [逐位颠倒]
+    ```javascript
+    var reverseBits = function(n) {
+        let rev = 0;
+        for (let i = 0; i < 32 && n > 0; ++i) {
+            rev |= (n & 1) << (31 - i);
+            n >>>= 1;
+        }
+        return rev >>> 0;
+    };
+    ```
+2. 官方解答 - [位运算分治]
+    ```javascript
+    var reverseBits = function(n) {
+        const M1 = 0x55555555; // 01010101010101010101010101010101
+        const M2 = 0x33333333; // 00110011001100110011001100110011
+        const M4 = 0x0f0f0f0f; // 00001111000011110000111100001111
+        const M8 = 0x00ff00ff; // 00000000111111110000000011111111
+
+        n = n >>> 1 & M1 | (n & M1) << 1;
+        n = n >>> 2 & M2 | (n & M2) << 2;
+        n = n >>> 4 & M4 | (n & M4) << 4;
+        n = n >>> 8 & M8 | (n & M8) << 8;
+        return (n >>> 16 | n << 16) >>> 0;
+    };
+    ```
+#### 其他：
+1. 脑子瓦特了，最近
+
+### 2021.3.30
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/search-a-2d-matrix/)
+#### 题目理解：
+```javascript
+/**
+ * 二分查找
+ */
+```
+#### 解决办法：
+1. 自己解答 - [行数减 / 2, 行数递加，列数递加]
+    ```javascript
+    var searchMatrix = function(matrix, target) {
+        /**
+         * 二分查找？
+        */
+        var row = matrix.length - 1, col = matrix[0].length - 1
+        var res = false
+        if (row < 0 || col < 0) return false
+        if (matrix[0][0] > target || matrix[row][col] < target) return false
+        while (row >= 0) {
+            if ((matrix[row][0] <= target && matrix[row][col] >= target) ||
+                (matrix[row][0] <= target && matrix[row + 1][0] > target)) {
+                for (let j = col; j >= 0; j--) {
+                    if (matrix[row][j] === target) {
+                        return true
+                    }
+                }
+                break
+            } else if (matrix[row][0] > target) {
+                row = parseInt((0 + row) / 2)
+            } else {
+                row++
+            }
+        }
+        return res
+    };
+    ```
+2. 官方解答 - [两次二分查找]
+    ```javascript
+    var searchMatrix = function(matrix, target) {
+        const rowIndex = binarySearchFirstColumn(matrix, target);
+        if (rowIndex < 0) {
+            return false;
+        }
+        return binarySearchRow(matrix[rowIndex], target);
+    };
+
+    const binarySearchFirstColumn = (matrix, target) => {
+        let low = -1, high = matrix.length - 1;
+        while (low < high) {
+            const mid = Math.floor((high - low + 1) / 2) + low;
+            if (matrix[mid][0] <= target) {
+                low = mid;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+
+    const binarySearchRow = (row, target) => {
+        let low = 0, high = row.length - 1;
+        while (low <= high) {
+            const mid = Math.floor((high - low) / 2) + low;
+            if (row[mid] == target) {
+                return true;
+            } else if (row[mid] > target) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return false;
+    }
+    ```
+3. 官方解答 - [一次二分查找]
+    ```javascript
+    var searchMatrix = function(matrix, target) {
+        const m = matrix.length, n = matrix[0].length;
+        let low = 0, high = m * n - 1;
+        while (low <= high) {
+            const mid = Math.floor((high - low) / 2) + low;
+            const x = matrix[Math.floor(mid / n)][mid % n];
+            if (x < target) {
+                low = mid + 1;
+            } else if (x > target) {
+                high = mid - 1;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    };
+    ```
+#### 其他：
+1. 自己没想好二分查找，

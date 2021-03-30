@@ -23,6 +23,11 @@
 | 15 | 2021.3.19 | 10 | 网络基础 | 0.7 | js 基础和模块化知识 | 必备 | 
 | 16 | 2021.3.22 | 10 | 数据库 | 0.4 | 非常基础 | 必备 | 
 | 17 | 2021.3.23 | 10 | js | 0.6 | 基础和重复以前的 | 必备 |
+| 18 | 2021.3.24 | 10 | js | 0.6 | 基础和重复以前的 | 必备 |
+| 19 | 2021.3.25 | 10 | js | 0.5 | 基础 | 必备 |
+| 20 | 2021.3.26 | 10 | js | 0.5 | 基础 | 必备 |
+| 21 | 2021.3.29 | 10 | js | 0.6 | 基础 | 必备 |
+| 22 | 2021.3.30 | 10 | js | 0.7 | 基础 | 必备 |
 ## 内容
 ### 2021.2.24 
 1. for ... in    
@@ -698,4 +703,186 @@ DATEADD() : 函数在日期中添加或减去指定的时间间隔。
     String(new function(){ return new String('foo'); })
     "foo"
     ```
-4. 
+### 2021.3.24
+1. angular   
+    ng-route  自带路由
+    ng-template 寄存方式
+    ng-model 指令绑定了 HTML 表单元素到 scope 变量中
+    ng-controller 指定控制器
+2. event 阻止默认事件和冒泡事件方法   
+    阻止默认事件：
+    ```javascript
+    e.preventDefault()
+    e.returnValue = false  (IE)
+    ```
+    阻止冒泡：
+    ```javascript
+    e.stopPropagation()
+    e.cancelBubble = true (IE)
+    ```
+3. 正则表达式的一些组合    
+    - /[^pattern]/ : 表示非
+      /^pattern/ : 表示以...开头
+    - /(?=pattern)/ : 表示正向先行断言，代表字符串中的一个位置，紧接该位置之后的字符序列能够匹配 pattern。
+4. 页面加载完成触发的事件   
+    A. readystatechange
+        document 有 readyState 属性来描述 document 的 loading 状态，readyState 的改变会触发 readystatechange 事件.
+        - loading : 文档仍然在加载
+        - interactive : 文档结束加载并且被解析，但是像图片，样式，frame 之类的子资源仍在加载
+        - complete : 文档和子资源已经结束加载，该状态表明将要触发 load 事件。
+        因此 readystatechange 在 onload 之前触发。
+
+    B.onpageshow
+        onpageshow 事件在用户浏览网页时触发。
+        onpageshow 事件类似于 onload 事件，onload 事件在页面第一次加载时触发， onpageshow 事件在每次加载页面时触发，即 onload 事件在页面从浏览器缓存中读取时不触发。
+
+    C. beforeunload
+        当浏览器窗口，文档或其资源将要卸载时，会触发 beforeunload 事件。这个文档是依然可见的，并且这个事件在这一刻是可以取消的.
+        如果处理函数为 Event 对象的 returnValue 属性赋值非空字符串，浏览器会弹出一个对话框，来询问用户是否确定要离开当前页面（如下示例）。有些浏览器会将返回的字符串展示在弹框里，但有些其他浏览器只展示它们自定义的信息。没有赋值时，该事件不做任何响应。
+
+    D.DOMContentLoaded
+        当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载。
+        另一个不同的事件 load 应该仅用于检测一个完全加载的页面。因此DOMContentLoaded 是 HTML 完全加载和解析完成之后发生的，发生时间点要早于 load，选D。
+        在使用 DOMContentLoaded 更加合适的情况下使用 load 是一个令人难以置信的流行的错误，所以要谨慎。
+        注意：DOMContentLoaded 事件必须等待其所属 script 之前的样式表加载解析完成才会触发。
+5. 隐式转换 : https://blog.csdn.net/y_programmer_ape/article/details/106818488
+    - 非数值类型数据进行算数运算
+        a. 字符串类型的 + 运算
+        b. 数据类型是非字符串类型时进行算数运算
+    - 非布尔值进行逻辑运算
+    - 非数值数据的关系运算
+    - 非布尔值进行条件运算
+    - if 条件句
+### 2021.3.25
+1. cookie 过期时间   
+    cookie 的有效时间默认为 -1，如果不进行设置的话，就会默认在浏览器会话关闭时结束。
+    可以通过 setMaxAge() 方法设置 cookie 的生命期。
+    当 setMaxAge(0) 表示立刻删除该浏览器上指定的 cookie
+2. angularjs : 前端mvc，极大降低前端开发的耦合; 大大减少了对DOM的访问    
+   jQuery : 极大的丰富了DOM操作
+3. ECMAScript 的全局函数
+    - 个人记忆方法：6（编码相关）+ 2（数据处理）+ 4（数字相关）+ 1（特殊）
+    - 编码相关：
+        escape()、unescape()、encodeURI()、decodeURI()、encodeURIComponent()、decodeURIComponent()
+    - 数据处理：
+        Number()、String()
+    - 数字相关：
+        isFinite()、isNaN()、parseFloat()、parseInt()
+    - 特殊：
+        eval()
+    *setTimeout 是在 window 下面的，是宿主环境提供的，即各大浏览器自己实现的 api，不属于 es 标准*
+4. document对象方法叙述辨认   
+    - onload 为 document 对象的属性，而不是方法：
+    - ParentNode.children 是一个只读属性，返回一个节点的子元素，是一个动态更新的 HTMLCollection 类型。不是 document 对象的方法。
+    - AJAX 不是 JavaScript 的规范，它只是一个缩写：Asynchronous JavaScript and XML，意思就是用JavaScript 执行异步网络请求。在现代浏览器中主要依靠 XmlHttpRequest 对象。
+5. 不支持冒泡的事件   
+    冒泡事件很多，常见的不支持冒泡事件有：focus、blur、mouseenter、mouseleave、load、unload、resize
+    *妈 (mouseenter) 妈 (mouseleave) 不 (blur) 放 (focus) 心你 (load,unload,resize)*
+### 2021.3.26
+1. angular.js 的 $apply() 的作用
+    待调查......
+2. 立即执行函数和作用域：
+    ```javascript
+    var foo = { n: 1 };
+    (function(foo){            // 形参foo同实参foo一样指向同一片内存空间，这个空间里的n的值为1
+        var foo;               // 优先级低于形参，无效。
+        console.log(foo.n);    // 输出1
+        foo.n = 3;             // 形参与实参foo指向的内存空间里的n的值被改为3
+        foo = { n: 2 };           // 形参foo指向了新的内存空间，里面n的值为2.
+        console.log(foo.n);    // 输出新的内存空间的n的值
+    })(foo);
+    console.log(foo.n);        // 实参foo的指向还是原来的内存空间，里面的n的值为3.
+    ```
+3. 作用域
+    ```javascript
+    function test(){
+        var n = 4399;
+        function add() {
+            n++;
+            console.log(n);
+        }
+        return {n: n, add: add}
+    }
+    var result = test();
+    var result2 = test();
+    result.add();  // 4399 + 1
+    result.add();  // 4400 + 1
+    console.log(result.n); // n 指向 test 中的 n 变量, 与 add 函数没有关系，故即 4399 
+    result2.add(); // 4399 + 1 , 与 result 的作用域分开
+    ```
+4. angularjs 指令中哪种作用域可以继承父scope?
+    scope: true和transclude: true会创建新的子作用域，并且进行原型继承；
+    scope: {...} 会创建新的独立作用域，不会进行原型继承;
+    默认情况下创建directive使用了scope: false，不会创建子作用域.
+5. 在JS里判断一个对象oStringObject是否为String
+    ```javascript
+    oStringObject instanceof String   // string
+    typeof oStringObject  // 'object'
+    /**
+    * String('hello') ： 字符串对象, object 类型
+    * 'hello': 字符串，string 类型 
+    */
+    ```
+    当执行 ```'hello'.length``` 时，发现可以意料之中的返回 5，你们就觉得 ```'hello'``` 就是 String 对象，不然它怎么会有 String 对象的属性。其实，这是由于 JS 在执行到这条语句的时候，内部将 'hello' 包装成了一个 String 对象，执行完后，再把这个对象丢弃了，这种语法叫做 *“装箱”*，在其他面向对象语言里也有（如 C#）。不要认为 JS 帮你装箱了，你就可以在写代码的时候不分箱里箱外了！
+### 2021.3.29
+1. var 与 let 作用域 ：
+    ```javascript
+    /**
+    * var : 函数作用域, 异步函数在 for 循环结束后还未执行，函数作用域的 i 变成了5。
+    * let : 块级作用域, 执行时，每一次 for 循环都会产生一个块级作用域。
+    * requestAnimationFrame ： https://www.jianshu.com/p/fa5512dfb4f5
+    */
+    for(var i = 0; i < 5; i++){
+        requestAnimationFrame(() => console.log(i)); // 5 5 5 5 5 
+    }
+    for(let i = 0; i < 5; i++){
+        requestAnimationFrame(() => console.log(i));  // 0 1 2 3 4
+    }
+    ```
+2. 等号的连接性 
+    ```javascript
+    (function() {
+      var a = b = 5;  // var a = b;  b = 5; b 为全局变量
+    })();   
+    console.log(b); // 5 
+    // a 声明的是函数的局部变量, 在函数结束是就销毁了, 所以在全局下找不到 a, 于是报错
+    console.log(a); // Uncaught ReferenceError: a is not defined
+    ```
+3. IDCard : https://segmentfault.com/a/1190000016696368   
+4. 将集合转化成为数组
+    ```javascript
+    Array.from(A)
+    [].slice.apply(A)
+    [...A]
+    [].map.call(A, o => o)
+    ```
+
+### 2021.3.30
+1. let暂时性死区
+    ```javascript
+    let x = 10;
+    let foo = () => {
+        console.log(x);  // ReferenceError
+        let x = 20;   
+        x++;
+    }
+    foo();
+    let x = 10;
+    let foo = () => {
+        console.log(x);  // 10
+        var x = 20;   
+        x++;
+    }
+    foo();
+    ```
+    暂时死区问题(temperal dead zone): ![](./img/17.png)
+    就是说虽然let语句不像var语句会产生 hoisting（变量提升），JavaScript引擎也会意识到在后边的let定义，只是不支持在let声明语句之前引用该变量而已。所以，只要在同一个block中，let是在后边定义的，就不能在之前引用该变量。与此同时，也不能再去取嵌套外层的值了（x=1）
+2. void 表达式
+    ```javascript
+    /**
+     * void 作为运算符后面接的是表达式，void expression。而 void(0) 也是被当做 void 0。如果直接 void()，那么我觉得应该是把 void 当做函数使用了，但是此时 void 并没有定义。
+     */
+    void  0; // undefined
+    void (0); // undefined
+    void (); // SyntaxError 语法错误
+    ```

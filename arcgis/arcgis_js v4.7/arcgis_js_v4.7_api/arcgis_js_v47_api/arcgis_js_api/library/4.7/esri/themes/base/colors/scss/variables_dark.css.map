@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "variables_dark.scss"
+    ],
+    "names": [],
+    "file": "variables_dark.css"
+}
