@@ -29,6 +29,7 @@
 | 21 | 2021.3.26 | 83. 删除排序链表中的重复元素 | 链表操作 | 简单 | 是 | 是 | 1 |  |
 | 22 | 2021.3.29 | 190. 颠倒二进制位 | 位操作 | 简单 | 否 | 否 | 1 |  |
 | 23 | 2021.3.30 | 74. 搜索二维矩阵 | 二分查找 | 中等 | 是 | 是 | 2 |  |
+| 24 | 2021.3.31 | 90. 子集 II | 子集枚举 | 中等 | 否 | 否 | 2 |  |
 ## 内容
 
 ### 2021.2.26 
@@ -1975,3 +1976,63 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 1. 自己没想好二分查找，
+
+### 2021.3.31
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/subsets-ii/)
+#### 题目理解：
+```javascript
+/**
+ * 排列组合
+ */
+```
+#### 解决办法：
+1. 官方解答 - [迭代法实现子集枚举]
+    ```javascript
+    var subsetsWithDup = function(nums) {
+        nums.sort((a, b) => a - b);
+        let t = [], ans = [];
+        const n = nums.length;
+        for (let mask = 0; mask < (1 << n); ++mask) {
+            t = [];
+            let flag = true;
+            for (let i = 0; i < n; ++i) {
+                if ((mask & (1 << i)) != 0) {
+                    if (i > 0 && (mask >> (i - 1) & 1) == 0 && nums[i] == nums[i - 1]) {
+                        flag = false;
+                        break;
+                    }
+                    t.push(nums[i]);
+                }
+            }
+            if (flag) {
+                ans.push(t.slice());
+            }
+        }
+        return ans;
+    };
+    ```
+2. 官方解答 - [递归法实现子集枚举]
+    ```javascript
+    var subsetsWithDup = function(nums) {
+        nums.sort((a, b) => a - b);
+        let t = [], ans = [];
+        const dfs = (choosePre, cur, nums) => {
+            if (cur === nums.length) {
+                ans.push(t.slice());
+                return;
+            }
+            dfs(false, cur + 1, nums);
+            if (!choosePre && cur > 0 && nums[cur - 1] === nums[cur]) {
+                return;
+            }
+            t.push(nums[cur]);
+            dfs(true, cur + 1, nums);
+            t = t.slice(0, t.length - 1);
+        }
+        dfs(false, 0, nums);
+        return ans;
+    };
+    ```
+#### 其他：
+1. 子集枚举
