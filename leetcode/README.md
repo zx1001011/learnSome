@@ -30,6 +30,9 @@
 | 22 | 2021.3.29 | 190. 颠倒二进制位 | 位操作 | 简单 | 否 | 否 | 1 |  |
 | 23 | 2021.3.30 | 74. 搜索二维矩阵 | 二分查找 | 中等 | 是 | 是 | 2 |  |
 | 24 | 2021.3.31 | 90. 子集 II | 子集枚举 | 中等 | 否 | 否 | 2 |  |
+| 25 | 2021.4.1 | 1006. 笨阶乘 | 栈或数学 | 中等 | 是 | 是 | 2 |  |
+| 26 | 2021.4.2 | 面试题 17.21. 直方图的水量 | 动态规划或单调栈或者双指针 | 困难 | 否 | 否 | 3 |  |
+
 ## 内容
 
 ### 2021.2.26 
@@ -2036,3 +2039,192 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 1. 子集枚举
+
+### 2021.4.1
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/clumsy-factorial/)
+#### 题目理解：
+```javascript
+/**
+ * 先乘除后加减
+ */
+```
+#### 解决办法：
+1. 直接解答 - [先乘除后加减]
+    ```javascript
+    /**
+     * @param {number} N
+    * @return {number}
+    */
+    var clumsy = function(N) {
+        /**
+        * 先乘除后加减
+        */
+        var res = 0
+        var i = N
+        var opt = 0
+        var tmp = i--
+        while(i > 0) {
+            switch(opt) {
+                case 0:
+                    tmp *= i
+                    break
+                case 1:
+                    tmp /= i
+                    break
+                case 2:
+                    tmp = parseInt(tmp) + i
+                    res += tmp
+                    break
+                case 3:
+                    tmp = -1 * i
+                    opt = -1
+                    break
+            }
+            opt += 1
+            i -= 1
+        }
+        if (opt !== 3) res += tmp
+        return res
+    };
+    ```
+2. 官方解答 - [使用栈模拟]
+    ```javascript
+    var clumsy = function(N) {
+        const stack = [N--];
+
+        let index = 0; // 用于控制乘、除、加、减
+        while (N > 0) {
+            if (index % 4 == 0) {
+                stack.push(stack.pop() * N);
+            } else if (index % 4 == 1) {
+                const cur = stack.pop();
+                stack.push(cur > 0 ? Math.floor(cur / N) : Math.ceil(cur / N));
+            } else if (index % 4 == 2) {
+                stack.push(N);
+            } else {
+                stack.push(-N);
+            }
+            index++;
+            N--;
+        }
+
+        // 把栈中所有的数字依次弹出求和
+        let sum = 0;
+        stack.forEach((element) => {
+            sum += element;
+        })
+        return sum;
+    };
+    ```
+3. 官方解答 - [数学]
+    ```javascript
+    var clumsy = function(N) {
+        if (N === 1) {
+            return 1;
+        } else if (N === 2) {
+            return 2;
+        } else if (N === 3) {
+            return 6;
+        } else if (N === 4) {
+            return 7;
+        }
+
+        if (N % 4 === 0) {
+            return N + 1;
+        } else if (N % 4 <= 2) {
+            return N + 2;
+        } else {
+            return N - 1;
+        }
+    };
+    ```
+#### 其他：
+1. 
+
+### 2021.4.2
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/volume-of-histogram-lcci/)
+#### 题目理解：
+```javascript
+/**
+ * 要放假了~~~，完全没心思！！！
+ */
+```
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    /**
+     * @param {number[]} height
+    * @return {number}
+    */
+    var trap = function(height) {
+        const n = height.length;
+        if (n == 0) {
+            return 0;
+        }
+
+        const leftMax = new Array(n).fill(0);
+        leftMax[0] = height[0];
+        for (let i = 1; i < n; ++i) {
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+        }
+
+        const rightMax = new Array(n).fill(0);
+        rightMax[n - 1] = height[n - 1];
+        for (let i = n - 2; i >= 0; --i) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+        }
+
+        let ans = 0;
+        for (let i = 0; i < n; ++i) {
+            ans += Math.min(leftMax[i], rightMax[i]) - height[i];
+        }
+        return ans;
+    };
+    ```
+2. 官方解答 - [单调栈]
+    ```javascript
+    var trap = function(height) {
+        let ans = 0;
+        const stack = [];
+        const n = height.length;
+        for (let i = 0; i < n; ++i) {
+            while (stack.length && height[i] > height[stack[stack.length - 1]]) {
+                const top = stack.pop();
+                if (!stack.length) {
+                    break;
+                }
+                const left = stack[stack.length - 1];
+                const currWidth = i - left - 1;
+                const currHeight = Math.min(height[left], height[i]) - height[top];
+                ans += currWidth * currHeight;
+            }
+            stack.push(i);
+        }
+        return ans;
+    };
+    ```
+3. 官方解答 - [双指针]
+    ```javascript
+    var trap = function(height) {
+        let ans = 0;
+        let left = 0, right = height.length - 1;
+        let leftMax = 0, rightMax = 0;
+        while (left < right) {
+            leftMax = Math.max(leftMax, height[left]);
+            rightMax = Math.max(rightMax, height[right]);
+            if (height[left] < height[right]) {
+                ans += leftMax - height[left];
+                ++left;
+            } else {
+                ans += rightMax - height[right];
+                --right;
+            }
+        }
+        return ans;
+    };
+    ```
+#### 其他：
+1. 人生的灵性
+ 
