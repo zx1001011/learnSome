@@ -32,6 +32,8 @@
 | 24 | 2021.3.31 | 90. 子集 II | 子集枚举 | 中等 | 否 | 否 | 2 |  |
 | 25 | 2021.4.1 | 1006. 笨阶乘 | 栈或数学 | 中等 | 是 | 是 | 2 |  |
 | 26 | 2021.4.2 | 面试题 17.21. 直方图的水量 | 动态规划或单调栈或者双指针 | 困难 | 否 | 否 | 3 |  |
+| 27 | 2021.4.8 | 153. 寻找旋转排序数组中的最小值 | 二分查找 | 中等 | 是 | 是 | 1 |  |
+
 
 ## 内容
 
@@ -2227,4 +2229,59 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 1. 人生的灵性
+ 
+### 2021.4.8
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
+#### 题目理解：
+```javascript
+/**
+* a. 最小的可能是第一个
+* b. 遇到 从大变小的那么那个小数是最小值
+*/
+```
+#### 解决办法：
+1. 直接解答 - [直接查找]
+    ```javascript
+    /**
+    * @param {number[]} nums
+    * @return {number}
+    */
+    var findMin = function(nums) {
+        /**
+        * a. 最小的可能是第一个
+        * b. 遇到 从大变小的那么那个小数是最小值
+        */
+        let res = nums[0]
+        for (let i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i+1]) {
+                res = nums[i+1]
+                break
+            }
+        }
+        return res
+    };
+    ```
+2. 官方解答 - [二分查找]
+    ```c++
+    class Solution {
+    public:
+        int findMin(vector<int>& nums) {
+            int low = 0;
+            int high = nums.size() - 1;
+            while (low < high) {
+                int pivot = low + (high - low) / 2;
+                if (nums[pivot] < nums[high]) {
+                    high = pivot;
+                }
+                else {
+                    low = pivot + 1;
+                }
+            }
+            return nums[low];
+        }
+    };
+    ```
+#### 其他：
+1. 二分查找想到了，但是不知道这里怎么用
  
