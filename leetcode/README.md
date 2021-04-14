@@ -33,6 +33,10 @@
 | 25 | 2021.4.1 | 1006. 笨阶乘 | 栈或数学 | 中等 | 是 | 是 | 2 |  |
 | 26 | 2021.4.2 | 面试题 17.21. 直方图的水量 | 动态规划或单调栈或者双指针 | 困难 | 否 | 否 | 3 |  |
 | 27 | 2021.4.8 | 153. 寻找旋转排序数组中的最小值 | 二分查找 | 中等 | 是 | 是 | 1 |  |
+| 28 | 2021.4.9 | 154. 寻找旋转排序数组中的最小值 II | 二分查找 | 困难 | 是 | 是 | 1 |  |
+| 29 | 2021.4.12 | 179. 最大数 | 排序 | 中等 | 是 | 是 | 1 |  |
+| 30 | 2021.4.13 | 783. 二叉搜索树节点最小距离 | 遍历 | 简单 | 否 | 是 | 1 |  |
+| 31 | 2021.4.14 | 208.实现Trie(前缀树) | 前缀树 | 中等 | 是 | 否 | 1 |  |
 
 
 ## 内容
@@ -2284,4 +2288,272 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 1. 二分查找想到了，但是不知道这里怎么用
+
+### 2021.4.9
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
+#### 题目理解：
+```javascript
+/**
+* a. 最小的可能是第一个
+* b. 遇到 从大变小的那么那个小数是最小值
+*/
+```
+#### 解决办法：
+1. 直接解答 - [直接查找]
+    ```javascript
+    /**
+    * @param {number[]} nums
+    * @return {number}
+    */
+    var findMin = function(nums) {
+        /**
+        * a. 最小的可能是第一个
+        * b. 遇到 从大变小的那么那个小数是最小值
+        */
+        let res = nums[0]
+        for (let i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i+1]) {
+                res = nums[i+1]
+                break
+            }
+        }
+        return res
+    };
+    ```
+2. 官方解答 - [二分查找]
+    ```javascript
+    var findMin = function(nums) {
+        let low = 0
+        let high = nums.length - 1
+        while(low < high) {
+            const pivot = low + Math.floor((high - low) / 2);
+            if (nums[pivot] < nums[high]) {
+                high = pivot;
+            } else if (nums[pivot] > nums[high]) {
+                low = pivot + 1;
+            } else {
+                high -= 1;
+            }
+        }
+        return nums[low]
+    };
+    ```
+#### 其他：
+1. 与前一道题相似
  
+### 2021.4.12
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/largest-number/)
+#### 题目理解：
+```javascript
+/**
+* 全遍历？
+* 动态规划 ？
+*/
+```
+#### 解决办法：
+1. 官方解答 - [排序]
+    ```javascript
+    /**
+    * @param {number[]} nums
+    * @return {string}
+    */
+    var largestNumber = function(nums) {
+        nums.sort((x, y) => {
+            let sx = 10, sy = 10;
+            while (sx <= x) {
+                sx *= 10;
+            }
+            while (sy <= y) {
+                sy *= 10;
+            }
+            return '' + (sx * y + x) - ('' + (sy * x + y));
+        })
+        if (nums[0] === 0) {
+            return '0';
+        }
+        return nums.join('');
+    };
+    ```
+
+#### 其他：
+1. 规律还是可信的，不要想太多
+
+
+### 2021.4.13
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/)
+#### 题目理解：
+```javascript
+/**
+ * 遍历: 必不可少
+ * 二叉搜索树的特点排序：左中右
+ * 所以：算 中 - 左， 右 - 中 ； 比较最小差值即可
+ */
+```
+#### 解决办法：
+1. 错误解答 - [遍历了相邻的差值]
+    ```javascript
+    /**
+    * Definition for a binary tree node.
+    * function TreeNode(val, left, right) {
+    *     this.val = (val===undefined ? 0 : val)
+    *     this.left = (left===undefined ? null : left)
+    *     this.right = (right===undefined ? null : right)
+    * }
+    */
+    /**
+    * @param {TreeNode} root
+    * @return {number}
+    */
+    var minDiffInBST = function(root) {
+        /**
+        * 遍历: 必不可少
+        * 二叉搜索树的特点排序：左中右
+        * 所以：算 中 - 左， 右 - 中 ； 比较最小差值即可
+        */
+        return bst(root, Number.MAX_VALUE)
+    };
+
+    function bst(root, num) {
+        if (!root) return num
+        if (root.left) {
+            let tmp = root.val - root.left.val
+            num = tmp < num ? tmp : num
+            let leftNum = bst(root.left, num)
+            num = leftNum < num ? leftNum : num
+        }
+        if (root.right) {
+            let tmp = root.right.val - root.val
+            num = tmp < num ? tmp : num
+            let rightNum = bst(root.right, num)
+            num = rightNum < num ? rightNum : num
+        }
+        return num
+    }
+    ```
+
+2. 官方解答 - [中序遍历二叉搜索树] 
+    ```javascript
+    var minDiffInBST = function(root) {
+        let ans = Number.MAX_SAFE_INTEGER, pre = -1;
+        const dfs = (root) => {
+            if (root === null) {
+                return;
+            }
+            dfs(root.left);
+            if (pre == -1) {
+                pre = root.val;
+            } else {
+                ans = Math.min(ans, root.val - pre);
+                pre = root.val;
+            }
+            dfs(root.right);
+        }
+        dfs(root);
+        return ans;
+    };
+    ```
+#### 其他：
+1. 二叉搜索树的排序来，但是不是左右两个差就可以算出最小差值的。
+
+### 2021.4.14
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)
+#### 题目理解：
+```javascript
+/**
+ * 直接根据意思来了，利用数组
+ */
+```
+#### 解决办法：
+1. 直接解答 - [数组]
+    ```javascript
+    /**
+    * Initialize your data structure here.
+    */
+    var Trie = function() {
+        this.list = []
+    };
+
+    /**
+    * Inserts a word into the trie. 
+    * @param {string} word
+    * @return {void}
+    */
+    Trie.prototype.insert = function(word) {
+        this.list.push(word)
+    };
+
+    /**
+    * Returns if the word is in the trie. 
+    * @param {string} word
+    * @return {boolean}
+    */
+    Trie.prototype.search = function(word) {
+        if (this.list.indexOf(word) !== -1) return true
+        return false
+    };
+
+    /**
+    * Returns if there is any word in the trie that starts with the given prefix. 
+    * @param {string} prefix
+    * @return {boolean}
+    */
+    Trie.prototype.startsWith = function(prefix) {
+        for (let i = 0; i < this.list.length; i++) {
+            if (this.list[i].startsWith(prefix)) return true
+        }
+        return false
+    };
+
+    /**
+    * Your Trie object will be instantiated and called as such:
+    * var obj = new Trie()
+    * obj.insert(word)
+    * var param_2 = obj.search(word)
+    * var param_3 = obj.startsWith(prefix)
+    */
+    ```
+
+2. 官方解答 - [字典树] 
+    ```javascript
+    var Trie = function() {
+        this.children = {};
+    };
+
+    Trie.prototype.insert = function(word) {
+        let node = this.children;
+        for (const ch of word) {
+            if (!node[ch]) {
+                node[ch] = {};
+            }
+            node = node[ch];
+        }
+        node.isEnd = true;
+    };
+
+    Trie.prototype.searchPrefix = function(prefix) {
+        let node = this.children;
+        for (const ch of prefix) {
+            if (!node[ch]) {
+                return false;
+            }
+            node = node[ch];
+        }
+        return node;
+    }
+
+    Trie.prototype.search = function(word) {
+        const node = this.searchPrefix(word);
+        return node !== undefined && node.isEnd !== undefined;
+    };
+
+    Trie.prototype.startsWith = function(prefix) {
+        return this.searchPrefix(prefix);
+    };
+    ```
+#### 其他：
+1. 没有考虑前缀树的特殊性，题目不是很看得懂，直接根据案例函数的功能来写了
+
