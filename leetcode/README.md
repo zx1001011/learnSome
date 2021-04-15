@@ -2557,3 +2557,78 @@ var generateMatrix = function(n) {
 #### 其他：
 1. 没有考虑前缀树的特殊性，题目不是很看得懂，直接根据案例函数的功能来写了
 
+### 2021.4.15
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/house-robber-ii/)
+#### 题目理解：
+```javascript
+/**
+* 奇偶区分：
+*   1. 奇数个： 头尾是相邻的，头可加或者尾可加，比较大小
+*   2. 偶数个： 间隔加
+* 
+* k 表示 间隔距离
+*/
+```
+#### 解决办法：
+1. 直接解答 - [数组]
+    ```javascript
+    /**
+    * @param {number[]} nums
+    * @return {number}
+    */
+    var rob = function(nums) {
+        /**
+        * 奇偶区分：
+        *   1. 奇数个： 头尾是相邻的，头可加或者尾可加，比较大小
+        *   2. 偶数个： 间隔加
+        * 
+        * k 表示 间隔距离
+        */
+        let len = nums.length
+        let res = [0, 0]
+        for (let i = 0; i < len; i++) {
+            if (i % 2) {
+                res[0] += nums[i]  // 第一间隔
+            } else {
+                res[1] += nums[i]  // 第二间隔
+            }
+        }
+        if (len > 1 && len % 2 === 1 ) {
+            if (nums[0] > nums[len - 1]) {
+                res[1] -= nums[len - 1]
+            } else {
+                res[1] -= nums[0]
+            }
+        }
+        return Math.max(res[0], res[1])
+    };
+    ```
+    不通过案例： [1,3,1,3,100]
+    输出：101
+    答案：103， k 间隔为 2
+
+2. 官方解答 - [动态规划] 
+    ```javascript
+    var rob = function(nums) {
+        const length = nums.length;
+        if (length === 1) {
+            return nums[0];
+        } else if (length === 2) {
+            return Math.max(nums[0], nums[1]);
+        }
+        return Math.max(robRange(nums, 0, length - 2), robRange(nums, 1, length - 1));
+    };
+
+    const robRange = (nums, start, end) => {
+        let first = nums[start], second = Math.max(nums[start], nums[start + 1]);
+        for (let i = start + 2; i <= end; i++) {
+            const temp = second;
+            second = Math.max(first + nums[i], second);
+            first = temp;
+        }
+        return second;
+    }
+    ```
+#### 其他：
+1. 这题原来是动态规划，案例思考只局限在了示例上
