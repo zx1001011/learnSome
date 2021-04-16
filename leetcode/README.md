@@ -37,7 +37,8 @@
 | 29 | 2021.4.12 | 179. 最大数 | 排序 | 中等 | 是 | 是 | 1 |  |
 | 30 | 2021.4.13 | 783. 二叉搜索树节点最小距离 | 遍历 | 简单 | 否 | 是 | 1 |  |
 | 31 | 2021.4.14 | 208.实现Trie(前缀树) | 前缀树 | 中等 | 是 | 否 | 1 |  |
-
+| 32 | 2021.4.15 | 213. 打家劫舍 II | 动态规划 | 中等 | 否 | 否 | 1 |  |
+| 33 | 2021.4.16 | 87. 扰乱字符串 | 动态规划 | 困难 | 否 | 否 | 1 |  |
 
 ## 内容
 
@@ -2632,3 +2633,81 @@ var generateMatrix = function(n) {
     ```
 #### 其他：
 1. 这题原来是动态规划，案例思考只局限在了示例上
+
+### 2021.4.16 
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/scramble-string/)
+#### 题目理解：
+```javascript
+/**
+* 递归
+* 遍历
+* 动态规划
+* 题目没怎么看懂
+*/
+```
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    var isScramble = function(s1, s2) {
+        const length = s1.length;
+        memo = new Array(length).fill(0).map(() => new Array(length).fill(0).map(() => new Array(length + 1).fill(0)));
+        return dfs(0, 0, length, s1, s2, memo);
+    };
+
+    const dfs = function(i1, i2, length, s1, s2, memo) {
+        if (memo[i1][i2][length] !== 0) {
+            return memo[i1][i2][length] === 1;
+        }
+
+        // 判断两个子串是否相等
+        if (s1.slice(i1, i1 + length) === s2.slice(i2, i2 + length)) {
+            memo[i1][i2][length] = 1;
+            return true;
+        }
+
+        // 判断是否存在字符 c 在两个子串中出现的次数不同
+        if (!checkIfSimilar(i1, i2, length, s1, s2)) {
+            memo[i1][i2][length] = -1;
+            return false;
+        }
+
+        // 枚举分割位置
+        for (let i = 1; i < length; ++i) {
+            // 不交换的情况
+            if (dfs(i1, i2, i, s1, s2, memo) && dfs(i1 + i, i2 + i, length - i, s1, s2, memo)) {
+                memo[i1][i2][length] = 1;
+                return true;
+            }
+            // 交换的情况
+            if (dfs(i1, i2 + length - i, i, s1, s2, memo) && dfs(i1 + i, i2, length - i, s1, s2, memo)) {
+                memo[i1][i2][length] = 1;
+                return true;
+            }
+        }
+
+        memo[i1][i2][length] = -1;
+        return false;
+    }
+
+    const checkIfSimilar = function(i1, i2, length, s1, s2) {
+        const freq = new Map();
+        for (let i = i1; i < i1 + length; ++i) {
+            const c = s1[i];
+            freq.set(c, (freq.get(c) || 0) + 1);
+        }
+        for (let i = i2; i < i2 + length; ++i) {
+            const c = s2[i];
+            freq.set(c, (freq.get(c) || 0) - 1);
+        }
+        for (const value of freq.values()) {
+            if (value !== 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    ```
+
+#### 其他：
+1. 无
