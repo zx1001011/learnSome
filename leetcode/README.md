@@ -39,6 +39,7 @@
 | 31 | 2021.4.14 | 208.实现Trie(前缀树) | 前缀树 | 中等 | 是 | 否 | 1 |  |
 | 32 | 2021.4.15 | 213. 打家劫舍 II | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 33 | 2021.4.16 | 87. 扰乱字符串 | 动态规划 | 困难 | 否 | 否 | 1 |  |
+| 34 | 2021.4.19 | 27. 移除元素 | 双指针 | 简单 | 是 | 是 | 1 |  |
 
 ## 内容
 
@@ -2711,3 +2712,70 @@ var generateMatrix = function(n) {
 
 #### 其他：
 1. 无
+
+### 2021.4.19 
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/scramble-string/)
+#### 题目理解：
+```javascript
+/**
+* 想到双指针了，
+* 没有理清头绪，
+* 为了保持数组的顺序的话，还是需要一个个移动。
+* 但是重点就是本题无需保持顺序
+*/
+```
+#### 解决办法：
+1. 直接解答 - [直接移动]
+    ```javascript
+    var removeElement = function(nums, val) {
+        let len = nums.length
+        for (let i = 0; i < nums.length; ) {
+            if (val === nums[i]) {
+                for (let j = i; j < nums.length; j++) {
+                    nums[j] = nums[j+1]
+                }
+                len -= 1
+            } else {
+                i += 1
+            }
+        }
+        return len
+    }; 
+    ```
+
+2. 官方解答 - [双指针]
+    ```javascript
+    var removeElement = function(nums, val) {
+        const n = nums.length;
+        let left = 0;
+        for (let right = 0; right < n; right++) {
+            if (nums[right] !== val) {
+                nums[left] = nums[right];
+                left++;
+            }
+        }
+        return left;
+    };
+    ```
+
+3. 官方解答 - [双指针优化]
+    ```javascript
+    var removeElement = function(nums, val) {
+        let left = 0, right = nums.length;
+        while (left < right) {
+            if (nums[left] === val) {
+                nums[left] = nums[right - 1];
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return left;
+    };
+    ```
+
+#### 其他：
+1. 无
+
+### 2021.4.20 
