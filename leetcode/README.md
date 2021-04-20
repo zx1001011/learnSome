@@ -40,6 +40,7 @@
 | 32 | 2021.4.15 | 213. 打家劫舍 II | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 33 | 2021.4.16 | 87. 扰乱字符串 | 动态规划 | 困难 | 否 | 否 | 1 |  |
 | 34 | 2021.4.19 | 27. 移除元素 | 双指针 | 简单 | 是 | 是 | 1 |  |
+| 35 | 2021.4.20 | 28. 实现 strStr() | 字符串匹配方法 | 简单 | 是 | 是 | 2+ |  |
 
 ## 内容
 
@@ -2779,3 +2780,83 @@ var generateMatrix = function(n) {
 1. 无
 
 ### 2021.4.20 
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/implement-strstr/)
+#### 题目理解：
+```javascript
+/**
+* 直接 indexOf 函数
+*/
+```
+#### 解决办法：
+1. 直接解答 - [indexOf 内置函数]
+    ```javascript
+    /**
+    * @param {string} haystack
+    * @param {string} needle
+    * @return {number}
+    */
+    var strStr = function(haystack, needle) {
+        return haystack.indexOf(needle)
+    };
+    ```
+
+2. 官方解答 - [暴力匹配]
+    - 前言
+        本题是经典的字符串单模匹配的模型，因此可以使用字符串匹配算法解决，常见的字符串匹配算法包括暴力匹配、\text{Knuth-Morris-Pratt}Knuth-Morris-Pratt 算法、\text{Boyer-Moore}Boyer-Moore 算法、\text{Sunday}Sunday 算法等，本文将讲解 \text{Knuth-Morris-Pratt}Knuth-Morris-Pratt 算法。
+
+        因为哈希方法可能出现哈希值相等但是字符串不相等的情况，而 \text{strStr}strStr 函数要求匹配结果必定正确，因此本文不介绍哈希方法，有兴趣的读者可以自行了解滚动哈希的实现（如 \text{Rabin-Karp}Rabin-Karp 算法）。
+
+    ```javascript
+    var strStr = function(haystack, needle) {
+        const n = haystack.length, m = needle.length;
+        for (let i = 0; i + m <= n; i++) {
+            let flag = true;
+            for (let j = 0; j < m; j++) {
+                if (haystack[i + j] != needle[j]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                return i;
+            }
+        }
+        return -1;
+    };
+    ```
+
+3. 官方解答 - [Knuth-Morris-Pratt 算法]
+    ```javascript
+    var strStr = function(haystack, needle) {
+        const n = haystack.length, m = needle.length;
+        if (m === 0) {
+            return 0;
+        }
+        const pi = new Array(m).fill(0);  // 通过 Pi 来标记
+        for (let i = 1, j = 0; i < m; i++) {
+            while (j > 0 && needle[i] !== needle[j]) {
+                j = pi[j - 1];
+            }
+            if (needle[i] == needle[j]) {
+                j++;
+            }
+            pi[i] = j;
+        }
+        for (let i = 0, j = 0; i < n; i++) {
+            while (j > 0 && haystack[i] != needle[j]) {
+                j = pi[j - 1];
+            }
+            if (haystack[i] == needle[j]) {
+                j++;
+            }
+            if (j === m) {
+                return i - m + 1;
+            }
+        }
+        return -1;
+    };
+    ```
+
+#### 其他：
+1. 这个方法有很多，需要花时间仔细看看
