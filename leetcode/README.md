@@ -42,6 +42,7 @@
 | 34 | 2021.4.19 | 27. 移除元素 | 双指针 | 简单 | 是 | 是 | 1 |  |
 | 35 | 2021.4.20 | 28. 实现 strStr() | 字符串匹配方法 | 简单 | 是 | 是 | 2+ |  |
 | 36 | 2021.4.21 | 91. 解码方法 | 动态规划 | 中等 | 否 | 否 | 1 |  |
+| 37 | 2021.4.22 | 363. 矩形区域不超过 K 的最大数值和 | 有序集合 | 困难 | 否 | 否 | 1 | 及其难，想不出来，也没看懂 |
 
 ## 内容
 
@@ -2916,3 +2917,95 @@ var generateMatrix = function(n) {
 
 #### 其他：
 1. ......
+
+### 2021.4.22
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/submissions/)
+#### 题目理解：
+```javascript
+var maxSumSubmatrix = function(matrix, k) {
+    /**
+     * 题目都有点看不懂
+     * 矩形区域不超过k的和，其中的最大值
+     * 用矩形算一遍和值，然后过滤得出结果
+     */
+    var rect = new Array();
+    var res = -1;
+    const getMaxLessThanK = function (k, a, b) {
+        if (b <= k) {
+            return Math.max(a, b);
+        }
+        return a
+    }
+    // 从 [0, 0] 开始的矩形  -> 将 [0, 0] 开始改变
+    for(var i = 0; i < matrix.length; i++) {
+        rect[i] = new Array();
+        for(var j = 0; j < matrix[i].length; j++) {
+            rect[i][j] = 0; // 0 表示只有一个空的红圈
+            if (i === 0 && j === 0) {
+                rect[0][0] = matrix[0][0]
+            }
+            if (i === 0 && j > 0) {
+                rect[i][j] = rect[i][j - 1] + matrix[i][j]
+            }
+            if (j === 0 && i > 0) {
+                rect[i][j] = rect[i - 1][j] + matrix[i][j]
+            }
+            if (j > 0 && i > 0) {
+                rect[i][j] = rect[i][j - 1] + rect[i - 1][j] + rect[i][j] - rect[i - 1][j - 1]
+            }
+            res = getMaxLessThanK(k, res, rect[i][j])
+        }
+    }
+    // 计算从 [x, y] 到 [x1, y1] 的矩形
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+            if (i > 0 || j > 0) {
+                // 有问题，不能随便产生一个矩形，此矩形靠边
+                for (var m = 0; m < i; m++) {
+                    var tmp = rect[i][j] - rect[m][j]
+                    rect[i][j] = getMaxLessThanK(k, rect[i][j], tmp)
+                }
+                for (var m = 0; m < j; m++) {
+                    var tmp = rect[i][j] - rect[i][m]
+                    rect[i][j] = getMaxLessThanK(k, rect[i][j], tmp)
+                }
+                res = Math.max(res, rect[i][j])
+            }
+        }   
+    }
+    return res
+};
+```
+#### 解决办法：
+1. 官方解答 - [有序集合]
+    ```javascript
+    class Solution {
+    public:
+        int maxSumSubmatrix(vector<vector<int>> &matrix, int k) {
+            int ans = INT_MIN;
+            int m = matrix.size(), n = matrix[0].size();
+            for (int i = 0; i < m; ++i) { // 枚举上边界
+                vector<int> sum(n);
+                for (int j = i; j < m; ++j) { // 枚举下边界
+                    for (int c = 0; c < n; ++c) {
+                        sum[c] += matrix[j][c]; // 更新每列的元素和
+                    }
+                    set<int> sumSet{0};
+                    int s = 0;
+                    for (int v : sum) {
+                        s += v;
+                        auto lb = sumSet.lower_bound(s - k);
+                        if (lb != sumSet.end()) {
+                            ans = max(ans, s - *lb);
+                        }
+                        sumSet.insert(s);
+                    }
+                }
+            }
+            return ans;
+        }
+    };
+    ```
+#### 其他：
+1. ......思路有问题，没有理清，需要将4层for改造，但是没想出来
