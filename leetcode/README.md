@@ -43,8 +43,10 @@
 | 35 | 2021.4.20 | 28. 实现 strStr() | 字符串匹配方法 | 简单 | 是 | 是 | 2+ |  |
 | 36 | 2021.4.21 | 91. 解码方法 | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 37 | 2021.4.22 | 363. 矩形区域不超过 K 的最大数值和 | 有序集合 | 困难 | 否 | 否 | 1 | 及其难，想不出来，也没看懂 |
+| 38 | 2021.4.23 | 368. 最大整除子集 | 动态规划 | 中等 | 否 | 否 | 1 |  |
+| 39 | 2021.4.25 | 897. 递增顺序搜索树 | 动态规划 | 简单 | 否 | 否 | 1 |  |
 
-## 内容
+## 已做内容
 
 ### 2021.2.26 
 #### 题目描述：
@@ -3009,3 +3011,132 @@ var maxSumSubmatrix = function(matrix, k) {
     ```
 #### 其他：
 1. ......思路有问题，没有理清，需要将4层for改造，但是没想出来
+
+### 2021.4.23 读书日（==)
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/largest-divisible-subset/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var largestDivisibleSubset = function(nums) {
+    var res = []
+    nums.sort((a, b) => a - b)
+
+    /**
+     * 有两个组成一个集合，那么就可以是一个新的
+     */
+
+
+
+    return res
+};
+```
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    var largestDivisibleSubset = function(nums) {
+        const len = nums.length;
+        nums.sort((a, b) => a - b);
+
+        // 第 1 步：动态规划找出最大子集的个数、最大子集中的最大整数
+        const dp = new Array(len).fill(1);
+        let maxSize = 1;
+        let maxVal = dp[0];
+        for (let i = 1; i < len; i++) {
+            for (let j = 0; j < i; j++) {
+                // 题目中说「没有重复元素」很重要
+                if (nums[i] % nums[j] === 0) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+
+            if (dp[i] > maxSize) {
+                maxSize = dp[i];
+                maxVal = nums[i];
+            }
+        }
+
+        // 第 2 步：倒推获得最大子集
+        const res = [];
+        if (maxSize === 1) {
+            res.push(nums[0]);
+            return res;
+        }
+        
+        for (let i = len - 1; i >= 0 && maxSize > 0; i--) {
+            if (dp[i] === maxSize && maxVal % nums[i] === 0) {
+                res.push(nums[i]);
+                maxVal = nums[i];
+                maxSize--;
+            }
+        }
+        return res;
+    };
+    ```
+#### 其他：
+1. TT 不会，可能想到了，但是动态规划一直没摸清套路，不会写
+
+## 本次新增
+
+### 2021.4.25
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/increasing-order-search-tree/)
+#### 题目理解：
+```javascript
+/**
+* 递归，这我还真想不到，只有经历过才能知道套路
+*/
+```
+#### 解决办法：
+1. 官方解答 - [在中序遍历的过程中改变节点指向]
+    ```javascript
+    var increasingBST = function(root) {
+        const dummyNode = new TreeNode(-1);
+        let resNode = dummyNode;
+        const inorder = (node) => {
+            if (!node) {
+                return;
+            }
+            inorder(node.left);
+            resNode.right = node;
+            node.left = null;
+            resNode = node;
+
+            inorder(node.right);
+        }
+        inorder(root);
+        return dummyNode.right;
+    };
+    ```
+
+2. 官方解答 - [中序遍历之后生成新的树]
+    ```javascript
+    var increasingBST = function(root) {
+        const res = [];
+        inorder(root, res);  // 遍历出来
+
+        const dummyNode = new TreeNode(-1);
+        let currNode = dummyNode;  // 生成新树
+        for (const value of res) {
+            currNode.right = new TreeNode(value);
+            currNode = currNode.right;
+        }
+        return dummyNode.right;
+    };
+
+    const inorder = (node, res) => {
+        if (!node) {
+            return;
+        }
+        inorder(node.left, res);
+        res.push(node.val);
+        inorder(node.right, res);
+    }
+    ```
+#### 其他：
+1.  数的遍历和递归算法
+
+
