@@ -45,6 +45,7 @@
 | 37 | 2021.4.22 | 363. 矩形区域不超过 K 的最大数值和 | 有序集合 | 困难 | 否 | 否 | 1 | 及其难，想不出来，也没看懂 |
 | 38 | 2021.4.23 | 368. 最大整除子集 | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 39 | 2021.4.25 | 897. 递增顺序搜索树 | 动态规划 | 简单 | 否 | 否 | 1 |  |
+| 40 | 2021.4.26 | 1011. 在 D 天内送达包裹的能力 | 二分查找 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -3079,8 +3080,6 @@ var largestDivisibleSubset = function(nums) {
 #### 其他：
 1. TT 不会，可能想到了，但是动态规划一直没摸清套路，不会写
 
-## 本次新增
-
 ### 2021.4.25
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/increasing-order-search-tree/)
@@ -3139,4 +3138,61 @@ var largestDivisibleSubset = function(nums) {
 #### 其他：
 1.  数的遍历和递归算法
 
+
+## 本次新增
+### 2021.4.26
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} weights
+ * @param {number} D
+ * @return {number}
+ */
+var shipWithinDays = function(weights, D) {
+    /**
+     * 对 weights 排序的 进行 D-1 次 分割, 
+     * 计算出 使分割后的每个组的和 的 最大值 中的 最小值
+     */
+    var res = []
+    // n 个元素，分为 m 个堆，种类
+
+    // 
+
+
+    return res
+};
+```
+#### 解决办法：
+1. 官方解答 - [二分查找转化为判定问题]
+    ```javascript
+    var shipWithinDays = function(weights, D) {
+        // 确定二分查找左右边界
+        let left = Math.max(...weights), right = weights.reduce((a, b) => a + b);
+        while (left < right) {
+            const mid = Math.floor((left + right) / 2);
+            //  need 为需要运送的天数
+            // cur 为当前这一天已经运送的包裹重量之和
+            let need = 1, cur = 0;
+            for (const weight of weights) {
+                if (cur + weight > mid) {
+                    need++;
+                    cur = 0;
+                } 
+                cur += weight;
+            }
+
+            if (need <= D) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left;
+    };
+    ```
+
+#### 其他：
+1.  想不到
 
