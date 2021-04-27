@@ -46,6 +46,7 @@
 | 38 | 2021.4.23 | 368. 最大整除子集 | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 39 | 2021.4.25 | 897. 递增顺序搜索树 | 动态规划 | 简单 | 否 | 否 | 1 |  |
 | 40 | 2021.4.26 | 1011. 在 D 天内送达包裹的能力 | 二分查找 | 中等 | 否 | 否 | 1 |  |
+| 41 | 2021.4.27 | 938. 二叉搜索树的范围和 | 树的遍历 | 简单 | 是 | 是 | 2 |  |
 
 ## 已做内容
 
@@ -3139,7 +3140,6 @@ var largestDivisibleSubset = function(nums) {
 1.  数的遍历和递归算法
 
 
-## 本次新增
 ### 2021.4.26
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/capacity-to-ship-packages-within-d-days/)
@@ -3195,4 +3195,102 @@ var shipWithinDays = function(weights, D) {
 
 #### 其他：
 1.  想不到
+
+## 本次新增
+### 2021.4.27
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/range-sum-of-bst/)
+#### 题目理解：
+```javascript
+/**
+ * 搜索树
+ *  the left < the root < the right
+ * a. 根据搜索树特点进行合理遍历然后求和
+ * b. 直接遍历，然后看范围求和
+ */
+```
+#### 解决办法：
+1. 自己解答 - [遍历]
+    ```javascript
+    /**
+     * Definition for a binary tree node.
+    * function TreeNode(val, left, right) {
+    *     this.val = (val===undefined ? 0 : val)
+    *     this.left = (left===undefined ? null : left)
+    *     this.right = (right===undefined ? null : right)
+    * }
+    */
+    /**
+    * @param {TreeNode} root
+    * @param {number} low
+    * @param {number} high
+    * @return {number}
+    */
+    var rangeSumBST = function(root, low, high) {
+        /**
+        * 搜索树
+        *  the left < the root < the right
+        * a. 根据搜索树特点进行合理遍历然后求和
+        * b. 直接遍历，然后看范围求和
+        */
+        let sum = 0
+        const bianli = (root, low, high) => {
+            if (root === null) return
+            if (root.val >= low && root.val <= high) {
+                sum += root.val
+                bianli(root.left, low, high)
+                bianli(root.right, low, high)
+            } else if (root.val > high){
+                bianli(root.left, low, high)
+            } else if (root.val < low) {
+                bianli(root.right, low, high)
+            }
+        }
+        bianli(root, low, high)
+        return sum
+    };
+    ```
+
+2. 官方解答 - [深度优先遍历/搜索]
+    ```javascript
+    var rangeSumBST = function(root, low, high) {
+        if (!root) {
+            return 0;
+        }
+        if (root.val > high) {
+            return rangeSumBST(root.left, low, high);
+        }
+        if (root.val < low) {
+            return rangeSumBST(root.right, low, high);
+        }
+        return root.val + rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high);
+    };
+    ```
+
+3. 官方解答 - [广度优先遍历/搜索]
+    ```javascript
+    var rangeSumBST = function(root, low, high) {
+        let sum = 0;
+        const q = [root];  // 利用栈缓存
+        while (q.length) {
+            const node = q.shift();
+            if (!node) {
+                continue;
+            }
+            if (node.val > high) {
+                q.push(node.left);
+            } else if (node.val < low) {
+                q.push(node.right);
+            } else {
+                sum += node.val;
+                q.push(node.left);
+                q.push(node.right);
+            }
+        }
+        return sum;
+    };
+    ```
+
+#### 其他：
+1.  二叉树遍历方法复习
 
