@@ -47,6 +47,7 @@
 | 39 | 2021.4.25 | 897. 递增顺序搜索树 | 动态规划 | 简单 | 否 | 否 | 1 |  |
 | 40 | 2021.4.26 | 1011. 在 D 天内送达包裹的能力 | 二分查找 | 中等 | 否 | 否 | 1 |  |
 | 41 | 2021.4.27 | 938. 二叉搜索树的范围和 | 树的遍历 | 简单 | 是 | 是 | 2 |  |
+| 42 | 2021.4.28 | 633. 平方数之和 | 双指针\数学(因式分解)\sqrt函数 | 中等 | 是 | 是 | 3 |  |
 
 ## 已做内容
 
@@ -3196,7 +3197,7 @@ var shipWithinDays = function(weights, D) {
 #### 其他：
 1.  想不到
 
-## 本次新增
+
 ### 2021.4.27
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/range-sum-of-bst/)
@@ -3294,3 +3295,84 @@ var shipWithinDays = function(weights, D) {
 #### 其他：
 1.  二叉树遍历方法复习
 
+## 本次新增
+
+### 2021.4.28
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/sum-of-square-numbers/)
+#### 题目理解：
+```javascript
+var judgeSquareSum = function(c) {
+    if (c === 0) return true
+    for (var i = 0; i < Math.sqrt(c); i++) {
+        var t = Math.sqrt(c - i*i)
+        if (parseInt(t) === t) {
+            return true
+        } 
+    }
+    return false
+};
+```
+#### 解决办法：
+1. 官方解答 - [sqrt]
+    ```javascript
+    var judgeSquareSum = function(c) {
+        for (let a = 0; a * a <= c; a++) {
+            const b = Math.sqrt(c - a * a);
+            if (b === parseInt(b)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    ```
+
+2. 官方解答 - [双指针]
+    ```javascript
+    var judgeSquareSum = function(c) {
+        let left = 0;
+        let right = Math.floor(Math.sqrt(c));
+        while (left <= right) {
+            const sum = left * left + right * right;
+            if (sum === c) {
+                return true;
+            } else if (sum > c) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return false;
+    };
+    ```
+
+3. 官方解答 - [数学-因式分解]
+    ```javascript
+    var judgeSquareSum = function(c) {
+        for (let base = 2; base * base <= c; base++) {
+            // 如果不是因子，枚举下一个
+            if (c % base !== 0) {
+                continue;
+            }
+
+            // 计算 base 的幂
+            let exp = 0;
+            while (c % base == 0) {
+                c /= base;
+                exp++;
+            }
+
+            // 根据 Sum of two squares theorem 验证
+            if (base % 4 === 3 && exp % 2 !== 0) {
+                return false;
+            }
+        }
+
+        // 例如 11 这样的用例，由于上面的 for 循环里 base * base <= c ，base == 11 的时候不会进入循环体
+        // 因此在退出循环以后需要再做一次判断
+        return c % 4 !== 3;
+    };
+    ```
+
+#### 其他：
+1.  无
