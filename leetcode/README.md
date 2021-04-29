@@ -48,6 +48,7 @@
 | 40 | 2021.4.26 | 1011. 在 D 天内送达包裹的能力 | 二分查找 | 中等 | 否 | 否 | 1 |  |
 | 41 | 2021.4.27 | 938. 二叉搜索树的范围和 | 树的遍历 | 简单 | 是 | 是 | 2 |  |
 | 42 | 2021.4.28 | 633. 平方数之和 | 双指针\数学(因式分解)\sqrt函数 | 中等 | 是 | 是 | 3 |  |
+| 43 | 2021.4.29 | 403. 青蛙过河 | 记忆化搜索\动态规划 | 困难 | 否 | 否 | 2 |  |
 
 ## 已做内容
 
@@ -3295,7 +3296,6 @@ var shipWithinDays = function(weights, D) {
 #### 其他：
 1.  二叉树遍历方法复习
 
-## 本次新增
 
 ### 2021.4.28
 #### 题目描述：
@@ -3376,3 +3376,108 @@ var judgeSquareSum = function(c) {
 
 #### 其他：
 1.  无
+
+## 本次新增
+### 2021.4.29
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/frog-jump/)
+#### 题目理解：
+```javascript
+var canCross = function(stones) {
+    /**
+     * 能跳过石子!
+     * 第一步不能跨越的话，那么起始 k 就定下来了，
+     * 之后就是看 k 或者 k-1 或者 k+1 是否有石子
+     * 
+     * 所以每走一步（除去第一步）都可能有 <=3 种走法
+     * 动态规划？
+     */
+    let k = stones[1]
+    for (let i = 2; i < stones.length - 1; i++) {
+        let step = stones[i] - stones[i - 1]
+        if (step >= k - 1 && step <= k + 1) {
+            k = step
+        } else {
+            return false
+        }
+    }
+    return true
+};
+```
+#### 解决办法：
+1. 官方解答 - [记忆化搜索 + 二分查找]
+    ```javascript
+    var canCross = function(stones) {
+        const n = stones.length;
+        rec = new Array(n).fill(0).map(() => new Map());
+
+        // 搜索
+        const dfs = (stones, i, lastDis) => {
+            if (i === stones.length - 1) {
+                return true;
+            }
+            if (rec[i].has(lastDis)) {
+                return rec[i].get(lastDis);
+            }
+            for (let curDis = lastDis - 1; curDis <= lastDis + 1; curDis++) {
+                if (curDis > 0) {
+                    const j = lower_bound(stones, curDis + stones[i]);
+                    if (j !== stones.length && stones[j] === curDis + stones[i] && dfs(stones, j, curDis)) {
+                        rec[i].set(lastDis, true);
+                        return rec[i].get(lastDis);
+                    }
+                }
+            }
+            rec[i].set(lastDis, false);
+            return rec[i].get(lastDis);
+        }
+
+        return dfs(stones, 0, 0);
+    };
+    
+    // 二分查找
+    function lower_bound(nums, target) {
+        let lo = 0, hi = nums.length;
+
+        while (lo < hi) {
+            const mid = lo + Math.floor((hi - lo) / 2);
+
+            if (nums[mid] >= target) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return lo;
+    }
+    ```
+
+2. 官方解答 - [动态规划]
+    ```javascript
+    var canCross = function(stones) {
+        const n = stones.length;
+        const dp = new Array(n).fill(0).map(() => new Array(n).fill(0));
+        dp[0][0] = true;
+        for (let i = 1; i < n; ++i) {
+            if (stones[i] - stones[i - 1] > i) {
+                return false;
+            }
+        }
+        for (let i = 1; i < n; ++i) {
+            for (let j = i - 1; j >= 0; --j) {
+                const k = stones[i] - stones[j];
+                if (k > j + 1) {
+                    break;
+                }
+                dp[i][k] = dp[j][k - 1] || dp[j][k] || dp[j][k + 1];
+                if (i === n - 1 && dp[i][k]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+    ```
+
+#### 其他：
+1.  至今动态规划都没有好好理清楚过，自己不受苦谁替你受吗？
