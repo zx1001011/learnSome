@@ -3377,7 +3377,6 @@ var judgeSquareSum = function(c) {
 #### 其他：
 1.  无
 
-## 本次新增
 ### 2021.4.29
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/frog-jump/)
@@ -3434,7 +3433,7 @@ var canCross = function(stones) {
 
         return dfs(stones, 0, 0);
     };
-    
+
     // 二分查找
     function lower_bound(nums, target) {
         let lo = 0, hi = nums.length;
@@ -3481,3 +3480,81 @@ var canCross = function(stones) {
 
 #### 其他：
 1.  至今动态规划都没有好好理清楚过，自己不受苦谁替你受吗？
+
+## 本次新增
+
+### 2021.4.30
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/single-number-ii/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+    /* 哈希 */
+    let map = new Map()
+    let num = -1
+    for (let i = 0; i < nums.length; i++) {
+        if (!map.has(nums[i])) {
+            map.set(nums[i], 0)
+        } else {
+            map.set(nums[i], 1)
+        }
+    }
+    for (let [key, value] of map) {
+        if (value === 0){
+            num = key
+            break
+        }
+    }
+    return num
+};
+```
+#### 解决办法：
+1. 官方解答 - [依次确定每一个二进制位]
+    ```javascript
+    var singleNumber = function(nums) {
+        let ans = 0;
+        for (let i = 0; i < 32; ++i) {
+            let total = 0;
+            for (const num of nums) {
+                total += ((num >> i) & 1);
+            }
+            if (total % 3 != 0) {
+                ans |= (1 << i);
+            }
+        }
+        return ans;
+    };
+    ```
+
+2. 官方解答 - [数字电路设计]
+    ```javascript
+    var singleNumber = function(nums) {
+        let a = 0, b = 0;
+        for (const num of nums) {
+            const aNext = (~a & b & num) | (a & ~b & ~num), bNext = ~a & (b ^ num);
+            a = aNext;
+            b = bNext;
+        }
+        return b;
+    };
+    ```
+
+3. 官方解答 - [数字电路设计优化]
+    ```javascript
+    var singleNumber = function(nums) {
+        let a = 0, b = 0;
+        for (const num of nums) {
+            b = ~a & (b ^ num);
+            a = ~b & (a ^ num);
+        }
+        return b;
+    };
+    ```
+
+#### 其他：
+1.  还可以这样？
+
