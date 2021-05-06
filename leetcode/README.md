@@ -49,6 +49,8 @@
 | 41 | 2021.4.27 | 938. 二叉搜索树的范围和 | 树的遍历 | 简单 | 是 | 是 | 2 |  |
 | 42 | 2021.4.28 | 633. 平方数之和 | 双指针\数学(因式分解)\sqrt函数 | 中等 | 是 | 是 | 3 |  |
 | 43 | 2021.4.29 | 403. 青蛙过河 | 记忆化搜索\动态规划 | 困难 | 否 | 否 | 2 |  |
+| 44 | 2021.5.6 | 1720. 解码异或后的数组 | 异或 | 简单 | 是 | 是 | 1 |  |
+
 
 ## 已做内容
 
@@ -3481,7 +3483,6 @@ var canCross = function(stones) {
 #### 其他：
 1.  至今动态规划都没有好好理清楚过，自己不受苦谁替你受吗？
 
-## 本次新增
 
 ### 2021.4.30
 #### 题目描述：
@@ -3557,4 +3558,47 @@ var singleNumber = function(nums) {
 
 #### 其他：
 1.  还可以这样？
+
+## 本次
+### 2021.5.6（劳动节复苏）
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/decode-xored-array/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} encoded
+ * @param {number} first
+ * @return {number[]}
+ */
+var decode = function(encoded, first) {
+    // 异或 ^ ： 同为 0, 异为 1
+    let arr = []
+    arr[0] = first
+    for (let i = 1; i < encoded.length + 1; i++) {
+        arr[i] = encoded[i - 1] ^ arr[i - 1]
+    }
+    return arr
+};
+```
+#### 解决办法：
+1. 官方解答 - []
+    ```javascript
+    
+    ```
+
+2. 官方解答 - [数字电路设计]
+    ```javascript
+    var singleNumber = function(nums) {
+        let a = 0, b = 0;
+        for (const num of nums) {
+            const aNext = (~a & b & num) | (a & ~b & ~num), bNext = ~a & (b ^ num);
+            a = aNext;
+            b = bNext;
+        }
+        return b;
+    };
+    ```
+
+#### 其他：
+无
 
