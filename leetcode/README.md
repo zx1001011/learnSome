@@ -50,7 +50,7 @@
 | 42 | 2021.4.28 | 633. 平方数之和 | 双指针\数学(因式分解)\sqrt函数 | 中等 | 是 | 是 | 3 |  |
 | 43 | 2021.4.29 | 403. 青蛙过河 | 记忆化搜索\动态规划 | 困难 | 否 | 否 | 2 |  |
 | 44 | 2021.5.6 | 1720. 解码异或后的数组 | 异或 | 简单 | 是 | 是 | 1 |  |
-
+| 45 | 2021.5.7 | 1486. 数组异或操作 | 异或 | 简单 | 是 | 是 | 2 |  |
 
 ## 已做内容
 
@@ -3559,7 +3559,6 @@ var singleNumber = function(nums) {
 #### 其他：
 1.  还可以这样？
 
-## 本次
 ### 2021.5.6（劳动节复苏）
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/decode-xored-array/)
@@ -3601,4 +3600,52 @@ var decode = function(encoded, first) {
 
 #### 其他：
 无
+
+## 本次
+### 2021.5.7
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/xor-operation-in-an-array/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number} n
+ * @param {number} start
+ * @return {number}
+ */
+var xorOperation = function(n, start) {
+    /**
+     * 等差数列，可能有什么规律吧，直接计算吧
+     */
+    let res = start
+    for (let i = 1; i < n; i++) {
+        res ^= start + 2 * i
+    }
+    return res
+};
+```
+#### 解决办法：
+1. 官方解答 - [数学]
+    ```javascript
+    var xorOperation = function(n, start) {
+        let s = start >> 1, e = n & start & 1;
+        let ret = sumXor(s - 1) ^ sumXor(s + n - 1);
+        return ret << 1 | e;
+    };
+
+    const sumXor = (x) => {
+        if (x % 4 === 0) {
+            return x;
+        }
+        if (x % 4 === 1) {
+            return 1;
+        }
+        if (x % 4 === 2) {
+            return x + 1;
+        }
+        return 0;
+    }
+    ```
+
+#### 其他：
+1. 这种只能看出来可能最好的解题方向，还真不知道怎么解。
 
