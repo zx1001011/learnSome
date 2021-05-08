@@ -51,6 +51,9 @@
 | 43 | 2021.4.29 | 403. 青蛙过河 | 记忆化搜索\动态规划 | 困难 | 否 | 否 | 2 |  |
 | 44 | 2021.5.6 | 1720. 解码异或后的数组 | 异或 | 简单 | 是 | 是 | 1 |  |
 | 45 | 2021.5.7 | 1486. 数组异或操作 | 异或 | 简单 | 是 | 是 | 2 |  |
+| 46 | 2021.5.8 | 1723. 完成所有工作的最短时间 | 全遍历的一些方法 | 困难 | 否 | 否 | 2 |  |
+
+
 
 ## 已做内容
 
@@ -3601,7 +3604,6 @@ var decode = function(encoded, first) {
 #### 其他：
 无
 
-## 本次
 ### 2021.5.7
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/xor-operation-in-an-array/)
@@ -3649,3 +3651,173 @@ var xorOperation = function(n, start) {
 #### 其他：
 1. 这种只能看出来可能最好的解题方向，还真不知道怎么解。
 
+## 本次
+### 2021.5.8
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs/)
+#### 题目理解：
+```javascript
+/**
+ * 将 jobs 集合划分为 k 个子集，
+ * 计算 众多情况中子集的和差最小的情况
+ * 分配方法有很多
+ * 动态规划-全遍历
+ */
+```
+#### 解决办法：
+1. 官方解答 - [二分查找+回溯+剪枝]
+    ```javascript
+    var minimumTimeRequired = function(jobs, k) {
+        jobs.sort((a, b) => a - b);
+        let low = 0, high = jobs.length - 1;
+        while (low < high) {
+            const temp = jobs[low];
+            jobs[low] = jobs[high];
+            jobs[high] = temp;
+            low++;
+            high--;
+        }
+        let l = jobs[0], r = jobs.reduce(function(prev, curr, idx, jobs){ return prev + curr });
+        while (l < r) {
+            const mid = Math.floor((l + r) >> 1);
+            if (check(jobs, k, mid)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return l;
+    };
+
+    const check = (jobs, k, limit) => {
+        const workloads = new Array(k).fill(0);
+        return backtrack(jobs, workloads, 0, limit);
+    }
+
+    const backtrack = (jobs, workloads, i, limit) => {
+        if (i >= jobs.length) {
+            return true;
+        }
+        let cur = jobs[i];
+        for (let j = 0; j < workloads.length; ++j) {
+            if (workloads[j] + cur <= limit) {
+                workloads[j] += cur;
+                if (backtrack(jobs, workloads, i + 1, limit)) {
+                    return true;
+                }
+                workloads[j] -= cur;
+            }
+            // 如果当前工人未被分配工作，那么下一个工人也必然未被分配工作
+            // 或者当前工作恰能使该工人的工作量达到了上限
+            // 这两种情况下我们无需尝试继续分配工作
+            if (workloads[j] === 0 || workloads[j] + cur === limit) {
+                break;
+            }
+        }
+        return false;
+    }
+    ```
+
+2. 官方解答 - [动态规划+状态压缩]
+    ```javascript
+    var minimumTimeRequired = function(jobs, k) {
+        const n = jobs.length;
+        const sum = new Array(1 << n).fill(0);
+        for (let i = 1; i < (1 << n); i++) {
+            const x = NumberOfTrailingZeros(i), y = i - (1 << x);
+            sum[i] = sum[y] + jobs[x];
+        }
+
+        const dp = new Array(k).fill(0).map(() => new Array(1 << n).fill(0));
+        for (let i = 0; i < (1 << n); i++) {
+            dp[0][i] = sum[i];
+        }
+
+        for (let i = 1; i < k; i++) {
+            for (let j = 0; j < (1 << n); j++) {
+                let minn = Number.MAX_VALUE;
+                for (let x = j; x != 0; x = (x - 1) & j) {
+                    minn = Math.min(minn, Math.max(dp[i - 1][j - x], sum[x]));
+                }
+                dp[i][j] = minn;
+            }
+        }
+        return dp[k - 1][(1 << n) - 1];
+    };
+
+    const NumberOfTrailingZeros = (number) => {
+        const num = parseInt(number).toString(2);
+        const multiply_De_Bruijn_position = [
+            0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8,
+            31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9];
+        return multiply_De_Bruijn_position[(((num & (-num)) * 0x077CB531) >> 27) & 31]
+    }
+    ```
+
+3. 宫水三叶 - [DFS]
+    ```java
+    class Solution {
+        int[] jobs;
+        int n, k;
+        int ans = 0x3f3f3f3f;
+        public int minimumTimeRequired(int[] _jobs, int _k) {
+            jobs = _jobs;
+            n = jobs.length;
+            k = _k;
+            int[] sum = new int[k];
+            dfs(0, sum, 0);
+            return ans;
+        }
+        /**
+        * u   : 当前处理到那个 job
+        * sum : 工人的分配情况          例如：sum[0] = x 代表 0 号工人工作量为 x
+        * max : 当前的「最大工作时间」
+        */
+        void dfs(int u, int[] sum, int max) {
+            if (max >= ans) return;
+            if (u == n) {
+                ans = max;
+                return;
+            }
+            for (int i = 0; i < k; i++) {
+                sum[i] += jobs[u];
+                dfs(u + 1, sum, Math.max(sum[i], max));
+                sum[i] -= jobs[u];
+            }
+        }
+    }
+    ```
+    人工转为 javascript 语言：
+    ```javascript
+    var minimumTimeRequired = function(jobs, k) {
+        /**
+         * 将 jobs 集合划分为 k 个子集，
+        * 计算 众多情况中子集的和差最小的情况
+        * 分配方法有很多
+        * 动态规划-全遍历
+        */
+        _jobs = jobs;
+        _n = jobs.length;
+        _k = k;
+        ans = Number.MAX_VALUE;
+        let sum = new Array(k).fill(0);
+        dfs(0, sum, 0);
+        return ans;
+    };
+    function dfs(u, sum, max){
+        if (max >= ans) return;
+        if (u === _n) {
+            ans = max;
+            return;
+        }
+        for (let i = 0; i < _k; i++) {
+            sum[i] += _jobs[u];
+            dfs(u + 1, sum, Math.max(sum[i], max));
+            sum[i] -= _jobs[u];
+        }
+    }
+    ```
+    虽然可以计算出来，但是超出时间限制。
+
+#### 其他：
+1. 脑子死掉了，动都不动一下
