@@ -52,7 +52,7 @@
 | 44 | 2021.5.6 | 1720. 解码异或后的数组 | 异或 | 简单 | 是 | 是 | 1 |  |
 | 45 | 2021.5.7 | 1486. 数组异或操作 | 异或 | 简单 | 是 | 是 | 2 |  |
 | 46 | 2021.5.8 | 1723. 完成所有工作的最短时间 | 全遍历的一些方法 | 困难 | 否 | 否 | 2 |  |
-
+| 47 | 2021.5.10 | 872. 叶子相似的树 | 树的遍历 | 简单 | 是 | 是 | 1 |  |
 
 
 ## 已做内容
@@ -3651,7 +3651,7 @@ var xorOperation = function(n, start) {
 #### 其他：
 1. 这种只能看出来可能最好的解题方向，还真不知道怎么解。
 
-## 本次
+
 ### 2021.5.8
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/find-minimum-time-to-finish-all-jobs/)
@@ -3821,3 +3821,82 @@ var xorOperation = function(n, start) {
 
 #### 其他：
 1. 脑子死掉了，动都不动一下
+## 本次
+### 2021.5.10
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/leaf-similar-trees/)
+#### 题目理解：
+```javascript
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root1
+ * @param {TreeNode} root2
+ * @return {boolean}
+ */
+var leafSimilar = function(root1, root2) {
+    /**
+     * A. 进行叶值序列的遍历, 然后比较
+     * B. 一个一个叶值进行比较,如果不同返回 false,否则 true
+     */
+    let leafArr1 = traversal(root1, [])
+    let leafArr2 = traversal(root2, [])
+    if (leafArr1.length !== leafArr2.length) return false
+    for (let i = 0; i < leafArr1.length; i++) {
+        if (leafArr2[i] !== leafArr1[i]) return false
+    }
+    return true
+};
+
+function traversal(root, leafArr){
+    if (root.left === null && root.right === null) {
+        leafArr.push(root.val)
+    } else {
+        if (root.left) {
+            traversal(root.left, leafArr)
+        }
+        if (root.right) {
+            traversal(root.right, leafArr)
+        }
+    }
+    return leafArr
+}
+```
+#### 解决办法：
+1. 官方解答 - [DFS深度优先遍历]
+    ```javascript
+    var leafSimilar = function(root1, root2) {
+        const seq1 = [];
+        if (root1) {
+            dfs(root1, seq1);
+        }
+
+        const seq2 = [];
+        if (root2) {
+            dfs(root2, seq2);
+        }
+        return seq1.toString() === seq2.toString();
+    };
+
+    const dfs = (node, seq) => {
+        if (!node.left && !node.right) {
+            seq.push(node.val);
+        } else {
+            if (node.left) {
+                dfs(node.left, seq);
+            }
+            if (node.right) {
+                dfs(node.right, seq);
+            }
+        }
+    }
+    ```
+
+#### 其他：
+1. 数组可以转为字符串进行直接比较！！！
