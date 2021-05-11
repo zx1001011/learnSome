@@ -53,7 +53,7 @@
 | 45 | 2021.5.7 | 1486. 数组异或操作 | 异或 | 简单 | 是 | 是 | 2 |  |
 | 46 | 2021.5.8 | 1723. 完成所有工作的最短时间 | 全遍历的一些方法 | 困难 | 否 | 否 | 2 |  |
 | 47 | 2021.5.10 | 872. 叶子相似的树 | 树的遍历 | 简单 | 是 | 是 | 1 |  |
-
+| 48 | 2021.5.11 | 1734. 解码异或后的排列 | 异或 | 中等 | 否 | 是 | 1 |  |
 
 ## 已做内容
 
@@ -3821,7 +3821,7 @@ var xorOperation = function(n, start) {
 
 #### 其他：
 1. 脑子死掉了，动都不动一下
-## 本次
+
 ### 2021.5.10
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/leaf-similar-trees/)
@@ -3900,3 +3900,43 @@ function traversal(root, leafArr){
 
 #### 其他：
 1. 数组可以转为字符串进行直接比较！！！
+
+## 本次
+### 2021.5.11
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/decode-xored-permutation/)
+#### 题目理解：
+```python
+'''
+想的是
+全部遍历？
+'''
+```
+#### 解决办法：
+1. 官方解答 - [异或的规律]
+    ```javascript
+    /**
+     * @param {number[]} encoded
+    * @return {number[]}
+    */
+    var decode = function(encoded) {
+        const n = encoded.length + 1;
+        let total = 0;
+        for (let i = 1; i <= n; i++) {
+            total ^= i;
+        }
+        let odd = 0;
+        for (let i = 1; i < n - 1; i += 2) {
+            odd ^= encoded[i];
+        }
+        const perm = new Array(n).fill(0);
+        perm[0] = total ^ odd;
+        for (let i = 0; i < n - 1; i++) {
+            perm[i + 1] = perm[i] ^ encoded[i];
+        }
+        return perm;
+    };
+    ```
+
+#### 其他：
+1. 异或的数  a ^ b = c 那么 c ^ a = b 或者 c ^ b = a
