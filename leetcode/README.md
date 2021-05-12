@@ -54,7 +54,7 @@
 | 46 | 2021.5.8 | [1723. 完成所有工作的最短时间](#2021-5-8) | 全遍历的一些方法 | 困难 | 否 | 否 | 2 |  |
 | 47 | 2021.5.10 | [872. 叶子相似的树](#2021-5-10) | 树的遍历 | 简单 | 是 | 是 | 1 |  |
 | 48 | 2021.5.11 | [1734. 解码异或后的排列](#2021-5-11) | 异或 | 中等 | 否 | 是 | 1 |  |
-
+| 49 | 2021.5.12 | [1310. 子数组异或查询](#2021-5-12) | 异或 | 中等 | 是 | 是 | 2 | 噗, 我竟然没有超时, 很不错!! |
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -3901,7 +3901,7 @@ function traversal(root, leafArr){
 #### 其他：
 1. 数组可以转为字符串进行直接比较！！！
 
-## 本次
+
 ### <div id="2021-5-11">2021.5.11</div>
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/decode-xored-permutation/)
@@ -3937,6 +3937,57 @@ function traversal(root, leafArr){
         return perm;
     };
     ```
+
+#### 其他：
+1. 异或的数  a ^ b = c 那么 c ^ a = b 或者 c ^ b = a
+
+## 本次
+### <div id="2021-5-12">2021.5.12</div>
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/xor-queries-of-a-subarray/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} arr
+ * @param {number[][]} queries
+ * @return {number[]}
+ */
+var xorQueries = function(arr, queries) {
+    /**
+     * 这就是计算吧
+     */
+    let res = []
+    for(let i = 0; i < queries.length; i++) {
+        let j = queries[i][0]
+        let a = arr[j]
+        j += 1
+        while(j <= queries[i][1]) {
+            a ^= arr[j]
+            j += 1
+        }
+        res.push(a)
+    }
+    return res
+};
+```
+#### 解决办法：
+1. 官方解答 - [前缀异或]
+    ```javascript
+    var xorQueries = function(arr, queries) {
+        const n = arr.length;
+        const xors = new Array(n + 1).fill(0);
+        for (let i = 0; i < n; i++) {
+            xors[i + 1] = xors[i] ^ arr[i];
+        }
+        const m = queries.length;
+        const ans = new Array(m).fill(0);
+        for (let i = 0; i < m; i++) {
+            ans[i] = xors[queries[i][0]] ^ xors[queries[i][1] + 1];
+        }
+        return ans;
+    };
+    ```
+    该方法先计算了前缀异或，然后直接计算相关值，少去每次循环。
 
 #### 其他：
 1. 异或的数  a ^ b = c 那么 c ^ a = b 或者 c ^ b = a
