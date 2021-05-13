@@ -55,6 +55,9 @@
 | 47 | 2021.5.10 | [872. 叶子相似的树](#2021-5-10) | 树的遍历 | 简单 | 是 | 是 | 1 |  |
 | 48 | 2021.5.11 | [1734. 解码异或后的排列](#2021-5-11) | 异或 | 中等 | 否 | 是 | 1 |  |
 | 49 | 2021.5.12 | [1310. 子数组异或查询](#2021-5-12) | 异或 | 中等 | 是 | 是 | 2 | 噗, 我竟然没有超时, 很不错!! |
+| 50 | 2021.5.13 | [1269. 停在原地的方案数](#2021-5-13) | 动态规划 | 困难 | 否 | 否 | 1 |  |
+
+
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -3941,7 +3944,6 @@ function traversal(root, leafArr){
 #### 其他：
 1. 异或的数  a ^ b = c 那么 c ^ a = b 或者 c ^ b = a
 
-## 本次
 ### <div id="2021-5-12">2021.5.12</div>
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/xor-queries-of-a-subarray/)
@@ -3991,3 +3993,49 @@ var xorQueries = function(arr, queries) {
 
 #### 其他：
 1. 异或的数  a ^ b = c 那么 c ^ a = b 或者 c ^ b = a
+
+## 本次
+### <div id="2021-5-13">2021.5.13</div>
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/)
+#### 题目理解：
+```javascript
+/**
+ * 动态规划
+ */
+```
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    /**
+     * @param {number} steps
+    * @param {number} arrLen
+    * @return {number}
+    */
+    var numWays = function(steps, arrLen) {
+        /**
+        * 动态规划
+        */
+        const MODULO = 1000000007;
+        let maxColumn = Math.min(arrLen - 1, steps);
+        let dp = new Array(maxColumn + 1).fill(0);
+        dp[0] = 1;
+        for (let i = 1; i <= steps; i++) {
+            const dpNext = new Array(maxColumn + 1).fill(0);
+            for (let j = 0; j <= maxColumn; j++) {
+                dpNext[j] = dp[j];
+                if (j - 1 >= 0) {
+                    dpNext[j] = (dpNext[j] + dp[j - 1]) % MODULO;
+                }
+                if (j + 1 <= maxColumn) {
+                    dpNext[j] = (dpNext[j] + dp[j + 1]) % MODULO;
+                }
+            }
+            dp = dpNext;
+        }
+        return dp[0];
+    };
+    ```
+
+#### 其他：
+1. ...
