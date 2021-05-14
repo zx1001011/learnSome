@@ -56,7 +56,7 @@
 | 48 | 2021.5.11 | [1734. 解码异或后的排列](#2021-5-11) | 异或 | 中等 | 否 | 是 | 1 |  |
 | 49 | 2021.5.12 | [1310. 子数组异或查询](#2021-5-12) | 异或 | 中等 | 是 | 是 | 2 | 噗, 我竟然没有超时, 很不错!! |
 | 50 | 2021.5.13 | [1269. 停在原地的方案数](#2021-5-13) | 动态规划 | 困难 | 否 | 否 | 1 |  |
-
+| 51 | 2021.5.14 | [12. 整数转罗马数字](#2021-5-14) | 模拟，硬编码数字 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -3994,7 +3994,7 @@ var xorQueries = function(arr, queries) {
 #### 其他：
 1. 异或的数  a ^ b = c 那么 c ^ a = b 或者 c ^ b = a
 
-## 本次
+
 ### <div id="2021-5-13">2021.5.13</div>
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/)
@@ -4037,5 +4037,53 @@ var xorQueries = function(arr, queries) {
     };
     ```
 
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-5-14">2021.5.14</div>
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/integer-to-roman/submissions/)
+#### 题目理解：
+```javascript
+/**
+ * 映射
+ * /
+```
+#### 解决办法：
+1. 官方解答 - [模拟]
+    ```javascript
+    var intToRoman = function(num) {
+        const valueSymbols = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+        const roman = [];
+        for (const [value, symbol] of valueSymbols) {
+            while (num >= value) {
+                num -= value;
+                roman.push(symbol);
+            }
+            if (num == 0) {
+                break;
+            }
+        }
+        return roman.join('');
+    };
+    ```
+
+2. 官方解答 - [硬编码数字]
+    ```javascript
+    var intToRoman = function(num) {
+        const thousands = ["", "M", "MM", "MMM"];
+        const hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
+        const tens     = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
+        const ones     = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+
+        const roman = [];
+        roman.push(thousands[Math.floor(num / 1000)]);
+        roman.push(hundreds[Math.floor(num % 1000 / 100)]);
+        roman.push(tens[Math.floor(num % 100 / 10)]);
+        roman.push(ones[num % 10]);
+        return roman.join('');
+    };
+    ```
 #### 其他：
 1. ...
