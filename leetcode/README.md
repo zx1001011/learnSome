@@ -58,7 +58,7 @@
 | 50 | 2021.5.13 | [1269. 停在原地的方案数](#2021-5-13) | 动态规划 | 困难 | 否 | 否 | 1 |  |
 | 51 | 2021.5.14 | [12. 整数转罗马数字](#2021-5-14) | 模拟，硬编码数字 | 中等 | 否 | 否 | 1 |  |
 | 52 | 2021.5.19 | [](#2021-5-19) |  | 中等 | 否 | 否 | 1 | 这几天比较忙，项目比较急，需要加班，刷题狼心狗肺，异或-前缀和方法。 |
-
+| 53 | 2021.5.20 | [692. 前K个高频单词](#2021-5-20) | hash + 排序 | 中等 | 是 | 是 | 2 | 发现自己的事还是比较重要的，跟着产品经理后面的活永远干不完，而且还只会吩咐别人干 |
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -4041,7 +4041,6 @@ var xorQueries = function(arr, queries) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-5-14">2021.5.14</div>
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/integer-to-roman/submissions/)
@@ -4084,6 +4083,89 @@ var xorQueries = function(arr, queries) {
         roman.push(tens[Math.floor(num % 100 / 10)]);
         roman.push(ones[num % 10]);
         return roman.join('');
+    };
+    ```
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-5-20">2021.5.20</div>
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/top-k-frequent-words/)
+#### 题目理解：
+```javascript
+var topKFrequent = function(words, k) {
+    /**
+     * 字典，或者说是 hash
+     */
+    let map = new Map()
+    words.sort()
+    for (let i = 0; i < words.length; i++) {
+        if (!map.has(words[i])) {
+            map.set(words[i], 1)
+        } else {
+            map.set(words[i], map.get(words[i]) + 1)
+        }
+    }
+    var arrayObj = Array.from(map);
+    arrayObj.sort((a,b) => {
+        if (a[1] - b[1] === 0) {
+            return a[0] > b[0]
+        }
+        return b[1] - a[1]
+    })
+    let res = []
+    for (let i = 0; i < k; i++) {
+        res.push(arrayObj[i][0])
+    }
+    return res
+};
+```
+#### 解决办法：
+1. 官方解答 - [哈希表+排序]
+    ```javascript
+    var topKFrequent = function(words, k) {
+        const cnt = new Map();
+        for (const word of words) {
+            cnt.set(word, (cnt.get(word) || 0) + 1);
+        }
+        const rec = [];
+        for (const entry of cnt.keys()) {
+            rec.push(entry);
+        }
+        rec.sort((word1, word2) => {
+            return cnt.get(word1) === cnt.get(word2) ? word1.localeCompare(word2) : cnt.get(word2) - cnt.get(word1);
+        })
+        return rec.slice(0, k);
+    };
+    ```
+
+2. 官方解答 - [优先队列]
+    ```c++
+    class Solution {
+    public:
+        vector<string> topKFrequent(vector<string>& words, int k) {
+            unordered_map<string, int> cnt;
+            for (auto& word : words) {
+                cnt[word]++;
+            }
+            auto cmp = [](const pair<string, int>& a, const pair<string, int>& b) {
+                return a.second == b.second ? a.first < b.first : a.second > b.second;
+            };
+            priority_queue<pair<string, int>, vector<pair<string, int>>, decltype(cmp)> que(cmp);
+            for (auto& it : cnt) {
+                que.emplace(it);
+                if (que.size() > k) {
+                    que.pop();
+                }
+            }
+            vector<string> ret(k);
+            for (int i = k - 1; i >= 0; i--) {
+                ret[i] = que.top().first;
+                que.pop();
+            }
+            return ret;
+        }
     };
     ```
 #### 其他：
