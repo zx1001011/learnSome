@@ -59,6 +59,9 @@
 | 51 | 2021.5.14 | [12. 整数转罗马数字](#2021-5-14) | 模拟，硬编码数字 | 中等 | 否 | 否 | 1 |  |
 | 52 | 2021.5.19 | [](#2021-5-19) |  | 中等 | 否 | 否 | 1 | 这几天比较忙，项目比较急，需要加班，刷题狼心狗肺，异或-前缀和方法。 |
 | 53 | 2021.5.20 | [692. 前K个高频单词](#2021-5-20) | hash + 排序 | 中等 | 是 | 是 | 2 | 发现自己的事还是比较重要的，跟着产品经理后面的活永远干不完，而且还只会吩咐别人干 |
+| 54 | 2021.5.21 | [1035. 不相交的线](#2021-5-21) | dp动态规划 | 中等 | 是 | 是 | 1 | 只要需要全遍历的都应该想到这个，但是不会 |
+
+
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -4088,7 +4091,6 @@ var xorQueries = function(arr, queries) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-5-20">2021.5.20</div>
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/top-k-frequent-words/)
@@ -4168,5 +4170,44 @@ var topKFrequent = function(words, k) {
         }
     };
     ```
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-5-21">2021.5.21</div>
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/uncrossed-lines/)
+#### 题目理解：
+```javascript
+/**
+相交的条件是：
+[x1, y1]  [x2, y2]
+x1 > x2 并且 y1 < y2
+x1 < x2 并且 y1 > y2
+    => (x1 - x2)*(y1 - y2) < 0
+需要遍历
+*/
+```
+#### 解决办法：
+1. 官方解答 - [dp]
+    ```javascript
+    var maxUncrossedLines = function(nums1, nums2) {
+        const m = nums1.length, n = nums2.length;
+        const dp = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
+        for (let i = 1; i <= m; i++) {
+            const num1 = nums1[i - 1];
+            for (let j = 1; j <= n; j++) {
+                const num2 = nums2[j - 1];
+                if (num1 === num2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[m][n];
+    };
+    ```
+
 #### 其他：
 1. ...
