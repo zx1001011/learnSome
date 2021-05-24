@@ -60,6 +60,7 @@
 | 52 | 2021.5.19 | [](#2021-5-19) |  | 中等 | 否 | 否 | 1 | 这几天比较忙，项目比较急，需要加班，刷题狼心狗肺，异或-前缀和方法。 |
 | 53 | 2021.5.20 | [692. 前K个高频单词](#2021-5-20) | hash + 排序 | 中等 | 是 | 是 | 2 | 发现自己的事还是比较重要的，跟着产品经理后面的活永远干不完，而且还只会吩咐别人干 |
 | 54 | 2021.5.21 | [1035. 不相交的线](#2021-5-21) | dp动态规划 | 中等 | 是 | 是 | 1 | 只要需要全遍历的都应该想到这个，但是不会 |
+| 55 | 2021.5.24 | [664. 奇怪的打印机](#2021-5-24) | dp动态规划 | 困难 | 是 | 否 | 1 |  |
 
 
 ## 已做内容
@@ -4172,9 +4173,49 @@ var topKFrequent = function(words, k) {
     ```
 #### 其他：
 1. ...
+### <div id="2021-5-21">2021.5.21</div>
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/strange-printer/)
+#### 题目理解：
+```javascript
+/**
+*/
+```
+#### 解决办法：
+1. 官方解答 - [dp]
+    ```javascript
+    /**
+    * @param {string} s
+    * @return {number}
+    */
+    var strangePrinter = function(s) {
+        const n = s.length;
+        const f = new Array(n).fill(0).map(() => new Array(n).fill(0));
+        for (let i = n - 1; i >= 0; i--) {
+            f[i][i] = 1;
+            for (let j = i + 1; j < n; j++) {
+                if (s[i] == s[j]) {
+                    f[i][j] = f[i][j - 1];
+                } else {
+                    let minn = Number.MAX_SAFE_INTEGER;
+                    for (let k = i; k < j; k++) {
+                        minn = Math.min(minn, f[i][k] + f[k + 1][j]);
+                    }
+                    f[i][j] = minn;
+                }
+            }
+        }
+        return f[0][n - 1];
+    };
+    ```
+
+#### 其他：
+1. ...
+
 
 ## 本次
-### <div id="2021-5-21">2021.5.21</div>
+### <div id="2021-5-24">2021.5.24</div>
+
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/uncrossed-lines/)
 #### 题目理解：
