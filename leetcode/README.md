@@ -60,7 +60,8 @@
 | 52 | 2021.5.19 | [](#2021-5-19) |  | 中等 | 否 | 否 | 1 | 这几天比较忙，项目比较急，需要加班，刷题狼心狗肺，异或-前缀和方法。 |
 | 53 | 2021.5.20 | [692. 前K个高频单词](#2021-5-20) | hash + 排序 | 中等 | 是 | 是 | 2 | 发现自己的事还是比较重要的，跟着产品经理后面的活永远干不完，而且还只会吩咐别人干 |
 | 54 | 2021.5.21 | [1035. 不相交的线](#2021-5-21) | dp动态规划 | 中等 | 是 | 是 | 1 | 只要需要全遍历的都应该想到这个，但是不会 |
-| 55 | 2021.5.24 | [664. 奇怪的打印机](#2021-5-24) | dp动态规划 | 困难 | 是 | 否 | 1 |  |
+| 55 | 2021.5.24 | [664. 奇怪的打印机](#2021-5-24) | dp动态规划 | 困难 | 否 | 否 | 1 |  |
+| 56 | 2021.5.25 | [1787. 使所有区间的异或结果为零](#2021-5-25) | dp动态规划 | 困难 | 否 | 否 | 1 |  |
 
 
 ## 已做内容
@@ -4212,8 +4213,6 @@ var topKFrequent = function(words, k) {
 #### 其他：
 1. ...
 
-
-## 本次
 ### <div id="2021-5-24">2021.5.24</div>
 
 #### 题目描述：
@@ -4252,3 +4251,69 @@ x1 < x2 并且 y1 > y2
 
 #### 其他：
 1. ...
+
+
+## 本次
+### <div id="2021-5-25">2021.5.25</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/make-the-xor-of-all-segments-equal-to-zero/)
+#### 题目理解：
+```javascript
+/**
+动态规划题
+*/
+```
+#### 解决办法：
+1. 官方解答 - [dp]
+    ```javascript
+    /**
+    * @param {number[]} nums
+    * @param {number} k
+    * @return {number}
+    */
+    var minChanges = function(nums, k) {
+        /**
+        动态规划题
+        */
+        // x 的范围为 [0, 2^10)
+        const MAXX = 2**10;
+
+        const n = nums.length;
+        let f = new Array(MAXX).fill(Number.MAX_VALUE);
+        // 边界条件 f(-1,0)=0
+        f[0] = 0;
+
+        for (let i = 0; i < k; i++) {
+            // 第 i 个组的哈希映射
+            const count = new Map();
+            let size = 0;
+            for (let j = i; j < n; j += k) {
+                count.has(nums[j]) ? count.set(nums[j], count.get(nums[j]) + 1) : count.set(nums[j], 1);
+                size++;
+            }
+
+            // 求出 t2
+            const t2min = Math.min(...f);
+
+            const g = new Array(MAXX).fill(t2min);
+            for (let mask = 0; mask < MAXX; mask++) {
+                // t1 则需要枚举 x 才能求出
+                for (const [x, countx] of count.entries()) {
+                    g[mask] = Math.min(g[mask], f[mask ^ x] - countx);
+                }
+            }
+
+            // 别忘了加上 size
+            for (const [index, val] of g.entries()) {
+                f[index] = val + size;
+            }
+        }
+
+        return f[0];
+    };
+    ```
+
+#### 其他：
+1. 动态规划解题需要找到状态转移方程
+2. 找到子问题的计算方法，然后存储起来，为大问题计算
