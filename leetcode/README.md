@@ -62,6 +62,8 @@
 | 54 | 2021.5.21 | [1035. 不相交的线](#2021-5-21) | dp动态规划 | 中等 | 是 | 是 | 1 | 只要需要全遍历的都应该想到这个，但是不会 |
 | 55 | 2021.5.24 | [664. 奇怪的打印机](#2021-5-24) | dp动态规划 | 困难 | 否 | 否 | 1 |  |
 | 56 | 2021.5.25 | [1787. 使所有区间的异或结果为零](#2021-5-25) | dp动态规划 | 困难 | 否 | 否 | 1 |  |
+| 57 | 2021.5.26 | [1190. 反转每对括号间的子串](#2021-5-26) | 栈、预处理 | 中等 | 否 | 否 | 2 | 傻了 |
+| 58 | 2021.5.27 | [461. 汉明距离](#2021-5-27) | 位 | 简单 | 是 | 是 | 2 |  |
 
 
 ## 已做内容
@@ -4252,8 +4254,6 @@ x1 < x2 并且 y1 > y2
 #### 其他：
 1. ...
 
-
-## 本次
 ### <div id="2021-5-25">2021.5.25</div>
 
 #### 题目描述：
@@ -4317,3 +4317,113 @@ x1 < x2 并且 y1 > y2
 #### 其他：
 1. 动态规划解题需要找到状态转移方程
 2. 找到子问题的计算方法，然后存储起来，为大问题计算
+
+### <div id="2021-5-26">2021.5.26</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/reverse-substrings-between-each-pair-of-parentheses/)
+#### 题目理解：
+```javascript
+/**
+字符串是否反转？
+    单数层： 反转
+    双数层： 不反转
+撸这个题目花了两个小时，还没解出来！！TT
+*/
+```
+#### 解决办法：
+1. 官方解答 - [Brian Kernighan 算法]
+    ```javascript
+    var reverseParentheses = function(s) {
+        const stk = []
+        let str = ''
+        for (const ch of s) {
+            if (ch === '(') {
+                stk.push(str)
+                str = ''
+            } else if (ch === ')') {
+                str = str.split("").reverse().join("")
+                str = stk[stk.length - 1] + str
+                stk.pop()
+            } else {
+                str += ch
+            }
+        }
+        return str;
+    }
+    ```
+2. 官方解答 - [预处理括号]
+    ```javascript
+    var reverseParentheses = function(s) {
+        const n = s.length
+        const pair = new Array(n).fill(0)
+        const stk = []
+        for (let i = 0; i < n; i++) {
+            if (s[i] === '(') {
+                stk.push(i)
+            } else if (s[i] === ')') {
+                const j = stk.pop()
+                pair[i] = j
+                pair[j] = i
+            }
+        }
+
+        const sb = []
+        let index = 0, step = 1;
+        while (index < n) {
+            if (s[index] === '(' || s[index] === ')') {
+                index = pair[index]
+                step = -step
+            } else {
+                sn.push(s[index])
+            }
+            index += step
+        }
+        return sb.join('')
+    }
+    ```
+
+#### 其他：
+1. 数据结构......
+2. 正正反反的自己都搞晕了！ js 的 string 类型还有 reverse 函数！！！
+
+## 本次
+### <div id="2021-5-27">2021.5.27</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/hamming-distance/)
+#### 题目理解：
+```javascript
+var hammingDistance = function(x, y) {
+    /**
+      这题好像很简单的，就是每位二进制位对比一下
+     */
+    let res = x ^ y
+    let num = 0
+    while(res) {
+        var tmp = res >>> 1
+        var t = tmp << 1
+        if (t !== res) {
+            num += 1
+        }
+        res = tmp
+    }
+    return num;
+};
+```
+#### 解决办法：
+1. 官方解答 - [Brian Kernighan 算法]
+    ```javascript
+    var hammingDistance = function(x, y) {
+        let s = x ^ y, ret = 0;
+        while (s != 0) {
+            s &= s - 1;  // 只遍历 s 中的 1 的位数
+            ret++;
+        }
+        return ret;
+    };
+    ```
+
+#### 其他：
+1. 汉明距离广泛应用于多个领域。在编码理论中用于错误检测，在信息论中量化字符串之间的差异。
+2. 还可以直接计算1的位数，忘了忘了！
