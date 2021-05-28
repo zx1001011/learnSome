@@ -63,7 +63,8 @@
 | 55 | 2021.5.24 | [664. 奇怪的打印机](#2021-5-24) | dp动态规划 | 困难 | 否 | 否 | 1 |  |
 | 56 | 2021.5.25 | [1787. 使所有区间的异或结果为零](#2021-5-25) | dp动态规划 | 困难 | 否 | 否 | 1 |  |
 | 57 | 2021.5.26 | [1190. 反转每对括号间的子串](#2021-5-26) | 栈、预处理 | 中等 | 否 | 否 | 2 | 傻了 |
-| 58 | 2021.5.27 | [461. 汉明距离](#2021-5-27) | 位 | 简单 | 是 | 是 | 2 |  |
+| 58 | 2021.5.27 | [461. 汉明距离](#2021-5-27) | 位运算 | 简单 | 是 | 是 | 2 |  |
+| 59 | 2021.5.28 | [477. 汉明距离总和](#2021-5-28) | 逐位统计 | 中等 | 否 | 是 | 1 |  |
 
 
 ## 已做内容
@@ -4387,7 +4388,7 @@ x1 < x2 并且 y1 > y2
 1. 数据结构......
 2. 正正反反的自己都搞晕了！ js 的 string 类型还有 reverse 函数！！！
 
-## 本次
+
 ### <div id="2021-5-27">2021.5.27</div>
 
 #### 题目描述：
@@ -4427,3 +4428,48 @@ var hammingDistance = function(x, y) {
 #### 其他：
 1. 汉明距离广泛应用于多个领域。在编码理论中用于错误检测，在信息论中量化字符串之间的差异。
 2. 还可以直接计算1的位数，忘了忘了！
+
+## 本次
+### <div id="2021-5-28">2021.5.28</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/total-hamming-distance/)
+#### 题目理解：
+```javascript
+var totalHammingDistance = function(nums) {
+    let sum = 0
+    const hammingDistance = (x, y) => {
+        let s = x ^ y, ret = 0;
+        while (s != 0) {
+            s &= s - 1;  // 只遍历 s 中的 1 的位数
+            ret++;
+        }
+        return ret;
+    }
+    for (let i = 0; i < nums.length - 1; i++) {
+        for (let j = i+1; j < nums.length; j++) {
+            sum += hammingDistance(nums[i], nums[j])  
+        }   
+    }
+    return sum
+};
+```
+TT 超时
+#### 解决办法：
+1. 官方解答 - [逐位统计]
+    ```javascript
+    var totalHammingDistance = function(nums) {
+        let ans = 0, n = nums.length;
+        for (let i = 0; i < 30; ++i) {
+            let c = 0;
+            for (const val of nums) {
+                c += (val >> i) & 1;
+            }
+            ans += c * (n - c);
+        }
+        return ans;
+    };
+    ```
+
+#### 其他：
+1. ...
