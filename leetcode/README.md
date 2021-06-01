@@ -66,6 +66,7 @@
 | 58 | 2021.5.27 | [461. 汉明距离](#2021-5-27) | 位运算 | 简单 | 是 | 是 | 2 |  |
 | 59 | 2021.5.28 | [477. 汉明距离总和](#2021-5-28) | 逐位统计 | 中等 | 否 | 是 | 1 |  |
 | 60 | 2021.5.31 | [342. 4的幂](#2021-5-31) | 二进制位、取模性质 | 简单 | 否 | 否 | 2 |  |
+| 61 | 2021.6.1 | [1744. 你能在你最喜欢的那天吃到你最喜欢的糖果吗？](#2021-6-1) | 前缀和 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4473,7 +4474,6 @@ TT 超时
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-5-31">2021.5.31</div>
 
 #### 题目描述：
@@ -4503,3 +4503,44 @@ var totalHammingDistance = function(nums) {
 #### 其他：
 1. 完全没想到，简单题
 2. 找数学规律
+
+## 本次
+### <div id="2021-6-1">2021.6.1</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/)
+#### 题目理解：
+```javascript
+```
+#### 解决办法：
+1. 官方解答 - [前缀和]
+    ```javascript
+    var canEat = function(candiesCount, queries) {
+        const n = candiesCount.length;
+        
+        // 前缀和
+        const sum = new Array(n).fill(0);;
+        sum[0] = candiesCount[0];
+        for (let i = 1; i < n; ++i) {
+            sum[i] = sum[i - 1] + candiesCount[i];
+        }
+        
+        const q = queries.length;
+        const ans = new Array(q).fill(0);
+        for (let i = 0; i < q; ++i) {
+            const query = queries[i];
+            const favoriteType = query[0], favoriteDay = query[1], dailyCap = query[2];
+            
+            const x1 = favoriteDay + 1;
+            const y1 = (favoriteDay + 1) * dailyCap;
+            const x2 = favoriteType == 0 ? 1 : sum[favoriteType - 1] + 1;
+            const y2 = sum[favoriteType];
+            
+            ans[i] = !(x1 > y2 || y1 < x2);
+        }
+        return ans;
+    };
+    ```
+
+#### 其他：
+1. ...
