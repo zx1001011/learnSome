@@ -67,6 +67,7 @@
 | 59 | 2021.5.28 | [477. 汉明距离总和](#2021-5-28) | 逐位统计 | 中等 | 否 | 是 | 1 |  |
 | 60 | 2021.5.31 | [342. 4的幂](#2021-5-31) | 二进制位、取模性质 | 简单 | 否 | 否 | 2 |  |
 | 61 | 2021.6.1 | [1744. 你能在你最喜欢的那天吃到你最喜欢的糖果吗？](#2021-6-1) | 前缀和 | 中等 | 否 | 否 | 1 |  |
+| 62 | 2021.6.2 | [523. 连续的子数组和](#2021-6-2) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4504,7 +4505,6 @@ var totalHammingDistance = function(nums) {
 1. 完全没想到，简单题
 2. 找数学规律
 
-## 本次
 ### <div id="2021-6-1">2021.6.1</div>
 
 #### 题目描述：
@@ -4539,6 +4539,69 @@ var totalHammingDistance = function(nums) {
             ans[i] = !(x1 > y2 || y1 < x2);
         }
         return ans;
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-2">2021.6.2</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/continuous-subarray-sum/)
+#### 题目理解：
+```javascript
+var checkSubarraySum = function(nums, k) {
+    /**
+        全部遍历-子数组？
+        动态规划？
+        BFS？
+        DFS？
+    */
+    // let arr = []
+    for (let i = 1; i < nums.length; i++) {
+        // var tmp = []
+        for (let j = 0; j < nums.length - i; j++) {
+            var sum = 0
+            for (let k = j; k <= j + i; k++) {
+                sum += nums[k]
+            }
+            // tmp.push(sum)
+            if(sum % k === 0) {
+                return true
+            }
+        }
+        // arr.push(tmp)
+    }
+    return false
+};
+```
+超时
+
+#### 解决办法：
+1. 官方解答 - [前缀和+哈希表]
+    ```javascript
+    var checkSubarraySum = function(nums, k) {
+        const m = nums.length;
+        if (m < 2) {
+            return false;
+        }
+        const map = new Map();
+        map.set(0, -1);
+        let remainder = 0;
+        for (let i = 0; i < m; i++) {
+            remainder = (remainder + nums[i]) % k;
+            if (map.has(remainder)) {
+                const prevIndex = map.get(remainder);
+                if (i - prevIndex >= 2) {
+                    return true;
+                }
+            } else {
+                map.set(remainder, i);
+            }
+        }
+        return false;
     };
     ```
 
