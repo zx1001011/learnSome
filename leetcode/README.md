@@ -68,6 +68,7 @@
 | 60 | 2021.5.31 | [342. 4的幂](#2021-5-31) | 二进制位、取模性质 | 简单 | 否 | 否 | 2 |  |
 | 61 | 2021.6.1 | [1744. 你能在你最喜欢的那天吃到你最喜欢的糖果吗？](#2021-6-1) | 前缀和 | 中等 | 否 | 否 | 1 |  |
 | 62 | 2021.6.2 | [523. 连续的子数组和](#2021-6-2) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
+| 63 | 2021.6.3 | [525. 连续数组](#2021-6-3) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4545,7 +4546,6 @@ var totalHammingDistance = function(nums) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-2">2021.6.2</div>
 
 #### 题目描述：
@@ -4602,6 +4602,79 @@ var checkSubarraySum = function(nums, k) {
             }
         }
         return false;
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-3">2021.6.3</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/contiguous-array/)
+#### 题目理解：
+```javascript
+var findMaxLength = function(nums) {
+    /**
+     * 要求： 子数组中 0 和 1 的数量要相等
+     * 方法： 
+     *      昨天的方法： 前缀和 + 哈希表
+     *      和？前缀计数？   
+     */
+    let res = 0
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 0; j < nums.length - i; j++) {
+            var x1 = 0, x2 = 0
+            for (let k = j; k <= j + i; k++) {
+                if (nums[k] === 0) {
+                    x1 += 1
+                } else {
+                    x2 += 1
+                }
+            }
+            // console.log("x1: ", x1)
+            // console.log("x2: ", x2)
+            if(x1 === x2 && res < i) {
+                res = x1 * 2
+            }
+        }
+    }
+    return res
+};
+```
+超时
+
+#### 解决办法：
+1. 官方解答 - [前缀和+哈希表]
+    ```javascript
+    var findMaxLength = function(nums) {
+        /**
+        * 要求： 子数组中 0 和 1 的数量要相等
+        * 方法： 
+        *      昨天的方法： 前缀和 + 哈希表
+        *      和？前缀计数？   
+        */
+        let maxLength = 0;
+        const map = new Map();
+        let counter = 0;
+        map.set(counter, -1);
+        const n = nums.length;
+        for (let i = 0; i < n; i++) {
+            const num = nums[i];
+            if (num == 1) {
+                counter++;
+            } else {
+                counter--;
+            }
+            if (map.has(counter)) {
+                const prevIndex = map.get(counter);
+                maxLength = Math.max(maxLength, i - prevIndex);
+            } else {
+                map.set(counter, i);
+            }
+        }
+        return maxLength;
     };
     ```
 
