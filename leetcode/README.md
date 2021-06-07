@@ -69,6 +69,7 @@
 | 61 | 2021.6.1 | [1744. 你能在你最喜欢的那天吃到你最喜欢的糖果吗？](#2021-6-1) | 前缀和 | 中等 | 否 | 否 | 1 |  |
 | 62 | 2021.6.2 | [523. 连续的子数组和](#2021-6-2) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
 | 63 | 2021.6.3 | [525. 连续数组](#2021-6-3) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
+| 64 | 2021.6.7 | [494. 目标和](#2021-6-7) | 动态规划、回溯 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4608,7 +4609,6 @@ var checkSubarraySum = function(nums, k) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-3">2021.6.3</div>
 
 #### 题目描述：
@@ -4675,6 +4675,92 @@ var findMaxLength = function(nums) {
             }
         }
         return maxLength;
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-7">2021.6.7</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/target-sum/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var findTargetSumWays = function(nums, target) {
+    /**
+        nums 的总和 为多大 sum，
+        要制造 target 的话，那么 t = sum - target 就是 nums 中需要组合的减法的部分
+        怎么组成 t / 2 , 有多少中不同的组合方法即返回值
+        如果 t / 2 不是整数 那么就是 0
+     */
+    let res = 0
+    let tmp = -target
+    tmp += nums.reduce((preV, curV) => {
+        return preV + curV
+    }) 
+    tmp /= 2
+    if (Int(tmp) !== tmp) {
+        return 0
+    } else {
+        // 动态规划实现 tmp 在 nums 数组中的路径匹配
+    }
+    return res
+};
+```
+但是动态规划TT
+
+#### 解决办法：
+1. 官方解答 - [回溯]
+    ```javascript
+    var findTargetSumWays = function(nums, target) {
+        let count = 0;
+        const backtrack = (nums, target, index, sum) => {
+            if (index === nums.length) {
+                if (sum === target) {
+                    count++;
+                }
+            } else {
+                backtrack(nums, target, index + 1, sum + nums[index]);
+                backtrack(nums, target, index + 1, sum - nums[index]);
+            }
+        }
+        
+        backtrack(nums, target, 0, 0);
+        return count;
+    };
+    ```
+
+2. 官方解答 - [动态规划]
+    ```javascript
+    var findTargetSumWays = function(nums, target) {
+        let sum = 0;
+        for (const num of nums) {
+            sum += num;
+        }
+        const diff = sum - target;
+        if (diff < 0 || diff % 2 !== 0) {
+            return 0;
+        }
+        const n = nums.length, neg = diff / 2;
+        const dp = new Array(n + 1).fill(0).map(() => new Array(neg + 1).fill(0));
+        dp[0][0] = 1;
+        for (let i = 1; i <= n; i++) {
+            const num = nums[i - 1];
+            for (let j = 0; j <= neg; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (j >= num) {
+                    dp[i][j] += dp[i - 1][j - num];
+                }
+            }
+        }
+        return dp[n][neg];
     };
     ```
 
