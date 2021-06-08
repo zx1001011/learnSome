@@ -70,6 +70,7 @@
 | 62 | 2021.6.2 | [523. 连续的子数组和](#2021-6-2) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
 | 63 | 2021.6.3 | [525. 连续数组](#2021-6-3) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
 | 64 | 2021.6.7 | [494. 目标和](#2021-6-7) | 动态规划、回溯 | 中等 | 否 | 否 | 1 |  |
+| 65 | 2021.6.8 | [1049. 最后一块石头的重量 II](#2021-6-8) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4681,7 +4682,7 @@ var findMaxLength = function(nums) {
 #### 其他：
 1. ...
 
-## 本次
+
 ### <div id="2021-6-7">2021.6.7</div>
 
 #### 题目描述：
@@ -4761,6 +4762,80 @@ var findTargetSumWays = function(nums, target) {
             }
         }
         return dp[n][neg];
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-8">2021.6.8</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/last-stone-weight-ii/submissions/)
+#### 题目理解：
+```javascript
+/**
+动态规划
+最小路径问题
+*/
+```
+但是动态规划TT
+
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    /**
+    * @param {number[]} stones
+    * @return {number}
+    */
+    var lastStoneWeightII = function(stones) {
+        /**
+            动态规划
+            最小路径问题
+        */
+        let sum = 0;
+        for (const weight of stones) {
+            sum += weight;
+        }
+        const m = Math.floor(sum / 2);
+        const dp = new Array(m + 1).fill(false);
+        dp[0] = true;
+        for (const weight of stones) {
+            for (let j = m; j >= weight; --j) {
+                dp[j] = dp[j] || dp[j - weight];
+            }
+        }
+        for (let j = m;; --j) {
+            if (dp[j]) {
+                return sum - 2 * j;
+            }
+        }
+    };
+    ```
+    ```javascript
+    var lastStoneWeightII = function(stones) {
+        let sum = 0;
+        for (const weight of stones) {
+            sum += weight;
+        }
+        const n = stones.length, m = Math.floor(sum / 2);
+        const dp = new Array(n + 1).fill(0).map(() => new Array(m + 1).fill(false));
+        dp[0][0] = true;
+        for (let i = 0; i < n; ++i) {
+            for (let j = 0; j <= m; ++j) {
+                if (j < stones[i]) {
+                    dp[i + 1][j] = dp[i][j];
+                } else {
+                    dp[i + 1][j] = dp[i][j] || dp[i][j - stones[i]];
+                }
+            }
+        }
+        for (let j = m;; --j) {
+            if (dp[n][j]) {
+                return sum - 2 * j;
+            }
+        }
     };
     ```
 
