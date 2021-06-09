@@ -71,6 +71,7 @@
 | 63 | 2021.6.3 | [525. 连续数组](#2021-6-3) | 前缀和+哈希表 | 中等 | 否 | 否 | 1 |  |
 | 64 | 2021.6.7 | [494. 目标和](#2021-6-7) | 动态规划、回溯 | 中等 | 否 | 否 | 1 |  |
 | 65 | 2021.6.8 | [1049. 最后一块石头的重量 II](#2021-6-8) | 动态规划 | 中等 | 否 | 否 | 1 |  |
+| 66 | 2021.6.9 | [879. 盈利计划](#2021-6-9) | 动态规划 | 困难 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4768,7 +4769,6 @@ var findTargetSumWays = function(nums, target) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-8">2021.6.8</div>
 
 #### 题目描述：
@@ -4836,6 +4836,50 @@ var findTargetSumWays = function(nums, target) {
                 return sum - 2 * j;
             }
         }
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-9">2021.6.9</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/profitable-schemes/)
+#### 题目理解：
+```javascript
+/**
+计划组合需要考虑：
+    1. 利润满足 profit的和 >= minProfit
+    2. 工作人员参与 group的和 <= n
+*/
+```
+
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    var profitableSchemes = function(n, minProfit, group, profit) {
+        const len = group.length, MOD = 1e9 + 7;
+        const dp = new Array(len + 1).fill(0).map(() => new Array(n + 1).fill(0).map(() => new Array(minProfit + 1).fill(0)));
+        dp[0][0][0] = 1;
+        for (let i = 1; i <= len; i++) {
+            const members = group[i - 1], earn = profit[i - 1];
+            for (let j = 0; j <= n; j++) {
+                for (let k = 0; k <= minProfit; k++) {
+                    if (j < members) {
+                        dp[i][j][k] = dp[i - 1][j][k];
+                    } else {
+                        dp[i][j][k] = (dp[i - 1][j][k] + dp[i - 1][j - members][Math.max(0, k - earn)]) % MOD;
+                    }
+                }
+            }
+        }
+        let sum = 0;
+        for (let j = 0; j <= n; j++) {
+            sum = (sum + dp[len][j][minProfit]) % MOD;
+        }
+        return sum;
     };
     ```
 
