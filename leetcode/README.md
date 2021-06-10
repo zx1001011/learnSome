@@ -72,6 +72,7 @@
 | 64 | 2021.6.7 | [494. 目标和](#2021-6-7) | 动态规划、回溯 | 中等 | 否 | 否 | 1 |  |
 | 65 | 2021.6.8 | [1049. 最后一块石头的重量 II](#2021-6-8) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 66 | 2021.6.9 | [879. 盈利计划](#2021-6-9) | 动态规划 | 困难 | 否 | 否 | 1 |  |
+| 67 | 2021.6.10 | [518. 零钱兑换 II](#2021-6-10) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4842,7 +4843,6 @@ var findTargetSumWays = function(nums, target) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-9">2021.6.9</div>
 
 #### 题目描述：
@@ -4880,6 +4880,36 @@ var findTargetSumWays = function(nums, target) {
             sum = (sum + dp[len][j][minProfit]) % MOD;
         }
         return sum;
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-10">2021.6.10</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/coin-change-2/submissions/)
+#### 题目理解：
+```javascript
+/**
+dp
+*/
+```
+
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    var change = function(amount, coins) {
+        const dp = new Array(amount + 1).fill(0);
+        dp[0] = 1;
+        for (const coin of coins) {
+            for (let i = coin; i <= amount; i++) {
+                dp[i] += dp[i - coin];
+            }
+        }
+        return dp[amount];
     };
     ```
 
