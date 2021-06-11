@@ -73,6 +73,7 @@
 | 65 | 2021.6.8 | [1049. 最后一块石头的重量 II](#2021-6-8) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 66 | 2021.6.9 | [879. 盈利计划](#2021-6-9) | 动态规划 | 困难 | 否 | 否 | 1 |  |
 | 67 | 2021.6.10 | [518. 零钱兑换 II](#2021-6-10) | 动态规划 | 中等 | 否 | 否 | 1 |  |
+| 68 | 2021.6.11 | [279. 完全平方数](#2021-6-11) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 
 ## 已做内容
 
@@ -4886,7 +4887,6 @@ var findTargetSumWays = function(nums, target) {
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-10">2021.6.10</div>
 
 #### 题目描述：
@@ -4910,6 +4910,42 @@ dp
             }
         }
         return dp[amount];
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-11">2021.6.11</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/perfect-squares/)
+#### 题目理解：
+```javascript
+/**
+dp
+*/
+```
+
+#### 解决办法：
+1. 官方解答 - [动态规划]
+    ```javascript
+    /**
+    * @param {number} n
+    * @return {number}
+    */
+    var numSquares = function(n) {
+        /** 动态规划 */
+        const f = new Array(n + 1).fill(0);
+        for (let i = 1; i <= n; i++) {
+            let minn = Number.MAX_VALUE;
+            for (let j = 1; j * j <= i; j++) {
+                minn = Math.min(minn, f[i - j * j]);
+            }
+            f[i] = minn + 1;
+        }
+        return f[n];
     };
     ```
 
