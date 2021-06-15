@@ -74,7 +74,7 @@
 | 66 | 2021.6.9 | [879. 盈利计划](#2021-6-9) | 动态规划 | 困难 | 否 | 否 | 1 |  |
 | 67 | 2021.6.10 | [518. 零钱兑换 II](#2021-6-10) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 68 | 2021.6.11 | [279. 完全平方数](#2021-6-11) | 动态规划 | 中等 | 否 | 否 | 1 |  |
-
+| 69 | 2021.6.15 | [852. 山脉数组的峰顶索引](#2021-6-15) | 枚举、二分查找 | 简单 | 是 | 是 | 2 |  |
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -4916,7 +4916,6 @@ dp
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-11">2021.6.11</div>
 
 #### 题目描述：
@@ -4946,6 +4945,50 @@ dp
             f[i] = minn + 1;
         }
         return f[n];
+    };
+    ```
+
+#### 其他：
+1. ...
+
+## 本次
+### <div id="2021-6-15">2021.6.15</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/peak-index-in-a-mountain-array/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var peakIndexInMountainArray = function(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            return i
+        }
+    }
+    return 0
+};
+```
+
+#### 解决办法：
+1. 官方解答 - [二分查找]
+    ```javascript
+    var peakIndexInMountainArray = function(arr) {
+        const n = arr.length;
+        let left = 1, right = n - 2, ans = 0;
+
+        while (left <= right) {
+            const mid = Math.floor((left + right) /2 );
+            if (arr[mid] > arr[mid + 1]) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
     };
     ```
 
