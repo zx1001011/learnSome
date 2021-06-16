@@ -75,6 +75,9 @@
 | 67 | 2021.6.10 | [518. 零钱兑换 II](#2021-6-10) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 68 | 2021.6.11 | [279. 完全平方数](#2021-6-11) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 69 | 2021.6.15 | [852. 山脉数组的峰顶索引](#2021-6-15) | 枚举、二分查找 | 简单 | 是 | 是 | 2 |  |
+| 70 | 2021.6.16 | [877. 石子游戏](#2021-6-16) | 数学、动态规划 | 中等 | 否 | 是 | 2 |  |
+
+
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -4951,7 +4954,6 @@ dp
 #### 其他：
 1. ...
 
-## 本次
 ### <div id="2021-6-15">2021.6.15</div>
 
 #### 题目描述：
@@ -4994,3 +4996,59 @@ var peakIndexInMountainArray = function(arr) {
 
 #### 其他：
 1. ...
+
+## 本次
+### <div id="2021-6-16">2021.6.16</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/stone-game/)
+#### 题目理解：
+```javascript
+/**
+ * @param {number[]} piles
+ * @return {boolean}
+ */
+var stoneGame = function(piles) {
+    /**
+        dp
+     */
+    return true
+};
+```
+
+#### 解决办法：
+1. 官方解答 - [dp]
+    ```javascript
+    var stoneGame = function(piles) {
+        const length = piles.length;
+        const dp = new Array(length).fill(0).map(() => new Array(length).fill(0));
+        for (let i = 0; i < length; i++) {
+            dp[i][i] = piles[i];
+        }
+        for (let i = length - 2; i >= 0; i--) {
+            for (let j = i + 1; j < length; j++) {
+                dp[i][j] = Math.max(piles[i] - dp[i + 1][j], piles[j] - dp[i][j - 1]);
+            }
+        }
+        return dp[0][length - 1] > 0;
+    };
+    ```
+    或者
+    ```javascript
+    var stoneGame = function(piles) {
+        const length = piles.length;
+        const dp = new Array(length).fill(0);
+        for (let i = 0; i < length; i++) {
+            dp[i] = piles[i];
+        }
+        for (let i = length - 2; i >= 0; i--) {
+            for (let j = i + 1; j < length; j++) {
+                dp[j] = Math.max(piles[i] - dp[j], piles[j] - dp[j - 1]);
+            }
+        }
+        return dp[length - 1] > 0;
+    };
+    ```
+
+#### 其他：
+1. 必赢的先手大概率有赢的可能
