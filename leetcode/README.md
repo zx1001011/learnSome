@@ -76,6 +76,7 @@
 | 68 | 2021.6.11 | [279. 完全平方数](#2021-6-11) | 动态规划 | 中等 | 否 | 否 | 1 |  |
 | 69 | 2021.6.15 | [852. 山脉数组的峰顶索引](#2021-6-15) | 枚举、二分查找 | 简单 | 是 | 是 | 2 |  |
 | 70 | 2021.6.16 | [877. 石子游戏](#2021-6-16) | 数学、动态规划 | 中等 | 否 | 是 | 2 |  |
+| 71 | 2021.6.17 | [65. 有效数字](#2021-6-17) | 确定有限状态自动机 | 困难 | 否 | 否 | 1 |  |
 
 
 ## 已做内容
@@ -4997,7 +4998,7 @@ var peakIndexInMountainArray = function(arr) {
 #### 其他：
 1. ...
 
-## 本次
+
 ### <div id="2021-6-16">2021.6.16</div>
 
 #### 题目描述：
@@ -5052,3 +5053,117 @@ var stoneGame = function(piles) {
 
 #### 其他：
 1. 必赢的先手大概率有赢的可能
+
+## 本次
+### <div id="2021-6-17">2021.6.17</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/valid-number/)
+#### 题目理解：
+```javascript
+```
+
+#### 解决办法：
+1. 官方解答 - [确定有限状态自动机]
+    ```javascript
+    /**
+    * @param {string} s
+    * @return {boolean}
+    */
+    var isNumber = function(s) {
+        /** 正则表达式 */
+        /**
+        1. 正则表达式
+        2. 以 e | E 分的话, 长度为 <= 2
+        以 . 分的话, 长度为 <= 2
+        以 + | - 分的话, 长度为 1
+        */
+        const State = {
+            STATE_INITIAL : "STATE_INITIAL",
+            STATE_INT_SIGN : "STATE_INT_SIGN",
+            STATE_INTEGER : "STATE_INTEGER",
+            STATE_POINT : "STATE_POINT",
+            STATE_POINT_WITHOUT_INT : "STATE_POINT_WITHOUT_INT",
+            STATE_FRACTION : "STATE_FRACTION",
+            STATE_EXP : "STATE_EXP",
+            STATE_EXP_SIGN : "STATE_EXP_SIGN",
+            STATE_EXP_NUMBER : "STATE_EXP_NUMBER",
+            STATE_END : "STATE_END"
+        }
+
+        const CharType = {
+            CHAR_NUMBER : "CHAR_NUMBER",
+            CHAR_EXP : "CHAR_EXP",
+            CHAR_POINT : "CHAR_POINT",
+            CHAR_SIGN : "CHAR_SIGN",
+            CHAR_ILLEGAL : "CHAR_ILLEGAL"
+        }
+
+        const toCharType = (ch) => {
+            if (!isNaN(ch)) {
+                return CharType.CHAR_NUMBER;
+            } else if (ch.toLowerCase() === 'e') {
+                return CharType.CHAR_EXP;
+            } else if (ch === '.') {
+                return CharType.CHAR_POINT;
+            } else if (ch === '+' || ch === '-') {
+                return CharType.CHAR_SIGN;
+            } else {
+                return CharType.CHAR_ILLEGAL;
+            }
+        }   
+
+        const transfer = new Map();
+        const initialMap = new Map();
+        initialMap.set(CharType.CHAR_NUMBER, State.STATE_INTEGER);
+        initialMap.set(CharType.CHAR_POINT, State.STATE_POINT_WITHOUT_INT);
+        initialMap.set(CharType.CHAR_SIGN, State.STATE_INT_SIGN);
+        transfer.set(State.STATE_INITIAL, initialMap);
+        const intSignMap = new Map();
+        intSignMap.set(CharType.CHAR_NUMBER, State.STATE_INTEGER);
+        intSignMap.set(CharType.CHAR_POINT, State.STATE_POINT_WITHOUT_INT);
+        transfer.set(State.STATE_INT_SIGN, intSignMap);
+        const integerMap = new Map();
+        integerMap.set(CharType.CHAR_NUMBER, State.STATE_INTEGER);
+        integerMap.set(CharType.CHAR_EXP, State.STATE_EXP);
+        integerMap.set(CharType.CHAR_POINT, State.STATE_POINT);
+        transfer.set(State.STATE_INTEGER, integerMap);
+        const pointMap = new Map() 
+        pointMap.set(CharType.CHAR_NUMBER, State.STATE_FRACTION);
+        pointMap.set(CharType.CHAR_EXP, State.STATE_EXP);
+        transfer.set(State.STATE_POINT, pointMap);
+        const pointWithoutIntMap = new Map();
+        pointWithoutIntMap.set(CharType.CHAR_NUMBER, State.STATE_FRACTION);
+        transfer.set(State.STATE_POINT_WITHOUT_INT, pointWithoutIntMap);
+        const fractionMap = new Map();
+        fractionMap.set(CharType.CHAR_NUMBER, State.STATE_FRACTION);
+        fractionMap.set(CharType.CHAR_EXP, State.STATE_EXP);
+        transfer.set(State.STATE_FRACTION, fractionMap);
+        const expMap = new Map(); 
+        expMap.set(CharType.CHAR_NUMBER, State.STATE_EXP_NUMBER);
+        expMap.set(CharType.CHAR_SIGN, State.STATE_EXP_SIGN);
+        transfer.set(State.STATE_EXP, expMap);
+        const expSignMap = new Map();
+        expSignMap.set(CharType.CHAR_NUMBER, State.STATE_EXP_NUMBER);
+        transfer.set(State.STATE_EXP_SIGN, expSignMap);
+        const expNumberMap = new Map();
+        expNumberMap.set(CharType.CHAR_NUMBER, State.STATE_EXP_NUMBER);
+        transfer.set(State.STATE_EXP_NUMBER, expNumberMap);
+
+        const length = s.length;
+        let state = State.STATE_INITIAL;
+
+        for (let i = 0; i < length; i++) {
+            const type = toCharType(s[i]);
+            if (!transfer.get(state).has(type)) {
+                return false;
+            } else {
+                state = transfer.get(state).get(type);
+            }
+        }
+        return state === State.STATE_INTEGER || state === State.STATE_POINT || state === State.STATE_FRACTION || state === State.STATE_EXP_NUMBER || state === State.STATE_END;
+    };
+    ```
+
+#### 其他：
+1. 是真不会，但是分类讨论应该可以，敲不出来
