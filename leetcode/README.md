@@ -77,6 +77,7 @@
 | 69 | 2021.6.15 | [852. 山脉数组的峰顶索引](#2021-6-15) | 枚举、二分查找 | 简单 | 是 | 是 | 2 |  |
 | 70 | 2021.6.16 | [877. 石子游戏](#2021-6-16) | 数学、动态规划 | 中等 | 否 | 是 | 2 |  |
 | 71 | 2021.6.17 | [65. 有效数字](#2021-6-17) | 确定有限状态自动机 | 困难 | 否 | 否 | 1 |  |
+| 72 | 2021.6.18 | [483. 最小好进制](#2021-6-18) | 数学 | 困难 | 否 | 否 | 1 |  |
 
 
 ## 已做内容
@@ -5054,7 +5055,6 @@ var stoneGame = function(piles) {
 #### 其他：
 1. 必赢的先手大概率有赢的可能
 
-## 本次
 ### <div id="2021-6-17">2021.6.17</div>
 
 #### 题目描述：
@@ -5167,3 +5167,42 @@ var stoneGame = function(piles) {
 
 #### 其他：
 1. 是真不会，但是分类讨论应该可以，敲不出来
+
+# 本次
+### <div id="2021-6-18">2021.6.18</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/smallest-good-base/)
+#### 题目理解：
+```javascript
+```
+
+#### 解决办法：
+1. 官方解答 - [数学找规律]
+    ```javascript
+    /**
+     * @param {string} n
+    * @return {string}
+    */
+    var smallestGoodBase = function(n) {
+        const nVal = parseInt(n);
+        const mMax = Math.floor(Math.log(nVal) / Math.log(2));
+        for (let m = mMax; m > 1; m--) {
+            const k = BigInt(Math.floor(Math.pow(nVal, 1.0 / m)));
+            if (k > 1) {
+                let mul = BigInt(1), sum = BigInt(1);
+                for (let i = 1; i <= m; i++) {
+                    mul *= k;
+                    sum += mul;
+                }
+                if (sum === BigInt(n)) {
+                    return k + '';
+                }
+            }
+        }
+        return (BigInt(n) - BigInt(1)) + ''
+    };
+    ```
+
+#### 其他：
+1. 是真不会，敲不出来，想不到是个数学题
