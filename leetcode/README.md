@@ -5208,7 +5208,6 @@ var stoneGame = function(piles) {
 
 #### 其他：
 1. 是真不会，敲不出来，想不到是个数学题
- ### <div id="2021-6-18">2021.6.18</div>
 
 #### 题目描述：
 [描述](https://leetcode-cn.com/problems/smallest-good-base/)
