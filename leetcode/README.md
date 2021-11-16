@@ -81,7 +81,7 @@
 | 73 | 2021.11.15 | [319. 灯泡开关](#2021-11-15) | 数学规律 | 中等 | 否 | 否 | 1 |  |
 | 74 | 2021.11.16 | [391. 完美矩形](#2021-11-16) | 哈希... | hard | 否 | 否 | 1 |  |
 
-
+ 
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -5245,6 +5245,35 @@ var stoneGame = function(piles) {
 
 #### 其他：
 1. 是真不会，敲不出来，想不到是个数学题
+
+### <div id="2021-11-15">2021.11.15</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/bulb-switcher/)
+#### 题目理解：
+```javascript
+```
+
+#### 解决办法：
+1. 官方解答 - [数学规律]
+    ```javascript
+    /**
+    * @param {number} n
+    * @return {number}
+    */
+   var bulbSwitch = function(n) {
+       /**
+       题目没看懂，为什么不是第三轮3个都亮着
+       有规律n的2次方范围是n
+       **/
+       return Math.floor(Math.sqrt(n));
+    };  
+    ```
+
+#### 其他：
+1. 规律找错了
+   
+# 本次
 ### <div id="2021-11-16">2021.11.16</div>
 
 #### 题目描述：
@@ -5323,32 +5352,7 @@ var stoneGame = function(piles) {
 #### 其他：
 1. 实现没完成
  
-# 本次 
+ 
 
-### <div id="2021-11-15">2021.11.15</div>
 
-#### 题目描述：
-[描述](https://leetcode-cn.com/problems/bulb-switcher/)
-#### 题目理解：
-```javascript
-```
-
-#### 解决办法：
-1. 官方解答 - [数学规律]
-    ```javascript
-    /**
-    * @param {number} n
-    * @return {number}
-    */
-   var bulbSwitch = function(n) {
-       /**
-       题目没看懂，为什么不是第三轮3个都亮着
-       有规律n的2次方范围是n
-       **/
-       return Math.floor(Math.sqrt(n));
-    };  
-    ```
-
-#### 其他：
-1. 规律找错了
  
