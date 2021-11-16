@@ -78,6 +78,8 @@
 | 70 | 2021.6.16 | [877. 石子游戏](#2021-6-16) | 数学、动态规划 | 中等 | 否 | 是 | 2 |  |
 | 71 | 2021.6.17 | [65. 有效数字](#2021-6-17) | 确定有限状态自动机 | 困难 | 否 | 否 | 1 |  |
 | 72 | 2021.6.18 | [483. 最小好进制](#2021-6-18) | 数学 | 困难 | 否 | 否 | 1 |  |
+| 73 | 2021.11.15 | [319. 灯泡开关](#2021-11-15) | 数学规律 | 中等 | 否 | 否 | 1 |  |
+| 74 | 2021.11.16 | [391. 完美矩形](#2021-11-16) | 哈希... | hard | 否 | 否 | 1 |  |
 
 
 ## 已做内容
@@ -5168,7 +5170,7 @@ var stoneGame = function(piles) {
 #### 其他：
 1. 是真不会，但是分类讨论应该可以，敲不出来
 
-# 本次
+
 ### <div id="2021-6-18">2021.6.18</div>
 
 #### 题目描述：
@@ -5206,3 +5208,147 @@ var stoneGame = function(piles) {
 
 #### 其他：
 1. 是真不会，敲不出来，想不到是个数学题
+ ### <div id="2021-6-18">2021.6.18</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/smallest-good-base/)
+#### 题目理解：
+```javascript
+```
+
+#### 解决办法：
+1. 官方解答 - [数学找规律]
+    ```javascript
+    /**
+     * @param {string} n
+    * @return {string}
+    */
+    var smallestGoodBase = function(n) {
+        const nVal = parseInt(n);
+        const mMax = Math.floor(Math.log(nVal) / Math.log(2));
+        for (let m = mMax; m > 1; m--) {
+            const k = BigInt(Math.floor(Math.pow(nVal, 1.0 / m)));
+            if (k > 1) {
+                let mul = BigInt(1), sum = BigInt(1);
+                for (let i = 1; i <= m; i++) {
+                    mul *= k;
+                    sum += mul;
+                }
+                if (sum === BigInt(n)) {
+                    return k + '';
+                }
+            }
+        }
+        return (BigInt(n) - BigInt(1)) + ''
+    };
+    ```
+
+#### 其他：
+1. 是真不会，敲不出来，想不到是个数学题
+### <div id="2021-11-16">2021.11.16</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/perfect-rectangle/)
+#### 题目理解：
+```javascript
+```
+
+#### 解决办法：
+1. 官方解答 - [哈希]
+    ```javascript
+    /**
+    * @param {number[][]} rectangles
+    * @return {boolean}
+    */
+   var isRectangleCover = function(rectangles) {
+       /**
+       左上和右下是否在别的地方看到
+       错误的情况：
+       1. 空
+       2. 重合
+
+       解决办法 1 ：
+       1. 找出 wmin,wmax,hmin,hmax 
+       2. 标记初始化为0, + 1
+       3. 判断
+
+       解决办法 2 ：
+       1. 拆分最小单元 
+       2. 如果出现两回就错
+       3. 判断
+       **/
+   let area = 0;
+       let minX = rectangles[0][0], minY = rectangles[0][1], maxX = rectangles[0][2], maxY = rectangles[0][3];
+       const cnt = new Map();
+       for (const rect of rectangles) {
+           const x = rect[0], y = rect[1], a = rect[2], b = rect[3];
+           area += (a - x) * (b - y);
+
+           minX = Math.min(minX, x);
+           minY = Math.min(minY, y);
+           maxX = Math.max(maxX, a);
+           maxY = Math.max(maxY, b);
+
+           cnt.set([x, y].toString(), (cnt.get([x, y].toString()) || 0) + 1);
+           cnt.set([x, b].toString(), (cnt.get([x, b].toString()) || 0) + 1);
+           cnt.set([a, y].toString(), (cnt.get([a, y].toString()) || 0) + 1);
+           cnt.set([a, b].toString(), (cnt.get([a, b].toString()) || 0) + 1);
+       }
+       
+       const pointMinMin = [minX, minY].toString();
+       const pointMinMax = [minX, maxY].toString();
+       const pointMaxMin = [maxX, minY].toString();
+       const pointMaxMax = [maxX, maxY].toString();
+       if (area !== (maxX - minX) * (maxY - minY) || (cnt.get(pointMinMin) || 0) !== 1 || (cnt.get(pointMinMax) || 0) !== 1 || (cnt.get(pointMaxMin) || 0) !== 1 || (cnt.get(pointMaxMax) || 0) !== 1) {
+           console.log(cnt.get([minX, minY].toString()))
+           return false;
+       }
+
+       cnt.delete(pointMinMin);
+       cnt.delete(pointMinMax);
+       cnt.delete(pointMaxMin);
+       cnt.delete(pointMaxMax);
+
+       for (const [_, value] of cnt.entries()) {
+           if (value !== 2 && value !== 4) {
+               
+               return false;
+           }
+       }
+       
+       return true;
+   };
+    ```
+
+#### 其他：
+1. 实现没完成
+ 
+# 本次 
+
+### <div id="2021-11-15">2021.11.15</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/bulb-switcher/)
+#### 题目理解：
+```javascript
+```
+
+#### 解决办法：
+1. 官方解答 - [数学规律]
+    ```javascript
+    /**
+    * @param {number} n
+    * @return {number}
+    */
+   var bulbSwitch = function(n) {
+       /**
+       题目没看懂，为什么不是第三轮3个都亮着
+       有规律n的2次方范围是n
+       **/
+       return Math.floor(Math.sqrt(n));
+    };  
+    ```
+
+#### 其他：
+1. 规律找错了
+ 
