@@ -80,6 +80,7 @@
 | 72 | 2021.6.18 | [483. 最小好进制](#2021-6-18) | 数学 | 困难 | 否 | 否 | 1 |  |
 | 73 | 2021.11.15 | [319. 灯泡开关](#2021-11-15) | 数学规律 | 中等 | 否 | 否 | 1 |  |
 | 74 | 2021.11.16 | [391. 完美矩形](#2021-11-16) | 哈希... | hard | 否 | 否 | 1 |  |
+| 75 | 2021.11.17 | [318. 最大单词长度乘积](#2021-11-17) | 遍历... | middle | 是 | 是 | 3+ |  |
 
  
 ## 已做内容
@@ -5272,7 +5273,7 @@ var stoneGame = function(piles) {
 #### 其他：
 1. 规律找错了
    
-# 本次
+
 ### <div id="2021-11-16">2021.11.16</div>
 
 #### 题目描述：
@@ -5350,6 +5351,86 @@ var stoneGame = function(piles) {
 
 #### 其他：
 1. 实现没完成
+ 
+ 
+
+
+ 
+
+# 本次
+### <div id="2021-11-17">2021.11.17</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/perfect-rectangle/)
+#### 题目理解：
+```javascript
+/**
+ * @param {string[]} words
+ * @return {number}
+ */
+var maxProduct = function(words) {
+    /** 遍历 */
+    var res = 0
+    for (var i = 0; i < words.length - 1; i++) {
+        for (var j = i + 1; j < words.length; j++) {
+            var len1 = words[i].length
+            var len2 = words[j].length
+            var k = 0;
+            var len = Math.min(len2, len1)
+            if (len2 > len1) {
+                for (; k < len1; k++) {
+                    if (words[j].indexOf(words[i][k]) !== -1) break 
+                }
+            } else {
+                for (; k < len2; k++) {
+                    if (words[i].indexOf(words[j][k]) !== -1) break 
+                }
+            }
+            if (k >= len) {
+                res = Math.max(len1 * len2, res)
+            }
+        }
+    }
+    return res;
+};
+```
+直接遍历
+#### 解决办法：
+1. 最优解答 - [最优]
+    ```javascript
+   /**
+    * @param {string[]} words
+    * @return {number}
+    */
+   var maxProduct = function(words) {
+       const bitmaskMap = new Map()
+       for (let i = 0; i < words.length; i++) {
+           let bitmask = 0
+           for (const c of words[i]) {
+               bitmask |= 1 << (c.charCodeAt() - 'a'.charCodeAt())
+           }
+           if (bitmaskMap.has(bitmask)) {
+               bitmaskMap.set(bitmask, Math.max(bitmaskMap.get(bitmask), words[i].length))
+           } else {
+               bitmaskMap.set(bitmask, words[i].length)
+           }
+       }
+
+       let ans = 0
+       for (const x of bitmaskMap.keys()) {
+           for (const y of bitmaskMap.keys()) {
+               if ((x & y) == 0) {
+                   ans = Math.max(ans, bitmaskMap.get(x) * bitmaskMap.get(y))
+               }
+           }
+       }
+
+       return ans
+   };
+    ```
+
+#### 其他：
+1. 用位来记录某个单词的出现，0 | 1
  
  
 
