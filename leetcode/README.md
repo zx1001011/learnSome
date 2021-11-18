@@ -81,8 +81,8 @@
 | 73 | 2021.11.15 | [319. 灯泡开关](#2021-11-15) | 数学规律 | 中等 | 否 | 否 | 1 |  |
 | 74 | 2021.11.16 | [391. 完美矩形](#2021-11-16) | 哈希... | hard | 否 | 否 | 1 |  |
 | 75 | 2021.11.17 | [318. 最大单词长度乘积](#2021-11-17) | 遍历... | middle | 是 | 是 | 3+ |  |
+| 76 | 2021.11.18 | [563. 二叉树的坡度](#2021-11-18) | 深度优先遍历 | simple | 是 | 是 | 1 |  |
 
- 
 ## 已做内容
 
 ### <div id="2021-2-26">2021.2.26</div>
@@ -5357,7 +5357,7 @@ var stoneGame = function(piles) {
 
  
 
-# 本次
+
 ### <div id="2021-11-17">2021.11.17</div>
 
 #### 题目描述：
@@ -5436,3 +5436,78 @@ var maxProduct = function(words) {
 
 
  
+# 本次
+### <div id="2021-11-18">2021.11.18</div>
+
+#### 题目描述：
+[描述](https://leetcode-cn.com/problems/binary-tree-tilt/)
+#### 题目理解：
+```javascript
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var findTilt = function(root) {
+    /**
+    肯定要遍历，
+    但是正常应该是叶子结点往上遍历
+    子树结点和需要遍历一遍
+    两重 ？？
+    **/
+    var res = 0
+    var deep = function(root) {
+        var sumL = 0
+        var sumR = 0
+        if (root.left === null && root.right === null) {
+            return root.val
+        }
+        if (root.left) {
+            sumL += deep(root.left)
+        }
+        if (root.right) {
+            sumR += deep(root.right)
+        }
+        root.val += sumL + sumR
+        res += Math.abs(sumL - sumR)
+        return root.val
+    }
+    if (root)deep(root)
+    return res;
+};
+```
+
+#### 解决办法：
+1. 解答 - [深度优先搜索]
+    ```javascript
+    var findTilt = function(root) {
+        let ans = 0;
+
+        const dfs = (node) => {
+            if (!node) {
+                return 0;
+            }
+            const sumLeft = dfs(node.left);
+            const sumRight = dfs(node.right);
+            ans += Math.abs(sumLeft - sumRight);
+            return sumLeft + sumRight + node.val;
+        }
+
+        dfs(root);
+        return ans;
+    };
+    ```
+
+ 
+ 
+
+
+ 
+
