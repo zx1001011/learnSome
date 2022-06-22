@@ -35,5 +35,4 @@ const sleep = (time: number) => {
         await sleep(500)
     }
     await page.screenshot({ path: `iphone13.png`, fullPage: true })
-    console.log('截图成功')
 })()

@@ -10,4 +10,24 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
+mapSelectTree: function (list, level) {
+  for (var i = 0; i < list.length; i++) {
+      list[i]['title'] = list[i]['name']
+      list[i]['spread'] = false
+      list[i]['field'] = level
+      if (list[i].isShare === 1) {
+          list[i]['checked'] = true
+      } else {
+          list[i]['checked'] = false
+      }
+      if (list[i]['isUser'] === 0) {
+          list[i].children = []
+          list[i].children.push({
+              title: ''
+          })
+          list[i].first = true
+      }
+  }
+  return list
+}
 </html>
